@@ -10,6 +10,7 @@ namespace TDIN_Proj1
     {
         public string ReturnHello()
         {
+            Console.WriteLine("Was called");
             return "Hello";
         }
     }
