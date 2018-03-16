@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDIN_Proj1
+namespace Server
 {
     interface IDiginoteSystem
     {

@@ -22,8 +22,7 @@ namespace Client
 
             // RemotingConfiguration.Configure("Client.exe.config", false);
 
-            IDiginoteSystem system = (IDiginoteSystem) RemotingServices.Connect(typeof(IDiginoteSystem),
-                "tpc://192.168.137.223:999/server/diginoteEndpoint");
+            IDiginoteSystem system = (IDiginoteSystem) RemotingServices.Connect(typeof(IDiginoteSystem), "tpc://localhost:999/server/diginoteEndpoint");
             
             f.setLabel(system.ReturnHello());
 

@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TDIN_Proj1
+namespace Server
 {
     class DiginoteSystem : MarshalByRefObject, IDiginoteSystem
     {
         public string ReturnHello()
         {
-            Console.WriteLine("Was called");
+            Console.WriteLine("ReturnHello() called");
             return "Hello";
         }
     }
