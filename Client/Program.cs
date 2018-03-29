@@ -15,18 +15,8 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 f = new Form1();
+            ClientForm f = new ClientForm();
             Application.Run(f);
-
-            f.setLabel("Boas");
-
-            // RemotingConfiguration.Configure("Client.exe.config", false);
-
-            IDiginoteSystem system = (IDiginoteSystem) RemotingServices.Connect(typeof(IDiginoteSystem), "tpc://localhost:999/server/diginoteEndpoint");
-            
-            f.setLabel(system.ReturnHello());
-
-
         }
     }
 }
