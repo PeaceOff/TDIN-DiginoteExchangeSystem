@@ -12,9 +12,13 @@ namespace Client
 {
     public partial class ClientForm : Form
     {
+        ClientRules clientRules;
+
         public ClientForm()
         {
             InitializeComponent();
+
+            clientRules = new ClientRules();
         }
     }
 }
