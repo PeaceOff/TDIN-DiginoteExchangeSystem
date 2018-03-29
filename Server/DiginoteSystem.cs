@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    class DiginoteSystem : MarshalByRefObject, IDiginoteSystem
+    public class DiginoteSystem : MarshalByRefObject, IDiginoteSystem
     {
+        public DiginoteSystem() {
+            Console.WriteLine("DiginoteSystem constructor called.");
+        }
+
         public string ReturnHello()
         {
             Console.WriteLine("ReturnHello() called");

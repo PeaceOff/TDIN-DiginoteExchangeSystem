@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using System.Runtime.Remoting;
-using TDIN_Proj1;
+using System.Collections;
 
 namespace Client
 {
@@ -15,8 +15,7 @@ namespace Client
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            ClientForm f = new ClientForm();
-            Application.Run(f);
+            Application.Run(new ClientForm());
         }
     }
 }

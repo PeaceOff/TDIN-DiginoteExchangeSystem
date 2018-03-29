@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Server
 {
-    interface IDiginoteSystem
+    public interface IDiginoteSystem
     {
         string ReturnHello();
     }
