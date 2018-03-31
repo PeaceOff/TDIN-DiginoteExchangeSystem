@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Shared;
 
 namespace Server
 {
     public class DiginoteSystem : MarshalByRefObject, IDiginoteSystem
     {
+        public event TestHandler TestEvent;
+
         public DiginoteSystem() {
             Console.WriteLine("DiginoteSystem constructor called.");
         }
@@ -15,7 +14,13 @@ namespace Server
         public string ReturnHello()
         {
             Console.WriteLine("ReturnHello() called");
-            return "Hello";
+            // TestEvent("Hello from the event");
+            return "Hello Client from Server";
+        }
+
+        public override object InitializeLifetimeService()
+        {
+            return null;
         }
     }
 }

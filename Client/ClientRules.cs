@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
-using Server;
+using Shared;
 
 namespace Client
 {
     class ClientRules
     {
+        IDiginoteSystem mSystem;
+        EventRepeater repeater = new EventRepeater();
+
         public ClientRules()
         {
             RemotingConfiguration.Configure("Client.exe.config", false);
-            IDiginoteSystem system;
+            repeater.TestRepeaterEvent += Handler;
             try
             {
-                system = (IDiginoteSystem)GetRemote.New(typeof(IDiginoteSystem));
-                system.ReturnHello();
+                mSystem = (IDiginoteSystem)GetRemote.New(typeof(IDiginoteSystem));
+                mSystem.TestEvent += repeater.FireTestRepeaterEvent;
+                Console.WriteLine(mSystem.ReturnHello());
             }
             catch (Exception ex)
             {
@@ -26,8 +26,13 @@ namespace Client
             }
         }
 
+        public void Handler(string arg1) {
+            Console.WriteLine("ATENCION!!!! " + arg1);
+        }
+
     }
 
+    // Class copied from the Demos to connect to a remote object
     class GetRemote
     {
         private static IDictionary wellKnownTypes;
