@@ -7,7 +7,12 @@ namespace Shared
     public interface IDiginoteSystem
     {
         event TestHandler TestEvent;
+
         string ReturnHello();
+
+        string Register(string username, string password);
+
+        bool Login(string username, string password);
     }
 
     public class EventRepeater : MarshalByRefObject

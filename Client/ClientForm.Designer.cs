@@ -28,68 +28,110 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.MyLbl = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.passTxt = new System.Windows.Forms.TextBox();
+            this.loginBtt = new System.Windows.Forms.Button();
+            this.userTxt = new System.Windows.Forms.TextBox();
+            this.registerBtt = new System.Windows.Forms.Button();
+            this.resultLbl = new System.Windows.Forms.Label();
+            this.logoutBtt = new System.Windows.Forms.Button();
+            this.loggedLbl = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // MyLbl
+            // passTxt
             // 
-            this.MyLbl.AutoSize = true;
-            this.MyLbl.Location = new System.Drawing.Point(48, 133);
-            this.MyLbl.Name = "MyLbl";
-            this.MyLbl.Size = new System.Drawing.Size(45, 17);
-            this.MyLbl.TabIndex = 7;
-            this.MyLbl.Text = "MyLbl";
+            this.passTxt.Location = new System.Drawing.Point(153, 13);
+            this.passTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.passTxt.Name = "passTxt";
+            this.passTxt.Size = new System.Drawing.Size(132, 22);
+            this.passTxt.TabIndex = 6;
+            this.passTxt.Text = "Password";
             // 
-            // textBox2
+            // loginBtt
             // 
-            this.textBox2.Location = new System.Drawing.Point(13, 45);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(132, 22);
-            this.textBox2.TabIndex = 6;
+            this.loginBtt.Location = new System.Drawing.Point(152, 43);
+            this.loginBtt.Margin = new System.Windows.Forms.Padding(4);
+            this.loginBtt.Name = "loginBtt";
+            this.loginBtt.Size = new System.Drawing.Size(133, 28);
+            this.loginBtt.TabIndex = 4;
+            this.loginBtt.Text = "Login";
+            this.loginBtt.UseVisualStyleBackColor = true;
+            this.loginBtt.Click += new System.EventHandler(this.loginBtt_Click);
             // 
-            // textBox1
+            // userTxt
             // 
-            this.textBox1.Location = new System.Drawing.Point(13, 13);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 22);
-            this.textBox1.TabIndex = 5;
+            this.userTxt.Location = new System.Drawing.Point(13, 13);
+            this.userTxt.Margin = new System.Windows.Forms.Padding(4);
+            this.userTxt.Name = "userTxt";
+            this.userTxt.Size = new System.Drawing.Size(132, 22);
+            this.userTxt.TabIndex = 7;
+            this.userTxt.Text = "Username";
             // 
-            // button1
+            // registerBtt
             // 
-            this.button1.Location = new System.Drawing.Point(13, 77);
-            this.button1.Margin = new System.Windows.Forms.Padding(4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(133, 28);
-            this.button1.TabIndex = 4;
-            this.button1.Text = "Login";
-            this.button1.UseVisualStyleBackColor = true;
+            this.registerBtt.Location = new System.Drawing.Point(13, 43);
+            this.registerBtt.Margin = new System.Windows.Forms.Padding(4);
+            this.registerBtt.Name = "registerBtt";
+            this.registerBtt.Size = new System.Drawing.Size(133, 28);
+            this.registerBtt.TabIndex = 8;
+            this.registerBtt.Text = "Register";
+            this.registerBtt.UseVisualStyleBackColor = true;
+            this.registerBtt.Click += new System.EventHandler(this.registerBtt_Click);
+            // 
+            // resultLbl
+            // 
+            this.resultLbl.AutoSize = true;
+            this.resultLbl.Location = new System.Drawing.Point(12, 75);
+            this.resultLbl.Name = "resultLbl";
+            this.resultLbl.Size = new System.Drawing.Size(48, 17);
+            this.resultLbl.TabIndex = 9;
+            this.resultLbl.Text = "Result";
+            // 
+            // logoutBtt
+            // 
+            this.logoutBtt.Location = new System.Drawing.Point(15, 414);
+            this.logoutBtt.Name = "logoutBtt";
+            this.logoutBtt.Size = new System.Drawing.Size(75, 27);
+            this.logoutBtt.TabIndex = 10;
+            this.logoutBtt.Text = "Logout";
+            this.logoutBtt.UseVisualStyleBackColor = true;
+            this.logoutBtt.Click += new System.EventHandler(this.logoutBtt_Click);
+            // 
+            // loggedLbl
+            // 
+            this.loggedLbl.AutoSize = true;
+            this.loggedLbl.Location = new System.Drawing.Point(96, 421);
+            this.loggedLbl.Name = "loggedLbl";
+            this.loggedLbl.Size = new System.Drawing.Size(98, 17);
+            this.loggedLbl.TabIndex = 11;
+            this.loggedLbl.Text = "Logged in as: ";
             // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(637, 453);
-            this.Controls.Add(this.MyLbl);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.loggedLbl);
+            this.Controls.Add(this.logoutBtt);
+            this.Controls.Add(this.resultLbl);
+            this.Controls.Add(this.registerBtt);
+            this.Controls.Add(this.userTxt);
+            this.Controls.Add(this.passTxt);
+            this.Controls.Add(this.loginBtt);
             this.Name = "ClientForm";
             this.Text = "ClientForm";
+            this.Load += new System.EventHandler(this.ClientForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label MyLbl;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.TextBox passTxt;
+        private System.Windows.Forms.Button loginBtt;
+        private System.Windows.Forms.TextBox userTxt;
+        private System.Windows.Forms.Button registerBtt;
+        private System.Windows.Forms.Label resultLbl;
+        private System.Windows.Forms.Button logoutBtt;
+        private System.Windows.Forms.Label loggedLbl;
     }
 }
