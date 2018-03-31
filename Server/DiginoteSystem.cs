@@ -14,7 +14,7 @@ namespace Server
         public string ReturnHello()
         {
             Console.WriteLine("ReturnHello() called");
-            // TestEvent("Hello from the event");
+            TestEvent("Hello from the event");
             return "Hello Client from Server";
         }
 

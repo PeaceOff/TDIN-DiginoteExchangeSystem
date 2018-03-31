@@ -8,12 +8,13 @@ namespace Client
     class ClientRules
     {
         IDiginoteSystem mSystem;
-        EventRepeater repeater = new EventRepeater();
+        EventRepeater repeater;
 
         public ClientRules()
         {
             RemotingConfiguration.Configure("Client.exe.config", false);
-            repeater.TestRepeaterEvent += Handler;
+            repeater = new EventRepeater();
+            repeater.TestEvent += Handler;
             try
             {
                 mSystem = (IDiginoteSystem)GetRemote.New(typeof(IDiginoteSystem));
@@ -29,7 +30,6 @@ namespace Client
         public void Handler(string arg1) {
             Console.WriteLine("ATENCION!!!! " + arg1);
         }
-
     }
 
     // Class copied from the Demos to connect to a remote object

@@ -12,11 +12,11 @@ namespace Shared
 
     public class EventRepeater : MarshalByRefObject
     {
-        public event TestHandler TestRepeaterEvent;
+        public event TestHandler TestEvent;
 
         public void FireTestRepeaterEvent(string arg1)
         {
-            TestRepeaterEvent(arg1);
+            TestEvent(arg1);
         }
 
         public override object InitializeLifetimeService()
