@@ -2,13 +2,6 @@
 
 namespace Shared
 {
-    class Program
-    {
-        static void Main(string[] args)
-        {
-        }
-    }
-
     public delegate void TestHandler(string arg1);
 
     public interface IDiginoteSystem
