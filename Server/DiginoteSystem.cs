@@ -29,6 +29,7 @@ namespace Server
             return ServerDB.Login(username, password);
         }
 
+        // Infinite Lease time
         public override object InitializeLifetimeService()
         {
             return null;

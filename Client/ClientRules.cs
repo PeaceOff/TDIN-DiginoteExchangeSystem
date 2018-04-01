@@ -6,8 +6,8 @@ namespace Client
 {
     class ClientRules
     {
-        private IDiginoteSystem diginoteSystem;
-        private EventRepeater repeater;
+        private IDiginoteSystem diginoteSystem = null;
+        private EventRepeater repeater = new EventRepeater();
 
         private String username = null;
 
@@ -16,7 +16,6 @@ namespace Client
             RemotingConfiguration.Configure("Client.exe.config", false);
             diginoteSystem = (IDiginoteSystem)GetRemote.New(typeof(IDiginoteSystem));
 
-            repeater = new EventRepeater();
             repeater.TestEvent += Handler;
             try
             {
@@ -45,12 +44,12 @@ namespace Client
 
         public string GetUsername()
         {
-
+            return username;
         }
 
-        public void SetUsername(string username)
+        public void SetUsername(string un)
         {
-
+            username = un;
         }
 
         // Handlers
