@@ -2,28 +2,34 @@
 
 namespace Shared
 {
-    public delegate void TestHandler(string arg1);
+    // Delegate for the Update Quote event
+    public delegate void UpdateQuoteEvent(double q);
 
+    // Shared interface for the diginote system (for both client and server)
     public interface IDiginoteSystem
     {
-        event TestHandler TestEvent;
+        event UpdateQuoteEvent UpdateQuote;
 
         string ReturnHello();
 
         string Register(string username, string password);
 
         bool Login(string username, string password);
+
+        double GetCurrentQuote(string username);
     }
 
+    // Event Repeater to respect the compiler rules for the server
     public class EventRepeater : MarshalByRefObject
     {
-        public event TestHandler TestEvent;
+        public event UpdateQuoteEvent UpdateQuote;
 
-        public void FireTestRepeaterEvent(string arg1)
+        public void FireUpdateQuoteEvent(double q)
         {
-            TestEvent(arg1);
+            UpdateQuote(q);
         }
 
+        // Infinite Lease Time
         public override object InitializeLifetimeService()
         {
             return null;

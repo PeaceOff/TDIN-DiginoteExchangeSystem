@@ -42,7 +42,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DiginoteSystem.cs" />
+    <Compile Include="DiginoteExchangeSystem\Diginote.cs" />
+    <Compile Include="DiginoteExchangeSystem\DiginoteSystem.cs" />
+    <Compile Include="DiginoteExchangeSystem\PurchaseOrder.cs" />
+    <Compile Include="DiginoteExchangeSystem\SellOrder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServerDB.cs" />

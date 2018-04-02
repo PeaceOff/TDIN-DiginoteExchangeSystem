@@ -63,5 +63,26 @@ namespace Server
                 }
             }
         }
+
+        public static bool UsernameExists(string username) {
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT COUNT(*) FROM \"User\" WHERE username = '{0}'", username);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    if ((int)command.ExecuteScalar() > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }

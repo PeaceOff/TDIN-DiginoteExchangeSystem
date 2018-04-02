@@ -10,16 +10,18 @@ namespace Client
         private EventRepeater repeater = new EventRepeater();
 
         private String username = null;
+        private ClientForm clientForm;
 
-        public ClientRules()
+        public ClientRules(ClientForm cf)
         {
+            clientForm = cf;
             RemotingConfiguration.Configure("Client.exe.config", false);
             diginoteSystem = (IDiginoteSystem)GetRemote.New(typeof(IDiginoteSystem));
 
-            repeater.TestEvent += Handler;
+            repeater.UpdateQuote += UpdateQuoteHandler;
             try
             {
-                diginoteSystem.TestEvent += repeater.FireTestRepeaterEvent;
+                diginoteSystem.UpdateQuote += repeater.FireUpdateQuoteEvent;
                 Console.WriteLine(diginoteSystem.ReturnHello());
             }
             catch (Exception ex)
@@ -40,6 +42,15 @@ namespace Client
             return diginoteSystem.Login(username, password);
         }
 
+        public double GetCurrentQuote() {
+
+            if (username != null) {
+                return diginoteSystem.GetCurrentQuote(username);
+            }
+
+            return 0.0;
+        }
+
         // Getters and Setters
 
         public string GetUsername()
@@ -54,9 +65,9 @@ namespace Client
 
         // Handlers
 
-        public void Handler(string arg1)
+        public void UpdateQuoteHandler(double q)
         {
-            Console.WriteLine("ATENCION!!!! " + arg1);
+            clientForm.UpdateQuote(q);
         }
     }  
 }
