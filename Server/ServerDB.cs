@@ -19,6 +19,24 @@ namespace Server
             return connection;
         }
 
+        // CONFIG
+        public static double GetQuote() {
+            // TODO Acabar
+            using (SqlConnection connection = GetConnection()) {
+
+                string commandString = "SELECT quote FROM \"System\" WHERE lock='X'";
+
+                using (var command = new SqlCommand(commandString, connection)) {
+                    if ((int)command.ExecuteScalar() > 0) {
+
+                    }
+                }
+            }
+
+            return 0.0;
+        }
+
+        // USER
         public static string Register(string username, string password)
         {
             using (SqlConnection connection = GetConnection())

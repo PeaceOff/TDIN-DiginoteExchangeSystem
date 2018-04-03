@@ -5,6 +5,7 @@ namespace Client
 {
     public partial class ClientForm : Form
     {
+        public static string LOGGED_TEXT = "Logged in as: ";
         ClientRules clientRules;
 
         public ClientForm()
@@ -58,7 +59,7 @@ namespace Client
                 loginBtt.Hide();
   
                 logoutBtt.Show();
-                loggedLbl.Text = loggedLbl.Text + username;
+                loggedLbl.Text = LOGGED_TEXT + username;
                 loggedLbl.Show();
                 quoteLbl.Show();
                 textLbl.Show();
