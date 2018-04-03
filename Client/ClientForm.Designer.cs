@@ -41,7 +41,7 @@
             // 
             // passTxt
             // 
-            this.passTxt.Location = new System.Drawing.Point(115, 11);
+            this.passTxt.Location = new System.Drawing.Point(118, 69);
             this.passTxt.Name = "passTxt";
             this.passTxt.Size = new System.Drawing.Size(100, 20);
             this.passTxt.TabIndex = 6;
@@ -49,7 +49,7 @@
             // 
             // loginBtt
             // 
-            this.loginBtt.Location = new System.Drawing.Point(114, 35);
+            this.loginBtt.Location = new System.Drawing.Point(117, 93);
             this.loginBtt.Name = "loginBtt";
             this.loginBtt.Size = new System.Drawing.Size(100, 23);
             this.loginBtt.TabIndex = 4;
@@ -59,7 +59,7 @@
             // 
             // userTxt
             // 
-            this.userTxt.Location = new System.Drawing.Point(10, 11);
+            this.userTxt.Location = new System.Drawing.Point(13, 69);
             this.userTxt.Name = "userTxt";
             this.userTxt.Size = new System.Drawing.Size(100, 20);
             this.userTxt.TabIndex = 7;
@@ -67,7 +67,7 @@
             // 
             // registerBtt
             // 
-            this.registerBtt.Location = new System.Drawing.Point(10, 35);
+            this.registerBtt.Location = new System.Drawing.Point(13, 93);
             this.registerBtt.Name = "registerBtt";
             this.registerBtt.Size = new System.Drawing.Size(100, 23);
             this.registerBtt.TabIndex = 8;
@@ -78,7 +78,7 @@
             // resultLbl
             // 
             this.resultLbl.AutoSize = true;
-            this.resultLbl.Location = new System.Drawing.Point(9, 61);
+            this.resultLbl.Location = new System.Drawing.Point(12, 119);
             this.resultLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.resultLbl.Name = "resultLbl";
             this.resultLbl.Size = new System.Drawing.Size(37, 13);
@@ -109,7 +109,7 @@
             // textLbl
             // 
             this.textLbl.AutoSize = true;
-            this.textLbl.Location = new System.Drawing.Point(234, 11);
+            this.textLbl.Location = new System.Drawing.Point(237, 69);
             this.textLbl.Name = "textLbl";
             this.textLbl.Size = new System.Drawing.Size(74, 13);
             this.textLbl.TabIndex = 12;
@@ -118,7 +118,7 @@
             // quoteLbl
             // 
             this.quoteLbl.AutoSize = true;
-            this.quoteLbl.Location = new System.Drawing.Point(315, 11);
+            this.quoteLbl.Location = new System.Drawing.Point(315, 69);
             this.quoteLbl.Name = "quoteLbl";
             this.quoteLbl.Size = new System.Drawing.Size(0, 13);
             this.quoteLbl.TabIndex = 14;
@@ -138,8 +138,8 @@
             this.Controls.Add(this.passTxt);
             this.Controls.Add(this.loginBtt);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "ClientForm";
-            this.Text = "ClientForm";
+            this.Name = "DiginoteExchangeSystem";
+            this.Text = "DiginoteExchangeSystem";
             this.Load += new System.EventHandler(this.ClientForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

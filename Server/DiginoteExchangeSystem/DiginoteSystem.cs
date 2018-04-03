@@ -17,6 +17,18 @@ namespace Server
 
         public DiginoteSystem()
         {
+            //TODO Verificar
+            double q = ServerDB.GetQuote();
+
+            if (q == 0.0)
+            {
+                ServerDB.InitQuote(QUOTE);
+            }
+            else {
+                QUOTE = q;
+                UpdateQuote(QUOTE);
+            }
+
             Console.WriteLine("DiginoteSystem constructor called.");
         }
 

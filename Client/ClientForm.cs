@@ -1,9 +1,10 @@
-﻿using System;
+﻿using MaterialSkin.Controls;
+using System;
 using System.Windows.Forms;
 
 namespace Client
 {
-    public partial class ClientForm : Form
+    public partial class ClientForm : MaterialForm
     {
         public static string LOGGED_TEXT = "Logged in as: ";
         ClientRules clientRules;
