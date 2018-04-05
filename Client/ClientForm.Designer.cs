@@ -28,69 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.passTxt = new System.Windows.Forms.TextBox();
-            this.loginBtt = new System.Windows.Forms.Button();
-            this.userTxt = new System.Windows.Forms.TextBox();
-            this.registerBtt = new System.Windows.Forms.Button();
-            this.textLbl = new System.Windows.Forms.Label();
-            this.quoteLbl = new System.Windows.Forms.Label();
             this.loggedLbl = new MaterialSkin.Controls.MaterialLabel();
             this.logoutBtt = new MaterialSkin.Controls.MaterialRaisedButton();
             this.resultLbl = new MaterialSkin.Controls.MaterialLabel();
+            this.quoteTxtLbl = new MaterialSkin.Controls.MaterialLabel();
+            this.registerBtt = new MaterialSkin.Controls.MaterialFlatButton();
+            this.loginBtt = new MaterialSkin.Controls.MaterialFlatButton();
+            this.userTxt = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.passTxt = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.nicknameTxt = new MaterialSkin.Controls.MaterialSingleLineTextField();
+            this.signInBtt = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.signUpBtt = new MaterialSkin.Controls.MaterialRaisedButton();
             this.SuspendLayout();
-            // 
-            // passTxt
-            // 
-            this.passTxt.Location = new System.Drawing.Point(118, 69);
-            this.passTxt.Name = "passTxt";
-            this.passTxt.Size = new System.Drawing.Size(100, 20);
-            this.passTxt.TabIndex = 6;
-            this.passTxt.Text = "Password";
-            // 
-            // loginBtt
-            // 
-            this.loginBtt.Location = new System.Drawing.Point(117, 93);
-            this.loginBtt.Name = "loginBtt";
-            this.loginBtt.Size = new System.Drawing.Size(100, 23);
-            this.loginBtt.TabIndex = 4;
-            this.loginBtt.Text = "Login";
-            this.loginBtt.UseVisualStyleBackColor = true;
-            this.loginBtt.Click += new System.EventHandler(this.loginBtt_Click);
-            // 
-            // userTxt
-            // 
-            this.userTxt.Location = new System.Drawing.Point(13, 69);
-            this.userTxt.Name = "userTxt";
-            this.userTxt.Size = new System.Drawing.Size(100, 20);
-            this.userTxt.TabIndex = 7;
-            this.userTxt.Text = "Username";
-            // 
-            // registerBtt
-            // 
-            this.registerBtt.Location = new System.Drawing.Point(13, 93);
-            this.registerBtt.Name = "registerBtt";
-            this.registerBtt.Size = new System.Drawing.Size(100, 23);
-            this.registerBtt.TabIndex = 8;
-            this.registerBtt.Text = "Register";
-            this.registerBtt.UseVisualStyleBackColor = true;
-            this.registerBtt.Click += new System.EventHandler(this.registerBtt_Click);
-            // 
-            // textLbl
-            // 
-            this.textLbl.AutoSize = true;
-            this.textLbl.Location = new System.Drawing.Point(237, 69);
-            this.textLbl.Name = "textLbl";
-            this.textLbl.Size = new System.Drawing.Size(74, 13);
-            this.textLbl.TabIndex = 12;
-            this.textLbl.Text = "Current quote:";
-            // 
-            // quoteLbl
-            // 
-            this.quoteLbl.AutoSize = true;
-            this.quoteLbl.Location = new System.Drawing.Point(315, 69);
-            this.quoteLbl.Name = "quoteLbl";
-            this.quoteLbl.Size = new System.Drawing.Size(0, 13);
-            this.quoteLbl.TabIndex = 14;
             // 
             // loggedLbl
             // 
@@ -124,27 +73,148 @@
             this.resultLbl.Depth = 0;
             this.resultLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.resultLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.resultLbl.Location = new System.Drawing.Point(12, 119);
+            this.resultLbl.Location = new System.Drawing.Point(309, 309);
             this.resultLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.resultLbl.Name = "resultLbl";
             this.resultLbl.Size = new System.Drawing.Size(51, 19);
             this.resultLbl.TabIndex = 17;
             this.resultLbl.Text = "Result";
             // 
+            // quoteTxtLbl
+            // 
+            this.quoteTxtLbl.AutoSize = true;
+            this.quoteTxtLbl.Depth = 0;
+            this.quoteTxtLbl.Font = new System.Drawing.Font("Roboto", 11F);
+            this.quoteTxtLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.quoteTxtLbl.Location = new System.Drawing.Point(505, 73);
+            this.quoteTxtLbl.MouseState = MaterialSkin.MouseState.HOVER;
+            this.quoteTxtLbl.Name = "quoteTxtLbl";
+            this.quoteTxtLbl.Size = new System.Drawing.Size(106, 19);
+            this.quoteTxtLbl.TabIndex = 18;
+            this.quoteTxtLbl.Text = "Current Quote:";
+            // 
+            // registerBtt
+            // 
+            this.registerBtt.AutoSize = true;
+            this.registerBtt.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.registerBtt.Depth = 0;
+            this.registerBtt.Location = new System.Drawing.Point(390, 142);
+            this.registerBtt.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.registerBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.registerBtt.Name = "registerBtt";
+            this.registerBtt.Primary = false;
+            this.registerBtt.Size = new System.Drawing.Size(74, 36);
+            this.registerBtt.TabIndex = 19;
+            this.registerBtt.Text = "Register";
+            this.registerBtt.UseVisualStyleBackColor = true;
+            this.registerBtt.Click += new System.EventHandler(this.registerBtt_Click);
+            // 
+            // loginBtt
+            // 
+            this.loginBtt.AutoSize = true;
+            this.loginBtt.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.loginBtt.Depth = 0;
+            this.loginBtt.Location = new System.Drawing.Point(390, 187);
+            this.loginBtt.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.loginBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.loginBtt.Name = "loginBtt";
+            this.loginBtt.Primary = false;
+            this.loginBtt.Size = new System.Drawing.Size(52, 36);
+            this.loginBtt.TabIndex = 20;
+            this.loginBtt.Text = "Login";
+            this.loginBtt.UseVisualStyleBackColor = true;
+            this.loginBtt.Click += new System.EventHandler(this.loginBtt_Click);
+            // 
+            // userTxt
+            // 
+            this.userTxt.Depth = 0;
+            this.userTxt.Hint = "";
+            this.userTxt.Location = new System.Drawing.Point(285, 171);
+            this.userTxt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.userTxt.Name = "userTxt";
+            this.userTxt.PasswordChar = '\0';
+            this.userTxt.SelectedText = "";
+            this.userTxt.SelectionLength = 0;
+            this.userTxt.SelectionStart = 0;
+            this.userTxt.Size = new System.Drawing.Size(75, 23);
+            this.userTxt.TabIndex = 21;
+            this.userTxt.Text = "Username";
+            this.userTxt.UseSystemPasswordChar = false;
+            // 
+            // passTxt
+            // 
+            this.passTxt.Depth = 0;
+            this.passTxt.Hint = "";
+            this.passTxt.Location = new System.Drawing.Point(285, 200);
+            this.passTxt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.passTxt.Name = "passTxt";
+            this.passTxt.PasswordChar = '\0';
+            this.passTxt.SelectedText = "";
+            this.passTxt.SelectionLength = 0;
+            this.passTxt.SelectionStart = 0;
+            this.passTxt.Size = new System.Drawing.Size(75, 23);
+            this.passTxt.TabIndex = 22;
+            this.passTxt.Text = "Password";
+            this.passTxt.UseSystemPasswordChar = false;
+            // 
+            // nicknameTxt
+            // 
+            this.nicknameTxt.Depth = 0;
+            this.nicknameTxt.Hint = "";
+            this.nicknameTxt.Location = new System.Drawing.Point(285, 142);
+            this.nicknameTxt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.nicknameTxt.Name = "nicknameTxt";
+            this.nicknameTxt.PasswordChar = '\0';
+            this.nicknameTxt.SelectedText = "";
+            this.nicknameTxt.SelectionLength = 0;
+            this.nicknameTxt.SelectionStart = 0;
+            this.nicknameTxt.Size = new System.Drawing.Size(75, 23);
+            this.nicknameTxt.TabIndex = 23;
+            this.nicknameTxt.Text = "Nickname";
+            this.nicknameTxt.UseSystemPasswordChar = false;
+            // 
+            // signInBtt
+            // 
+            this.signInBtt.Depth = 0;
+            this.signInBtt.Location = new System.Drawing.Point(251, 89);
+            this.signInBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.signInBtt.Name = "signInBtt";
+            this.signInBtt.Primary = true;
+            this.signInBtt.Size = new System.Drawing.Size(75, 23);
+            this.signInBtt.TabIndex = 24;
+            this.signInBtt.Text = "Sign In";
+            this.signInBtt.UseVisualStyleBackColor = true;
+            this.signInBtt.Click += new System.EventHandler(this.signInBtt_Click);
+            // 
+            // signUpBtt
+            // 
+            this.signUpBtt.Depth = 0;
+            this.signUpBtt.Location = new System.Drawing.Point(345, 89);
+            this.signUpBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.signUpBtt.Name = "signUpBtt";
+            this.signUpBtt.Primary = true;
+            this.signUpBtt.Size = new System.Drawing.Size(75, 23);
+            this.signUpBtt.TabIndex = 25;
+            this.signUpBtt.Text = "Sign Up";
+            this.signUpBtt.UseVisualStyleBackColor = true;
+            this.signUpBtt.Click += new System.EventHandler(this.signUpBtt_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(533, 456);
+            this.ClientSize = new System.Drawing.Size(715, 593);
+            this.Controls.Add(this.signUpBtt);
+            this.Controls.Add(this.signInBtt);
+            this.Controls.Add(this.registerBtt);
+            this.Controls.Add(this.passTxt);
+            this.Controls.Add(this.nicknameTxt);
+            this.Controls.Add(this.userTxt);
+            this.Controls.Add(this.loginBtt);
+            this.Controls.Add(this.quoteTxtLbl);
             this.Controls.Add(this.resultLbl);
             this.Controls.Add(this.logoutBtt);
             this.Controls.Add(this.loggedLbl);
-            this.Controls.Add(this.quoteLbl);
-            this.Controls.Add(this.textLbl);
-            this.Controls.Add(this.registerBtt);
-            this.Controls.Add(this.userTxt);
-            this.Controls.Add(this.passTxt);
-            this.Controls.Add(this.loginBtt);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "ClientForm";
             this.Text = "DiginoteExchangeSystem";
@@ -155,14 +225,16 @@
         }
 
         #endregion
-        private System.Windows.Forms.TextBox passTxt;
-        private System.Windows.Forms.Button loginBtt;
-        private System.Windows.Forms.TextBox userTxt;
-        private System.Windows.Forms.Button registerBtt;
-        private System.Windows.Forms.Label textLbl;
-        private System.Windows.Forms.Label quoteLbl;
         private MaterialSkin.Controls.MaterialLabel loggedLbl;
         private MaterialSkin.Controls.MaterialRaisedButton logoutBtt;
         private MaterialSkin.Controls.MaterialLabel resultLbl;
+        private MaterialSkin.Controls.MaterialLabel quoteTxtLbl;
+        private MaterialSkin.Controls.MaterialFlatButton registerBtt;
+        private MaterialSkin.Controls.MaterialFlatButton loginBtt;
+        private MaterialSkin.Controls.MaterialSingleLineTextField userTxt;
+        private MaterialSkin.Controls.MaterialSingleLineTextField passTxt;
+        private MaterialSkin.Controls.MaterialSingleLineTextField nicknameTxt;
+        private MaterialSkin.Controls.MaterialRaisedButton signInBtt;
+        private MaterialSkin.Controls.MaterialRaisedButton signUpBtt;
     }
 }
