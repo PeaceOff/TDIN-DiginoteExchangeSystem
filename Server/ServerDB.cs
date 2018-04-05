@@ -10,6 +10,8 @@ namespace Server
     class ServerDB
     {
 
+#region Connection
+
         public static string connectionString = "Data Source = .\\SQLEXPRESS;Initial Catalog = TDIN1; Integrated Security = True; MultipleActiveResultSets=True";
 
         public static SqlConnection GetConnection()
@@ -19,44 +21,51 @@ namespace Server
             return connection;
         }
 
-        // CONFIG
-        public static double GetQuote() {
+        #endregion
 
-            using (SqlConnection connection = GetConnection()) {
+#region Quote
 
-                string commandString = "SELECT quote FROM \"System\";";
-
-                using (var command = new SqlCommand(commandString, connection)) {
-                    return (double)command.ExecuteScalar();
-                }
-            }
-        }
-
-        public static bool InitQuote(double quote) {
-
-            using (SqlConnection connection = GetConnection()) {
-
+        public static bool InitQuote(double quote)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
                 string commandString = "SELECT COUNT(*) FROM \"System\";";
 
-                using (var command = new SqlCommand(commandString, connection)) {
-                    if ((int)command.ExecuteScalar() > 0) {
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    if ((int)command.ExecuteScalar() > 0)
+                    {
                         return false;
                     }
                 }
 
                 commandString = string.Format("INSERT INTO \"System\"(quote, lock) VALUES({0}, 'X');", quote);
 
-                using (var c = new SqlCommand(commandString, connection))
+                using (var command = new SqlCommand(commandString, connection))
                 {
-                    c.ExecuteNonQuery();
+                    command.ExecuteNonQuery();
                 }
             }
 
             return true;
         }
 
-        public static void UpdateQuote(double quote) {
-            // TODO Testar
+        public static double GetQuote()
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+
+                string commandString = "SELECT quote FROM \"System\";";
+
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    return (double)command.ExecuteScalar();
+                }
+            }
+        }
+
+        public static void UpdateQuote(double quote)
+        {
             using (SqlConnection connection = GetConnection())
             {
 
@@ -68,17 +77,19 @@ namespace Server
                     command.ExecuteNonQuery();
                 }
             }
-
         }
 
-        // USER
-        public static string Register(string username, string password)
+        #endregion
+
+#region User
+
+        public static string Register(string username, string nickname, string password)
         {
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
 
-                commandString = string.Format("SELECT Count(*) FROM \"User\" WHERE username = '{0}';", username);
+                commandString = string.Format("SELECT Count(*) FROM \"User\" WHERE username = '{0}' OR nickname = '{1}';", username, nickname);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     if ((int)command.ExecuteScalar() > 0)
@@ -87,38 +98,58 @@ namespace Server
                     }
                 }
 
-                commandString = string.Format("INSERT INTO \"User\" (username, password) VALUES ('{0}', '{1}')", username, password);
+                commandString = string.Format("INSERT INTO \"User\" (username, nickname, password) VALUES ('{0}', '{1}' , '{2}')", username, nickname, password);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     command.ExecuteNonQuery();
+                }
+
+                commandString = string.Format("SELECT id FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
+                int id = 0;
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    id = (int)command.ExecuteScalar();
+                }
+
+                for (int i = 0; i < 50; i++)
+                {
+                    commandString = string.Format("INSERT INTO Diginote (user_id) VALUES ('{0}')", id);
+                    using (var command = new SqlCommand(commandString, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
                 }
             }
             return "Successfully registered";
         }
 
-        public static bool Login(string username, string password)
+        public static string Login(string username, string password)
         {
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
 
-                commandString = string.Format("SELECT COUNT(*) FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
+                commandString = string.Format("SELECT nickname FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
                 using (var command = new SqlCommand(commandString, connection))
                 {
-                    if ((int)command.ExecuteScalar() > 0)
+                    using (var reader = command.ExecuteReader())
                     {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            return reader["nickname"].ToString();
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
                 }
             }
         }
 
-        public static bool UsernameExists(string username) {
-
+        public static bool UsernameExists(string username)
+        {
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
@@ -137,5 +168,8 @@ namespace Server
                 }
             }
         }
+
+#endregion
+
     }
 }
