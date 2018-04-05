@@ -54,7 +54,7 @@ namespace Server
             return 0.0;
         }
 
-        public bool Login(string username, string password)
+        public string Login(string username, string password)
         {
             return ServerDB.Login(username, password);
         }

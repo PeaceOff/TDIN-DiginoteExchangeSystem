@@ -81,7 +81,7 @@ namespace Server
 
         #endregion
 
-        #region User
+#region User
 
         public static string Register(string username, string nickname, string password)
         {
@@ -103,26 +103,46 @@ namespace Server
                 {
                     command.ExecuteNonQuery();
                 }
+
+                commandString = string.Format("SELECT id FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
+                int id = 0;
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    id = (int)command.ExecuteScalar();
+                }
+
+                for (int i = 0; i < 50; i++)
+                {
+                    commandString = string.Format("INSERT INTO Diginote (user_id) VALUES ('{0}')", id);
+                    using (var command = new SqlCommand(commandString, connection))
+                    {
+                        command.ExecuteNonQuery();
+                    }
+                }
             }
             return "Successfully registered";
         }
 
-        public static bool Login(string username, string password)
+        public static string Login(string username, string password)
         {
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
 
-                commandString = string.Format("SELECT COUNT(*) FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
+                commandString = string.Format("SELECT nickname FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
                 using (var command = new SqlCommand(commandString, connection))
                 {
-                    if ((int)command.ExecuteScalar() > 0)
+                    using (var reader = command.ExecuteReader())
                     {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
+                        if (reader.HasRows)
+                        {
+                            reader.Read();
+                            return reader["nickname"].ToString();
+                        }
+                        else
+                        {
+                            return null;
+                        }
                     }
                 }
             }
@@ -149,7 +169,7 @@ namespace Server
             }
         }
 
-        #endregion
+#endregion
 
     }
 }
