@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="DiginoteExchangeSystem\Diginote.cs" />
     <Compile Include="DiginoteExchangeSystem\DiginoteSystem.cs" />
+    <Compile Include="DiginoteExchangeSystem\Order.cs" />
     <Compile Include="DiginoteExchangeSystem\PurchaseOrder.cs" />
     <Compile Include="DiginoteExchangeSystem\SellOrder.cs" />
     <Compile Include="Program.cs" />
