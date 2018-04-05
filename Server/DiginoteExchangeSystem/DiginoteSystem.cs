@@ -54,7 +54,7 @@ namespace Server
             return 0.0;
         }
 
-        public bool Login(string username, string password)
+        public string Login(string username, string password)
         {
             return ServerDB.Login(username, password);
         }
@@ -63,6 +63,16 @@ namespace Server
         public override object InitializeLifetimeService()
         {
             return null;
+        }
+
+        public bool PurchaseOrders(string username, int quantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SellOrders(string username, int quantity)
+        {
+            throw new NotImplementedException();
         }
     }
 }

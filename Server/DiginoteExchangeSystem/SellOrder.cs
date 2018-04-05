@@ -6,7 +6,24 @@ using System.Threading.Tasks;
 
 namespace Server.DiginoteExchangeSystem
 {
-    class SellOrder
+    class SellOrder : Order
     {
+        public SellOrder(String username, int quantity) : base(username, quantity)
+        {
+        }
+
+        public bool SetPrice(double price)
+        {
+            double quote = ServerDB.GetQuote();
+
+            if (price <= quote)
+            {
+                ServerDB.UpdateQuote(price);
+                return true;
+            } else
+            {
+                return false;
+            }
+        }
     }
 }

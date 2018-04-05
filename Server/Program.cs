@@ -39,6 +39,22 @@ namespace Server
             ServerDB.Register("uEdu", "Edu", "pass2");
             ServerDB.Register("uEdu", "x", "pass2");
             ServerDB.Register("uEdu", "Edu", "x");
+
+            // Login
+            if(ServerDB.Login("uEdu", "pass2") != "Edu")
+            {
+                Console.WriteLine("Test Failed");
+            }
+
+            if (ServerDB.Login("x", "pass2") != null)
+            {
+                Console.WriteLine("Test Failed");
+            }
+
+            if (ServerDB.Login("uEdu", "x") != null)
+            {
+                Console.WriteLine("Test Failed");
+            }
         }
     }
 }
