@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Server.DiginoteExchangeSystem;
+using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Server
     class ServerDB
     {
 
-#region Connection
+        #region Connection
 
         public static string connectionString = "Data Source = .\\SQLEXPRESS;Initial Catalog = TDIN1; Integrated Security = True; MultipleActiveResultSets=True";
 
@@ -23,7 +24,7 @@ namespace Server
 
         #endregion
 
-#region Quote
+        #region Quote
 
         public static bool InitQuote(double quote)
         {
@@ -81,7 +82,7 @@ namespace Server
 
         #endregion
 
-#region User
+        #region User
 
         public static string Register(string username, string nickname, string password)
         {
@@ -169,7 +170,69 @@ namespace Server
             }
         }
 
-#endregion
+        public static int GetUserId(string username)
+        {
+            if(!UsernameExists(username))
+            {
+                return 0;
+            }
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT id FROM \"User\" WHERE username = '{0}'", username);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    return (int)command.ExecuteScalar();
+                }
+            }
+        }
+
+        #endregion
+
+        #region Order
+
+        public List<PurchaseOrder> GetPurchaseOrders(string username)
+        {
+            List<PurchaseOrder> orders = new List<PurchaseOrder>();
+
+            int id = GetUserId(username);
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT quantity, timestamp, suspension FROM PurchaseOrder WHERE user_id = '{0}'", id);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PurchaseOrder purchaseOrder = new PurchaseOrder();
+
+                            // TODO
+
+                            orders.Add(purchaseOrder);
+                        }
+                    }
+                }
+            }
+
+            return orders;
+        }
+
+        public List<SellOrder> GetSellOrders(string username)
+        {
+            List<SellOrder> orders = new List<SellOrder>();
+
+            int id = GetUserId(username);
+
+            return orders;
+        }
+
+        #endregion
 
     }
 }
