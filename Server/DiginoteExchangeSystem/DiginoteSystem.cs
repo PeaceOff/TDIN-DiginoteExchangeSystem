@@ -18,23 +18,18 @@ namespace Server
         public DiginoteSystem()
         {
             //TODO Verificar
-            double q = ServerDB.GetQuote();
-
-            if (q == 0.0)
-            {
-                ServerDB.InitQuote(QUOTE);
-            }
-            else {
-                QUOTE = q;
-                UpdateQuote(QUOTE);
+            if (!ServerDB.InitQuote(QUOTE)) {
+                QUOTE = ServerDB.GetQuote();
             }
 
+            Console.WriteLine("Starting System with quote: " + QUOTE);
             Console.WriteLine("DiginoteSystem constructor called.");
         }
 
         // Setter for the static value of QUOTE that triggers the event
         private void SetQuote(double value) {
             QUOTE = value;
+            ServerDB.UpdateQuote(QUOTE);
             UpdateQuote(QUOTE);
         }
 

@@ -21,24 +21,53 @@ namespace Server
 
         // CONFIG
         public static double GetQuote() {
-            // TODO Acabar
+
             using (SqlConnection connection = GetConnection()) {
 
-                string commandString = "SELECT quote FROM \"System\" WHERE lock='X'";
+                string commandString = "SELECT quote FROM \"System\";";
 
                 using (var command = new SqlCommand(commandString, connection)) {
-                    
+                    return (double)command.ExecuteScalar();
+                }
+            }
+        }
+
+        public static bool InitQuote(double quote) {
+
+            using (SqlConnection connection = GetConnection()) {
+
+                string commandString = "SELECT COUNT(*) FROM \"System\";";
+
+                using (var command = new SqlCommand(commandString, connection)) {
+                    if ((int)command.ExecuteScalar() > 0) {
+                        return false;
+                    }
+                }
+
+                commandString = string.Format("INSERT INTO \"System\"(quote, lock) VALUES({0}, 'X');", quote);
+
+                using (var c = new SqlCommand(commandString, connection))
+                {
+                    c.ExecuteNonQuery();
                 }
             }
 
-            return 0.0;
+            return true;
         }
 
-        public static void InitQuote(double quote) {
-            // TODO Acabar
-            using (SqlConnection connection = GetConnection()) {
+        public static void UpdateQuote(double quote) {
+            // TODO Testar
+            using (SqlConnection connection = GetConnection())
+            {
 
+                string commandString = string.Format("UPDATE \"System\" SET quote = {0} WHERE lock='X';", quote);
+
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
             }
+
         }
 
         // USER
