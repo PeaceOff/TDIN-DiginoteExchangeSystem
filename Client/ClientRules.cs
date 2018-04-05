@@ -32,9 +32,9 @@ namespace Client
 
         // UI Functions
 
-        public string Register(string username, string password)
+        public string Register(string username, string nickname, string password)
         {
-            return diginoteSystem.Register(username, password);
+            return diginoteSystem.Register(username, nickname, password);
         }
 
         public bool Login(string username, string password)

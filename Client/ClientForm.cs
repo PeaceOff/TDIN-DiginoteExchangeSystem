@@ -7,6 +7,7 @@ namespace Client
     public partial class ClientForm : MaterialForm
     {
         public static string LOGGED_TEXT = "Logged in as: ";
+        public static string QUOTE_TEXT = "Current Quote: ";
         ClientRules clientRules;
 
         public ClientForm()
@@ -20,10 +21,9 @@ namespace Client
 
         public void UpdateQuote(double newQuote) {
 
-            quoteLbl.Text = newQuote.ToString();
+            quoteTxtLbl.Text = QUOTE_TEXT + newQuote.ToString();
 
         }
-
 
         // Event Handlers
 
@@ -32,16 +32,18 @@ namespace Client
             resultLbl.Hide();
             loggedLbl.Hide();
             logoutBtt.Hide();
-            textLbl.Hide();
-            quoteLbl.Hide();
+            quoteTxtLbl.Hide();
+            nicknameTxt.Hide();
+            registerBtt.Hide();
         }
 
         private void registerBtt_Click(object sender, EventArgs e)
         {
             string username = userTxt.Text;
             string password = passTxt.Text;
+            string nickname = nicknameTxt.Text;
 
-            resultLbl.Text = clientRules.Register(username, password);
+            resultLbl.Text = clientRules.Register(username, nickname, password);
             resultLbl.Show();
         }
 
@@ -56,18 +58,20 @@ namespace Client
                 resultLbl.Hide();
                 userTxt.Hide();
                 passTxt.Hide();
+                nicknameTxt.Hide();
                 registerBtt.Hide();
                 loginBtt.Hide();
+                signInBtt.Hide();
+                signUpBtt.Hide();
   
                 logoutBtt.Show();
                 loggedLbl.Text = LOGGED_TEXT + username;
                 loggedLbl.Show();
-                quoteLbl.Show();
-                textLbl.Show();
+                quoteTxtLbl.Show();
 
                 // When the client logs in we get the current quote
                 // Afterwards the quote will be updated in real time via events
-                quoteLbl.Text = clientRules.GetCurrentQuote().ToString();
+                quoteTxtLbl.Text = QUOTE_TEXT + clientRules.GetCurrentQuote().ToString();
             }
             else
             {
@@ -84,8 +88,28 @@ namespace Client
             userTxt.Text = "Username";
             passTxt.Show();
             passTxt.Text = "Password";
-            registerBtt.Show();
+            nicknameTxt.Text = "Nickname";
             loginBtt.Show();
+            signInBtt.Show();
+            signUpBtt.Show();
+        }
+
+        private void signInBtt_Click(object sender, EventArgs e)
+        {
+            userTxt.Show();
+            passTxt.Show();
+            loginBtt.Show();
+            registerBtt.Hide();
+            nicknameTxt.Hide();
+        }
+
+        private void signUpBtt_Click(object sender, EventArgs e)
+        {
+            userTxt.Show();
+            passTxt.Show();
+            registerBtt.Show();
+            nicknameTxt.Show();
+            loginBtt.Hide();
         }
     }
 }
