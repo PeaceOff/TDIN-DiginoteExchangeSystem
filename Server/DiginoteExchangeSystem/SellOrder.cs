@@ -12,6 +12,12 @@ namespace Server.DiginoteExchangeSystem
         {
         }
 
+        public SellOrder() : base()
+        {
+
+        }
+
+
         public bool SetPrice(double price)
         {
             double quote = ServerDB.GetQuote();

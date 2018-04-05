@@ -20,6 +20,11 @@ namespace Server.DiginoteExchangeSystem
             this.timestamp = DateTime.Now;
         }
 
+        public Order()
+        {
+
+        }
+
         public void SetSuspension()
         {
             this.suspension = DateTime.Now;
