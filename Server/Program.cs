@@ -33,6 +33,12 @@ namespace Server
             {
                 Console.WriteLine("Test Failed");
             }
+
+            // Register Users
+            ServerDB.Register("uDavid", "David", "pass1");
+            ServerDB.Register("uEdu", "Edu", "pass2");
+            ServerDB.Register("uEdu", "x", "pass2");
+            ServerDB.Register("uEdu", "Edu", "x");
         }
     }
 }

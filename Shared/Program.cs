@@ -12,7 +12,7 @@ namespace Shared
 
         string ReturnHello();
 
-        string Register(string username, string password);
+        string Register(string username, string nickname, string password);
 
         bool Login(string username, string password);
 

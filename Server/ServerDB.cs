@@ -83,13 +83,13 @@ namespace Server
 
         #region User
 
-        public static string Register(string username, string password)
+        public static string Register(string username, string nickname, string password)
         {
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
 
-                commandString = string.Format("SELECT Count(*) FROM \"User\" WHERE username = '{0}';", username);
+                commandString = string.Format("SELECT Count(*) FROM \"User\" WHERE username = '{0}' OR nickname = '{1}';", username, nickname);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     if ((int)command.ExecuteScalar() > 0)
@@ -98,7 +98,7 @@ namespace Server
                     }
                 }
 
-                commandString = string.Format("INSERT INTO \"User\" (username, password) VALUES ('{0}', '{1}')", username, password);
+                commandString = string.Format("INSERT INTO \"User\" (username, nickname, password) VALUES ('{0}', '{1}' , '{2}')", username, nickname, password);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     command.ExecuteNonQuery();
@@ -130,7 +130,6 @@ namespace Server
 
         public static bool UsernameExists(string username)
         {
-
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
@@ -150,6 +149,7 @@ namespace Server
             }
         }
 
-#endregion
+        #endregion
+
     }
 }

@@ -41,9 +41,9 @@ namespace Server
             return "Hello Client from Server";
         }
 
-        public string Register(string username, string password)
+        public string Register(string username, string nickname, string password)
         {
-            return ServerDB.Register(username, password);
+            return ServerDB.Register(username, nickname, password);
         }
 
         public double GetCurrentQuote(string username) {
