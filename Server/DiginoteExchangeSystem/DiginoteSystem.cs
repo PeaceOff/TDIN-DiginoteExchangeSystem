@@ -64,5 +64,15 @@ namespace Server
         {
             return null;
         }
+
+        public bool PurchaseOrders(string username, int quantity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool SellOrders(string username, int quantity)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
