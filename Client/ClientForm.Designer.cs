@@ -32,11 +32,11 @@
             this.loginBtt = new System.Windows.Forms.Button();
             this.userTxt = new System.Windows.Forms.TextBox();
             this.registerBtt = new System.Windows.Forms.Button();
-            this.resultLbl = new System.Windows.Forms.Label();
-            this.logoutBtt = new System.Windows.Forms.Button();
-            this.loggedLbl = new System.Windows.Forms.Label();
             this.textLbl = new System.Windows.Forms.Label();
             this.quoteLbl = new System.Windows.Forms.Label();
+            this.loggedLbl = new MaterialSkin.Controls.MaterialLabel();
+            this.logoutBtt = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.resultLbl = new MaterialSkin.Controls.MaterialLabel();
             this.SuspendLayout();
             // 
             // passTxt
@@ -75,37 +75,6 @@
             this.registerBtt.UseVisualStyleBackColor = true;
             this.registerBtt.Click += new System.EventHandler(this.registerBtt_Click);
             // 
-            // resultLbl
-            // 
-            this.resultLbl.AutoSize = true;
-            this.resultLbl.Location = new System.Drawing.Point(12, 119);
-            this.resultLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.resultLbl.Name = "resultLbl";
-            this.resultLbl.Size = new System.Drawing.Size(37, 13);
-            this.resultLbl.TabIndex = 9;
-            this.resultLbl.Text = "Result";
-            // 
-            // logoutBtt
-            // 
-            this.logoutBtt.Location = new System.Drawing.Point(12, 167);
-            this.logoutBtt.Margin = new System.Windows.Forms.Padding(2);
-            this.logoutBtt.Name = "logoutBtt";
-            this.logoutBtt.Size = new System.Drawing.Size(56, 22);
-            this.logoutBtt.TabIndex = 10;
-            this.logoutBtt.Text = "Logout";
-            this.logoutBtt.UseVisualStyleBackColor = true;
-            this.logoutBtt.Click += new System.EventHandler(this.logoutBtt_Click);
-            // 
-            // loggedLbl
-            // 
-            this.loggedLbl.AutoSize = true;
-            this.loggedLbl.Location = new System.Drawing.Point(73, 173);
-            this.loggedLbl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.loggedLbl.Name = "loggedLbl";
-            this.loggedLbl.Size = new System.Drawing.Size(74, 13);
-            this.loggedLbl.TabIndex = 11;
-            this.loggedLbl.Text = "Logged in as: ";
-            // 
             // textLbl
             // 
             this.textLbl.AutoSize = true;
@@ -123,22 +92,61 @@
             this.quoteLbl.Size = new System.Drawing.Size(0, 13);
             this.quoteLbl.TabIndex = 14;
             // 
+            // loggedLbl
+            // 
+            this.loggedLbl.AutoSize = true;
+            this.loggedLbl.Depth = 0;
+            this.loggedLbl.Font = new System.Drawing.Font("Roboto", 11F);
+            this.loggedLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.loggedLbl.Location = new System.Drawing.Point(94, 422);
+            this.loggedLbl.MouseState = MaterialSkin.MouseState.HOVER;
+            this.loggedLbl.Name = "loggedLbl";
+            this.loggedLbl.Size = new System.Drawing.Size(102, 19);
+            this.loggedLbl.TabIndex = 15;
+            this.loggedLbl.Text = "Logged in as: ";
+            // 
+            // logoutBtt
+            // 
+            this.logoutBtt.Depth = 0;
+            this.logoutBtt.Location = new System.Drawing.Point(13, 421);
+            this.logoutBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.logoutBtt.Name = "logoutBtt";
+            this.logoutBtt.Primary = true;
+            this.logoutBtt.Size = new System.Drawing.Size(75, 23);
+            this.logoutBtt.TabIndex = 16;
+            this.logoutBtt.Text = "Logout";
+            this.logoutBtt.UseVisualStyleBackColor = true;
+            this.logoutBtt.Click += new System.EventHandler(this.logoutBtt_Click);
+            // 
+            // resultLbl
+            // 
+            this.resultLbl.AutoSize = true;
+            this.resultLbl.Depth = 0;
+            this.resultLbl.Font = new System.Drawing.Font("Roboto", 11F);
+            this.resultLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.resultLbl.Location = new System.Drawing.Point(12, 119);
+            this.resultLbl.MouseState = MaterialSkin.MouseState.HOVER;
+            this.resultLbl.Name = "resultLbl";
+            this.resultLbl.Size = new System.Drawing.Size(51, 19);
+            this.resultLbl.TabIndex = 17;
+            this.resultLbl.Text = "Result";
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 213);
+            this.ClientSize = new System.Drawing.Size(533, 456);
+            this.Controls.Add(this.resultLbl);
+            this.Controls.Add(this.logoutBtt);
+            this.Controls.Add(this.loggedLbl);
             this.Controls.Add(this.quoteLbl);
             this.Controls.Add(this.textLbl);
-            this.Controls.Add(this.loggedLbl);
-            this.Controls.Add(this.logoutBtt);
-            this.Controls.Add(this.resultLbl);
             this.Controls.Add(this.registerBtt);
             this.Controls.Add(this.userTxt);
             this.Controls.Add(this.passTxt);
             this.Controls.Add(this.loginBtt);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "DiginoteExchangeSystem";
+            this.Name = "ClientForm";
             this.Text = "DiginoteExchangeSystem";
             this.Load += new System.EventHandler(this.ClientForm_Load);
             this.ResumeLayout(false);
@@ -151,10 +159,10 @@
         private System.Windows.Forms.Button loginBtt;
         private System.Windows.Forms.TextBox userTxt;
         private System.Windows.Forms.Button registerBtt;
-        private System.Windows.Forms.Label resultLbl;
-        private System.Windows.Forms.Button logoutBtt;
-        private System.Windows.Forms.Label loggedLbl;
         private System.Windows.Forms.Label textLbl;
         private System.Windows.Forms.Label quoteLbl;
+        private MaterialSkin.Controls.MaterialLabel loggedLbl;
+        private MaterialSkin.Controls.MaterialRaisedButton logoutBtt;
+        private MaterialSkin.Controls.MaterialLabel resultLbl;
     }
 }

@@ -60,10 +60,11 @@ namespace Server
             using (SqlConnection connection = GetConnection())
             {
 
-                string commandString = string.Format("UPDATE \"System\" SET quote = {0} WHERE lock='X';", quote);
+                string commandString = "UPDATE \"System\" SET quote = @quote WHERE lock='X';";
 
                 using (var command = new SqlCommand(commandString, connection))
                 {
+                    command.Parameters.AddWithValue("@quote", quote);
                     command.ExecuteNonQuery();
                 }
             }
