@@ -17,6 +17,10 @@ namespace Shared
         bool Login(string username, string password);
 
         double GetCurrentQuote(string username);
+
+        bool PurchaseOrders(String username, int quantity);
+
+        bool SellOrders(String username, int quantity);
     }
 
     // Event Repeater to respect the compiler rules for the server
