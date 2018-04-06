@@ -13,7 +13,7 @@ namespace Client
         public ClientForm()
         {
             InitializeComponent();
-
+            this.Size = new System.Drawing.Size(250, 300);
             clientRules = new ClientRules(this);
         }
 
@@ -43,6 +43,12 @@ namespace Client
             string password = passTxt.Text;
             string nickname = nicknameTxt.Text;
 
+            if (username == "" || password == "" || nickname == "") {
+                resultLbl.Text = "Input cannot be empty";
+                resultLbl.Show();
+                return;
+            }
+
             resultLbl.Text = clientRules.Register(username, nickname, password);
             resultLbl.Show();
         }
@@ -51,10 +57,18 @@ namespace Client
         {
             string username = userTxt.Text;
             string password = passTxt.Text;
+
+            if (username == "" || password == "") {
+                resultLbl.Text = "Username or Password is empty";
+                resultLbl.Show();
+                return;
+            }
+
             string nickname = clientRules.Login(username, password);
 
             if (nickname != null)
             {
+                this.Size = new System.Drawing.Size(700, 600);
                 clientRules.SetUsername(username);
                 clientRules.SetNickname(nickname);
                 resultLbl.Hide();
@@ -86,11 +100,12 @@ namespace Client
         {
             ClientForm_Load(sender, e);
 
+            this.Size = new System.Drawing.Size(250, 300);
             userTxt.Show();
-            userTxt.Text = "Username";
             passTxt.Show();
-            passTxt.Text = "Password";
-            nicknameTxt.Text = "Nickname";
+            userTxt.Clear();
+            passTxt.Clear();
+            nicknameTxt.Clear();
             loginBtt.Show();
             signInBtt.Show();
             signUpBtt.Show();
