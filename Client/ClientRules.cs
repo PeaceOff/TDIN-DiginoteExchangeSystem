@@ -10,6 +10,7 @@ namespace Client
         private EventRepeater repeater = new EventRepeater();
 
         private String username = null;
+        private String nickname = null;
         private ClientForm clientForm;
 
         public ClientRules(ClientForm cf)
@@ -37,7 +38,7 @@ namespace Client
             return diginoteSystem.Register(username, nickname, password);
         }
 
-        public bool Login(string username, string password)
+        public string Login(string username, string password)
         {
             return diginoteSystem.Login(username, password);
         }
@@ -61,6 +62,14 @@ namespace Client
         public void SetUsername(string un)
         {
             username = un;
+        }
+
+        public string GetNickname() {
+            return nickname;
+        }
+
+        public void SetNickname(string nk) {
+            nickname = nk;
         }
 
         // Handlers

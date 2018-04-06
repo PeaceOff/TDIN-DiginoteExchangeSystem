@@ -51,10 +51,12 @@ namespace Client
         {
             string username = userTxt.Text;
             string password = passTxt.Text;
+            string nickname = clientRules.Login(username, password);
 
-            if(clientRules.Login(username, password))
+            if (nickname != null)
             {
                 clientRules.SetUsername(username);
+                clientRules.SetNickname(nickname);
                 resultLbl.Hide();
                 userTxt.Hide();
                 passTxt.Hide();
@@ -65,7 +67,7 @@ namespace Client
                 signUpBtt.Hide();
   
                 logoutBtt.Show();
-                loggedLbl.Text = LOGGED_TEXT + username;
+                loggedLbl.Text = LOGGED_TEXT + nickname;
                 loggedLbl.Show();
                 quoteTxtLbl.Show();
 
