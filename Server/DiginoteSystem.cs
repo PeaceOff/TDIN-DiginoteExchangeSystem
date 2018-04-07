@@ -123,9 +123,7 @@ namespace Server
 
         List<Transaction> IDiginoteSystem.GetTransactions(string username)
         {
-            //TODO descomentar quando houver commit desta função
-            //return ServerDB.GetTransactions(username);
-            return new List<Transaction>();
+            return ServerDB.GetTransactions(username);
         }
 
         List<Transaction> IDiginoteSystem.GetRecentTransactions()
