@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Server.DiginoteExchangeSystem;
+using System;
+using System.Collections.Generic;
 using System.Runtime.Remoting;
 
 namespace Server
@@ -57,7 +59,19 @@ namespace Server
             }
 
             // Order
-            ServerDB.InsertPurchaseOrder("uEdu", 10);
+            List<PurchaseOrder> purchaseOrders = ServerDB.GetPurchaseOrders("uEdu");
+
+            if(purchaseOrders.Count == 0)
+            {
+                ServerDB.InsertPurchaseOrder("uEdu", 10);
+
+                purchaseOrders = ServerDB.GetPurchaseOrders("uEdu");
+
+                if (purchaseOrders.Count != 1)
+                {
+                    Console.WriteLine("Test Failed");
+                }
+            }
         }
     }
 }

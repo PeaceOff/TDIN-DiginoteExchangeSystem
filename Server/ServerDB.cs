@@ -207,18 +207,26 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT quantity, timestamp, suspension FROM PurchaseOrder WHERE user_id = '{0}'", id);
+                commandString = string.Format("SELECT quantity, timestamp, suspension FROM \"BuyOrder\" WHERE user_id = '{0}'", id);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            PurchaseOrder purchaseOrder = new PurchaseOrder();
-
                             int quantity = int.Parse(reader["quantity"].ToString());
-                            string timestampS = reader["timestamp"].ToString();
-                            string suspensionS = reader["suspension"].ToString();
+                            DateTime timestamp = Convert.ToDateTime(reader["timestamp"].ToString());
+                            DateTime suspension = new DateTime();
+                            try
+                            {
+                                suspension = Convert.ToDateTime(reader["suspension"].ToString());
+                            }
+                            catch(Exception e)
+                            {
+
+                            }
+
+                            PurchaseOrder purchaseOrder = new PurchaseOrder(quantity, timestamp, suspension);
 
                             orders.Add(purchaseOrder);
                         }
@@ -254,7 +262,7 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("INSERT INTO \"BuyOrder\" (user_id, quantity, timestamp, suspension) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now);
+                commandString = string.Format("INSERT INTO \"BuyOrder\" (user_id, quantity, timestamp) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     command.ExecuteNonQuery();
