@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Shared
 {
@@ -10,19 +11,20 @@ namespace Shared
     {
         event UpdateQuoteEvent UpdateQuote;
 
-        string ReturnHello();
-
         string Register(string username, string nickname, string password);
-
         string Login(string username, string password);
 
         double GetCurrentQuote(string username);
+        bool SetPrice(int price);
 
         bool PurchaseOrders(String username, int quantity);
+        bool SellOrders(String username, int quantity);        
 
-        bool SellOrders(String username, int quantity);
-
-        bool setPrice(int orderID, int price);
+        List<SellOrder> GetPendingSellOrders(String username);
+        List<PurchaseOrder> GetPendingPurchaseOrders(String username);
+        int GetDiginotes(String username);
+        List<Transaction> GetTransactions(String username);
+        List<Transaction> GetRecentTransactions(String username);
     }
 
     // Event Repeater to respect the compiler rules for the server
@@ -40,5 +42,93 @@ namespace Shared
         {
             return null;
         }
+    }
+
+    [Serializable]
+    public class Order
+    {
+        int quantity;
+        DateTime timestamp;
+        DateTime suspension;
+
+        public Order(int quantity, DateTime timestamp, DateTime suspension)
+        {
+            this.quantity = quantity;
+            this.timestamp = timestamp;
+            this.suspension = suspension;
+        }
+
+        public Order() {}
+
+        public int Quantity { get; set; }
+
+        public DateTime Timestamp { get; set; }
+
+        public DateTime Suspension { get; set; }
+    }
+
+    [Serializable]
+    public class PurchaseOrder : Order
+    {
+        public PurchaseOrder(int quantity, DateTime timestamp, DateTime suspension) : base(quantity, timestamp, suspension) {}
+
+        public PurchaseOrder() : base() {}
+    }
+
+    [Serializable]
+    public class SellOrder : Order
+    {
+        public SellOrder(int quantity, DateTime timestamp, DateTime suspension) : base(quantity, timestamp, suspension) {}
+
+        public SellOrder() : base() {}
+    }
+
+    [Serializable]
+    public class Transaction
+    {
+        String oldOwner;
+        String newOwner;
+        int quantity;
+        DateTime timestamp;
+
+        public Transaction(String oldOwner, String newOwner, int quantity, DateTime timestamp)
+        {
+            this.oldOwner = oldOwner;
+            this.newOwner = newOwner;
+            this.quantity = quantity;
+            this.timestamp = timestamp;
+        }
+
+        public Transaction() {}
+
+        public String OldOwner { get; set; }
+
+        public String NewOwner { get; set; }
+
+        public int Quantity { get; set; }
+
+        public DateTime Timestamp { get; set; }
+
+        public override string ToString()
+        {
+            return oldOwner +" sold " + quantity + " diginotes to " +oldOwner;
+        }
+    }
+
+    [Serializable]
+    public class Diginote
+    {
+        private long serialNumber;
+        private String username;
+
+        public Diginote(String username, long serialNumber)
+        {
+            this.username = username;
+            this.serialNumber = serialNumber;
+        }
+
+        public String Username { get; set; }
+
+        public long SerialNumber { get; set; }
     }
 }
