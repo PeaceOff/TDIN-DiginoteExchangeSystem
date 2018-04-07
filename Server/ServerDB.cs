@@ -219,6 +219,30 @@ namespace Server
 
         #region Order
 
+        public static void DeletePurchaseOrder(int id)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString = string.Format("DELETE FROM \"BuyOrder\" WHERE id = {0}", id);
+                using (var innerCommand = new SqlCommand(commandString, connection))
+                {
+                    innerCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void DeleteSellingOrder(int id)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString = string.Format("DELETE FROM \"SellOrder\" WHERE id = {0}", id);
+                using (var innerCommand = new SqlCommand(commandString, connection))
+                {
+                    innerCommand.ExecuteNonQuery();
+                }
+            }
+        }
+
         public static void SetOrdersSuspension(bool suspend)
         {
             using (SqlConnection connection = GetConnection())
