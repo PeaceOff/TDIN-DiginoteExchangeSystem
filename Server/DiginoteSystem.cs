@@ -85,9 +85,7 @@ namespace Server
 
         public List<Diginote> GetDiginotes(string username)
         {
-            //TODO descomentar para invocar a get diginotes
-            //return ServerDB.GetDiginotes(username);
-            return new List<Diginote>();
+            return ServerDB.GetDiginotes(username);
         }
 
         List<SellOrder> IDiginoteSystem.GetPendingSellOrders(string username)
