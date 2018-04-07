@@ -245,9 +245,9 @@
             this.diginotesLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.diginotesLbl.Name = "diginotesLbl";
             this.diginotesLbl.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.diginotesLbl.Size = new System.Drawing.Size(112, 23);
+            this.diginotesLbl.Size = new System.Drawing.Size(81, 23);
             this.diginotesLbl.TabIndex = 26;
-            this.diginotesLbl.Text = "Your Diginotes:";
+            this.diginotesLbl.Text = "Diginotes: ";
             // 
             // mTransactionTextArea
             // 

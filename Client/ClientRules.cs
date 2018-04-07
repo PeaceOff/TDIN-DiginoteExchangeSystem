@@ -11,7 +11,6 @@ namespace Client
         private EventRepeater repeater = new EventRepeater();
 
         private String username = null;
-        private String nickname = null;
         private ClientForm clientForm;
         private List<Diginote> mWallet = new List<Diginote>();
         private List<SellOrder> mSellOrders = new List<SellOrder>();
@@ -51,9 +50,17 @@ namespace Client
             return diginoteSystem.Register(username, nickname, password);
         }
 
-        public string Login(string username, string password)
+        public string Login(string uname, string pword)
         {
-            return diginoteSystem.Login(username, password);
+            string result = diginoteSystem.Login(uname, pword);
+            username = result;
+
+            if (username != null) {
+                mWallet = diginoteSystem.GetDiginotes(username);
+                clientForm.UpdateDiginotes(mWallet.Count);
+            }
+
+            return username;
         }
 
         public double GetCurrentQuote() {
@@ -75,14 +82,6 @@ namespace Client
         public void SetUsername(string un)
         {
             username = un;
-        }
-
-        public string GetNickname() {
-            return nickname;
-        }
-
-        public void SetNickname(string nk) {
-            nickname = nk;
         }
 
         // Handlers

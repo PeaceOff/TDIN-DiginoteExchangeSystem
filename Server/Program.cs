@@ -9,7 +9,7 @@ namespace Server
     {
         static void Main(string[] args)
         {
-            Tests();
+            // Tests();
 
             RemotingConfiguration.Configure("Server.exe.config", false);
             Console.WriteLine("Server is running. Press ENTER to exit...");

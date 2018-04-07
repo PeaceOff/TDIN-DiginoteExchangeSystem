@@ -142,7 +142,7 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT nickname FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
+                commandString = string.Format("SELECT nickname, username FROM \"User\" WHERE username = '{0}' AND password = '{1}'", username, password);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())
@@ -150,7 +150,7 @@ namespace Server
                         if (reader.HasRows)
                         {
                             reader.Read();
-                            return reader["nickname"].ToString();
+                            return reader["username"].ToString();
                         }
                         else
                         {

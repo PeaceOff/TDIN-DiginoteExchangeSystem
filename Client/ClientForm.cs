@@ -8,6 +8,7 @@ namespace Client
     {
         public static string LOGGED_TEXT = "Logged in as: ";
         public static string QUOTE_TEXT = "Current Quote: ";
+        public static string DIGINOTES_TEXT = "Diginotes: ";
         ClientRules clientRules;
 
         public ClientForm()
@@ -22,6 +23,12 @@ namespace Client
         public void UpdateQuote(double newQuote) {
 
             quoteTxtLbl.Text = QUOTE_TEXT + newQuote.ToString();
+
+        }
+
+        public void UpdateDiginotes(int amount) {
+
+            diginotesLbl.Text = DIGINOTES_TEXT + amount.ToString();
 
         }
 
@@ -99,13 +106,12 @@ namespace Client
                 return;
             }
 
-            string nickname = clientRules.Login(username, password);
+            username = clientRules.Login(username, password);
 
-            if (nickname != null)
+            if (username != null)
             {
                 this.Size = new System.Drawing.Size(700, 600);
                 clientRules.SetUsername(username);
-                clientRules.SetNickname(nickname);
                 resultLbl.Hide();
                 userTxt.Hide();
                 passTxt.Hide();
@@ -117,7 +123,7 @@ namespace Client
 
                 LoginShows();
 
-                loggedLbl.Text = LOGGED_TEXT + nickname;
+                loggedLbl.Text = LOGGED_TEXT + username;
                 loggedLbl.Show();
                 quoteTxtLbl.Show();
 
