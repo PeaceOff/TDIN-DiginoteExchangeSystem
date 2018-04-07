@@ -58,29 +58,52 @@ namespace Server
 
         public bool PurchaseOrders(string username, int quantity)
         {
-            //TODO descomentar quando o edu fizer a alteração para retornar bool
-            //return ServerDB.InsertPurchaseOrder(username, quantity);
-            return true;
+            if (ServerDB.InsertPurchaseOrder(username, quantity).Count == quantity)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public bool SellOrders(string username, int quantity)
         {
-            //TODO descomentar quando o edu fizer a alteração para retornar bool
-            //return ServerDB.InsertSellingOrder(username, quantity);
-            return true;
+            if(ServerDB.InsertSellingOrder(username, quantity).Count == quantity)
+            {
+                return true;
+            } else
+            {
+                return false;
+            }
         }
 
-        public bool SetPrice(int price)
+        public bool SetPurchasePrice(int price)
         {
             double quote = ServerDB.GetQuote();
 
-            //TODO ver a cena do tipo da order
             if (price >= quote)  {
                 ServerDB.UpdateQuote(price);
                 return true;
             } else {
                 return false;
             }                         
+        }
+
+        public bool SetSellPrice(int price)
+        {
+            double quote = ServerDB.GetQuote();
+
+            if (price <= quote)
+            {
+                ServerDB.UpdateQuote(price);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<Diginote> GetDiginotes(string username)
@@ -111,5 +134,7 @@ namespace Server
             //return ServerDB.GetRecentTransactions(username);
             return new List<Transaction>();
         }
+
+
     }
 }
