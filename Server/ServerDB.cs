@@ -216,7 +216,6 @@ namespace Server
                             string timestampS = reader["timestamp"].ToString();
                             string suspensionS = reader["suspension"].ToString();
 
-
                             orders.Add(purchaseOrder);
                         }
                     }
@@ -226,13 +225,23 @@ namespace Server
             return orders;
         }
 
-        public List<SellOrder> GetSellOrders(string username)
+        public List<SellOrder> GetSellingOrders(string username)
         {
             List<SellOrder> orders = new List<SellOrder>();
 
             int id = GetUserId(username);
 
             return orders;
+        }
+
+        public void InsertPurchaseOrder(string username, int quantity)
+        {
+
+        }
+
+        public void InsertSellingOrder(string username, int quantity)
+        {
+
         }
 
         #endregion
