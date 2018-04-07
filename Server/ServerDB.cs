@@ -294,11 +294,6 @@ namespace Server
                 return true;
             }
 
-            if (!HasEnoughDiginotes(username, quantity))
-            {
-                return true;
-            }
-
             double quote = GetQuote();
 
             using (SqlConnection connection = GetConnection())
@@ -383,9 +378,106 @@ namespace Server
             return false;
         }
 
-        public static void InsertSellingOrder(string username, int quantity)
+        public static bool InsertSellingOrder(string username, int quantity)
         {
+            if (quantity < 1)
+            {
+                return true;
+            }
 
+            int id = GetUserId(username);
+            if (id == 0)
+            {
+                return true;
+            }
+
+            if (!HasEnoughDiginotes(username, quantity))
+            {
+                return true;
+            }
+
+            double quote = GetQuote();
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT id, user_id, quantity FROM \"BuyOrder\" WHERE suspension IS NULL ORDER BY timestamp ASC");
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int buyId = int.Parse(reader["id"].ToString());
+                            int buyUserId = int.Parse(reader["user_id"].ToString());
+                            int buyQuantity = int.Parse(reader["quantity"].ToString());
+
+                            int transactionQuantity = buyQuantity < quantity ? buyQuantity : quantity;
+
+                            // Create Transaction
+                            commandString = string.Format("INSERT INTO \"Transaction\" (old_user_id, new_user_id, quantity, timestamp, quote) VALUES ('{0}', '{1}', '{2}', '{3}','{4}')", id, buyUserId, transactionQuantity, DateTime.Now, quote);
+                            using (var innerCommand = new SqlCommand(commandString, connection))
+                            {
+                                innerCommand.ExecuteNonQuery();
+                            }
+
+                            // Change Diginote Owner
+                            for (int i = 0; i < transactionQuantity; i++)
+                            {
+                                int diginoteId = 0;
+
+                                commandString = string.Format("SELECT TOP 1 serial_number FROM \"Diginote\" WHERE user_id = {0}", id);
+                                using (var innerCommand = new SqlCommand(commandString, connection))
+                                {
+                                    diginoteId = (int)innerCommand.ExecuteScalar();
+                                }
+
+                                commandString = string.Format("UPDATE \"Diginote\" SET user_id = {0} WHERE serial_number = {1}", buyUserId, diginoteId);
+                                using (var innerCommand = new SqlCommand(commandString, connection))
+                                {
+                                    innerCommand.ExecuteNonQuery();
+                                }
+                            }
+
+                            if (buyQuantity > quantity)
+                            {
+                                // Update Buy Order
+                                int newBuyQuantity = buyQuantity - quantity;
+                                commandString = string.Format("UPDATE \"BuyOrder\" SET quantity = {0} WHERE id = {1}", newBuyQuantity, buyId);
+                                using (var innerCommand = new SqlCommand(commandString, connection))
+                                {
+                                    innerCommand.ExecuteNonQuery();
+                                }
+
+                                return true;
+                            }
+
+                            // Delete Buy Order
+                            commandString = string.Format("DELETE FROM \"BuyOrder\" WHERE id = {0}", buyId);
+                            using (var innerCommand = new SqlCommand(commandString, connection))
+                            {
+                                innerCommand.ExecuteNonQuery();
+                            }
+
+                            if (buyQuantity == quantity)
+                            {
+                                return true;
+                            }
+
+                            quantity -= buyQuantity;
+                        }
+                    }
+                }
+
+                commandString = string.Format("INSERT INTO \"SellOrder\" (user_id, quantity, timestamp) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            return false;
         }
 
         public static bool HasEnoughDiginotes(string username, int quantity)
@@ -401,8 +493,23 @@ namespace Server
                 return true;
             }
 
-            // TODO
-            return true;
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT COUNT(*) FROM \"Diginote\" WHERE user_id = '{0}'", id);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    if ((int)command.ExecuteScalar() >= quantity)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
         }
 
         #endregion

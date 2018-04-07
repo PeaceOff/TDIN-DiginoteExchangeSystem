@@ -59,7 +59,10 @@ namespace Server
             }
 
             // Order
-            ServerDB.InsertPurchaseOrder("uEdu", 10);
+            ServerDB.InsertPurchaseOrder("uEdu", 20);
+            ServerDB.InsertSellingOrder("uDavid", 10);
+            ServerDB.InsertSellingOrder("uDavid", 10);
+            ServerDB.InsertSellingOrder("uDavid", 10);
         }
     }
 }
