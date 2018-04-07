@@ -212,7 +212,10 @@ namespace Server
                         {
                             PurchaseOrder purchaseOrder = new PurchaseOrder();
 
-                            // TODO
+                            int quantity = int.Parse(reader["quantity"].ToString());
+                            string timestampS = reader["timestamp"].ToString();
+                            string suspensionS = reader["suspension"].ToString();
+
 
                             orders.Add(purchaseOrder);
                         }
