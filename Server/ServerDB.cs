@@ -524,6 +524,40 @@ namespace Server
 
         #region Diginote
 
+        public static List<Diginote> GetDiginotes(string username)
+        {
+            List<Diginote> diginotes = new List<Diginote>();
+
+            int id = GetUserId(username);
+            if (id == 0)
+            {
+                return diginotes;
+            }
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT serial_number FROM \"Diginote\" WHERE user_id = '{0}'", id);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int serial_number = int.Parse(reader["serial_number"].ToString());
+
+                            Diginote diginote = new Diginote(serial_number);
+
+                            diginotes.Add(diginote);
+                        }
+                    }
+                }
+            }
+
+            return diginotes;
+        }
+
         #endregion
 
     }
