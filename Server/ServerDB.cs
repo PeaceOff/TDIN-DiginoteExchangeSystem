@@ -193,11 +193,15 @@ namespace Server
 
         #region Order
 
-        public List<PurchaseOrder> GetPurchaseOrders(string username)
+        public static List<PurchaseOrder> GetPurchaseOrders(string username)
         {
             List<PurchaseOrder> orders = new List<PurchaseOrder>();
 
             int id = GetUserId(username);
+            if(id == 0)
+            {
+                return orders;
+            }
 
             using (SqlConnection connection = GetConnection())
             {
@@ -225,21 +229,40 @@ namespace Server
             return orders;
         }
 
-        public List<SellOrder> GetSellingOrders(string username)
+        public static List<SellOrder> GetSellingOrders(string username)
         {
             List<SellOrder> orders = new List<SellOrder>();
 
             int id = GetUserId(username);
+            if (id == 0)
+            {
+                return orders;
+            }
 
             return orders;
         }
 
-        public void InsertPurchaseOrder(string username, int quantity)
+        public static void InsertPurchaseOrder(string username, int quantity)
         {
+            int id = GetUserId(username);
+            if (id == 0)
+            {
+                return;
+            }
 
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("INSERT INTO \"BuyOrder\" (user_id, quantity, timestamp, suspension) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
         }
 
-        public void InsertSellingOrder(string username, int quantity)
+        public static void InsertSellingOrder(string username, int quantity)
         {
 
         }

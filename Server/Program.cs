@@ -55,6 +55,9 @@ namespace Server
             {
                 Console.WriteLine("Test Failed");
             }
+
+            // Order
+            ServerDB.InsertPurchaseOrder("uEdu", 10);
         }
     }
 }
