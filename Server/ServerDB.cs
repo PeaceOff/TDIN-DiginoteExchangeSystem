@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Server
@@ -69,7 +70,6 @@ namespace Server
         {
             using (SqlConnection connection = GetConnection())
             {
-
                 string commandString = "UPDATE \"System\" SET quote = @quote WHERE lock='X';";
 
                 using (var command = new SqlCommand(commandString, connection))
@@ -77,7 +77,19 @@ namespace Server
                     command.Parameters.AddWithValue("@quote", quote);
                     command.ExecuteNonQuery();
                 }
+
+                SetOrdersSuspension(true);
             }
+
+            Task t = Task.Run
+                    (
+                        ()
+                         =>
+                        {
+                            Thread.Sleep(1 * 60 * 1000);
+                            SetOrdersSuspension(false);
+                        }
+                    );
         }
 
         #endregion
@@ -206,6 +218,32 @@ namespace Server
         #endregion
 
         #region Order
+
+        public static void SetOrdersSuspension(bool suspend)
+        {
+            DateTime dateTime = new DateTime();
+            if(suspend)
+            {
+                dateTime = DateTime.Now;
+            }
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = {0}", dateTime);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = {0}", dateTime);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
 
         public static List<PurchaseOrder> GetPurchaseOrders(string username)
         {
