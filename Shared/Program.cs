@@ -21,6 +21,8 @@ namespace Shared
         bool PurchaseOrders(String username, int quantity);
 
         bool SellOrders(String username, int quantity);
+
+        bool setPrice(int orderID, int price);
     }
 
     // Event Repeater to respect the compiler rules for the server

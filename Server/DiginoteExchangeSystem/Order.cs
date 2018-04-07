@@ -8,16 +8,15 @@ namespace Server.DiginoteExchangeSystem
 {
     class Order
     {
-        String username;
         int quantity;
         DateTime timestamp;
         DateTime suspension;
 
-        public Order(String username, int quantity)
+        public Order(int quantity, DateTime timestamp, DateTime suspension)
         {
-            this.username = username;
             this.quantity = quantity;
-            this.timestamp = DateTime.Now;
+            this.timestamp = timestamp;
+            this.suspension = suspension;
         }
 
         public Order()
@@ -25,9 +24,10 @@ namespace Server.DiginoteExchangeSystem
 
         }
 
-        public void SetSuspension()
-        {
-            this.suspension = DateTime.Now;
-        }
+        public int Quantity { get; set; }
+
+        public DateTime Timestamp { get; set; }
+
+        public DateTime Suspension { get; set; }
     }
 }
