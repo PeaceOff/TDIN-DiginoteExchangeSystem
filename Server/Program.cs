@@ -1,4 +1,4 @@
-﻿using Server.DiginoteExchangeSystem;
+﻿using Shared;
 using System;
 using System.Collections.Generic;
 using System.Runtime.Remoting;

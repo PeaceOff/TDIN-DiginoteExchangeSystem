@@ -25,7 +25,6 @@ namespace Client
             try
             {
                 diginoteSystem.UpdateQuote += repeater.FireUpdateQuoteEvent;
-                Console.WriteLine(diginoteSystem.ReturnHello());
             }
             catch (Exception ex)
             {
