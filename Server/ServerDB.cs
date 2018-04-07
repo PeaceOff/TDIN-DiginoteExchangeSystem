@@ -221,23 +221,65 @@ namespace Server
 
         public static void SetOrdersSuspension(bool suspend)
         {
-            DateTime dateTime = new DateTime();
-            if(suspend)
+            using (SqlConnection connection = GetConnection())
             {
-                dateTime = DateTime.Now;
+                string commandString;
+
+                // Buy Order
+                if (suspend)
+                {
+                    commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = {0}", DateTime.Now);
+                }
+                else
+                {
+                    commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = null");
+                }
+
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+
+                // Sell Order
+                if (suspend)
+                {
+                    commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = {0}", DateTime.Now);
+                }
+                else
+                {
+                    commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = null");
+                }
+
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public static void UnsuspendOrders(string username)
+        {
+            int id = GetUserId(username);
+            if (id == 0)
+            {
+                return;
             }
 
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
 
-                commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = {0}", dateTime);
+                // Buy Order
+                commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = null WHERE user_id = {0}");
+
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     command.ExecuteNonQuery();
                 }
 
-                commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = {0}", dateTime);
+                // Sell Order
+                commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = null WHERE user_id = {0}");
+
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     command.ExecuteNonQuery();
