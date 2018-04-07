@@ -48,18 +48,22 @@ namespace Shared
     [Serializable]
     public class Order
     {
+        int id;
         int quantity;
         DateTime timestamp;
         DateTime suspension;
 
-        public Order(int quantity, DateTime timestamp, DateTime suspension)
+        public Order(int id, int quantity, DateTime timestamp, DateTime suspension)
         {
+            this.id = id;
             this.quantity = quantity;
             this.timestamp = timestamp;
             this.suspension = suspension;
         }
 
         public Order() {}
+
+        public int Id { get; set; }
 
         public int Quantity { get; set; }
 
@@ -71,7 +75,7 @@ namespace Shared
     [Serializable]
     public class PurchaseOrder : Order
     {
-        public PurchaseOrder(int quantity, DateTime timestamp, DateTime suspension) : base(quantity, timestamp, suspension) {}
+        public PurchaseOrder(int id, int quantity, DateTime timestamp, DateTime suspension) : base(id, quantity, timestamp, suspension) {}
 
         public PurchaseOrder() : base() {}
     }
@@ -79,7 +83,7 @@ namespace Shared
     [Serializable]
     public class SellOrder : Order
     {
-        public SellOrder(int quantity, DateTime timestamp, DateTime suspension) : base(quantity, timestamp, suspension) {}
+        public SellOrder(int id, int quantity, DateTime timestamp, DateTime suspension) : base(id, quantity, timestamp, suspension) {}
 
         public SellOrder() : base() {}
     }

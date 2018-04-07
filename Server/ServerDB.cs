@@ -301,13 +301,14 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT quantity, timestamp, suspension FROM \"BuyOrder\" WHERE user_id = '{0}'", id);
+                commandString = string.Format("SELECT id, quantity, timestamp, suspension FROM \"BuyOrder\" WHERE user_id = '{0}'", id);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
+                            int orderId = int.Parse(reader["id"].ToString());
                             int quantity = int.Parse(reader["quantity"].ToString());
                             DateTime timestamp = Convert.ToDateTime(reader["timestamp"].ToString());
                             DateTime suspension = new DateTime();
@@ -320,7 +321,7 @@ namespace Server
 
                             }
 
-                            PurchaseOrder purchaseOrder = new PurchaseOrder(quantity, timestamp, suspension);
+                            PurchaseOrder purchaseOrder = new PurchaseOrder(orderId, quantity, timestamp, suspension);
 
                             orders.Add(purchaseOrder);
                         }
@@ -345,13 +346,14 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT quantity, timestamp, suspension FROM \"SellOrder\" WHERE user_id = '{0}'", id);
+                commandString = string.Format("SELECT id, quantity, timestamp, suspension FROM \"SellOrder\" WHERE user_id = '{0}'", id);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
+                            int orderId = int.Parse(reader["id"].ToString());
                             int quantity = int.Parse(reader["quantity"].ToString());
                             DateTime timestamp = Convert.ToDateTime(reader["timestamp"].ToString());
                             DateTime suspension = new DateTime();
@@ -359,12 +361,12 @@ namespace Server
                             {
                                 suspension = Convert.ToDateTime(reader["suspension"].ToString());
                             }
-                            catch (Exception e)
+                            catch(Exception e)
                             {
 
                             }
 
-                            SellOrder sellOrder = new SellOrder(quantity, timestamp, suspension);
+                            SellOrder sellOrder = new SellOrder(id, quantity, timestamp, suspension);
 
                             orders.Add(sellOrder);
                         }
@@ -695,6 +697,35 @@ namespace Server
             }
 
             return transactions;
+        }
+
+        public static double GetTransactionalBalance(string username)
+        {
+            int id = GetUserId(username);
+            if (id == 0)
+            {
+                return 0;
+            }
+
+            double balance = 0;
+
+            List<Transaction> transactions = GetTransactions(username);
+            
+            foreach(Transaction t in transactions)
+            {
+                double value = t.Quantity* t.Quote;
+
+                if (t.NewOwner == username)
+                {
+                    balance -= value;
+                }
+                else if(t.OldOwner == username)
+                {
+                    balance += value;
+                }
+            }
+
+            return balance;
         }
 
         #endregion
