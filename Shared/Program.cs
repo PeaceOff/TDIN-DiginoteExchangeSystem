@@ -22,9 +22,9 @@ namespace Shared
 
         List<SellOrder> GetPendingSellOrders(String username);
         List<PurchaseOrder> GetPendingPurchaseOrders(String username);
-        int GetDiginotes(String username);
+        List<Diginote> GetDiginotes(String username);
         List<Transaction> GetTransactions(String username);
-        List<Transaction> GetRecentTransactions(String username);
+        List<Transaction> GetRecentTransactions();
     }
 
     // Event Repeater to respect the compiler rules for the server
@@ -123,15 +123,11 @@ namespace Shared
     public class Diginote
     {
         private long serialNumber;
-        private String username;
 
-        public Diginote(String username, long serialNumber)
+        public Diginote(long serialNumber)
         {
-            this.username = username;
             this.serialNumber = serialNumber;
         }
-
-        public String Username { get; set; }
 
         public long SerialNumber { get; set; }
     }
