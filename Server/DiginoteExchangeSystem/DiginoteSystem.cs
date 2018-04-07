@@ -74,5 +74,10 @@ namespace Server
         {
             throw new NotImplementedException();
         }
+
+        public bool setPrice(int orderID, int price)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
