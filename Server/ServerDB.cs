@@ -189,6 +189,20 @@ namespace Server
             }
         }
 
+        public static string GetUsername(int userId)
+        {
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT username FROM \"User\" WHERE id = '{0}'", userId);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    return command.ExecuteScalar().ToString();
+                }
+            }
+        }
+
         #endregion
 
         #region Order
@@ -576,24 +590,31 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT id FROM \"Transactions\" WHERE user_id = '{0}'", id);
+                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transactions\" WHERE old_user_id = '{0}' OR new_user_id = '{0}' ORDER BY id OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY", id);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            int serial_number = int.Parse(reader["serial_number"].ToString());
+                            int old_user_id = int.Parse(reader["old_user_id"].ToString());
+                            int new_user_id = int.Parse(reader["new_user_id"].ToString());
+                            int quantity = int.Parse(reader["quantity"].ToString());
+                            DateTime timestamp = Convert.ToDateTime(reader["timestamp"].ToString());
+                            double quote = double.Parse(reader["quote"].ToString());
 
-                            Transaction transaction = new Transaction(serial_number);
+                            string old_user_username = GetUsername(old_user_id);
+                            string new_user_username = GetUsername(new_user_id);
 
-                            diginotes.Add(diginote);
+                            Transaction transaction = new Transaction(old_user_username, new_user_username, quantity, timestamp, quote);
+
+                            transactions.Add(transaction);
                         }
                     }
                 }
             }
 
-            return diginotes;
+            return transactions;
         }
 
         #endregion
