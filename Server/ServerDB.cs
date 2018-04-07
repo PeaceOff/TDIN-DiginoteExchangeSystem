@@ -247,20 +247,131 @@ namespace Server
                 return orders;
             }
 
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT quantity, timestamp, suspension FROM \"SellOrder\" WHERE user_id = '{0}'", id);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int quantity = int.Parse(reader["quantity"].ToString());
+                            DateTime timestamp = Convert.ToDateTime(reader["timestamp"].ToString());
+                            DateTime suspension = new DateTime();
+                            try
+                            {
+                                suspension = Convert.ToDateTime(reader["suspension"].ToString());
+                            }
+                            catch (Exception e)
+                            {
+
+                            }
+
+                            SellOrder sellOrder = new SellOrder(quantity, timestamp, suspension);
+
+                            orders.Add(sellOrder);
+                        }
+                    }
+                }
+            }
+
             return orders;
         }
 
-        public static void InsertPurchaseOrder(string username, int quantity)
+        public static bool InsertPurchaseOrder(string username, int quantity)
         {
+            if(quantity < 1)
+            {
+                return true;
+            }
+
             int id = GetUserId(username);
             if (id == 0)
             {
-                return;
+                return true;
             }
+
+            if (!HasEnoughDiginotes(username, quantity))
+            {
+                return true;
+            }
+
+            double quote = GetQuote();
 
             using (SqlConnection connection = GetConnection())
             {
                 string commandString;
+
+                commandString = string.Format("SELECT id, user_id, quantity FROM \"SellOrder\" WHERE suspension IS NULL ORDER BY timestamp ASC");
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int sellId = int.Parse(reader["id"].ToString());
+                            int sellUserId = int.Parse(reader["user_id"].ToString());
+                            int sellQuantity = int.Parse(reader["quantity"].ToString());
+
+                            int transactionQuantity = sellQuantity < quantity ? sellQuantity : quantity;
+
+                            // Create Transaction
+                            commandString = string.Format("INSERT INTO \"Transaction\" (old_user_id, new_user_id, quantity, timestamp, quote) VALUES ('{0}', '{1}', '{2}', '{3}','{4}')", sellUserId, id, transactionQuantity, DateTime.Now, quote);
+                            using (var innerCommand = new SqlCommand(commandString, connection))
+                            {
+                                innerCommand.ExecuteNonQuery();
+                            }
+
+                            // Change Diginote Owner
+                            for (int i = 0; i < transactionQuantity; i++)
+                            {
+                                int diginoteId = 0;
+
+                                commandString = string.Format("SELECT TOP 1 serial_number FROM \"Diginote\" WHERE user_id = {0}", sellUserId);
+                                using (var innerCommand = new SqlCommand(commandString, connection))
+                                {
+                                    diginoteId =  (int)innerCommand.ExecuteScalar();
+                                }
+
+                                commandString = string.Format("UPDATE \"Diginote\" SET user_id = {0} WHERE serial_number = {1}", id, diginoteId);
+                                using (var innerCommand = new SqlCommand(commandString, connection))
+                                {
+                                    innerCommand.ExecuteNonQuery();
+                                }
+                            }
+
+                            if (sellQuantity > quantity)
+                            {
+                                // Update Sell Order
+                                int newSellQuantity = sellQuantity - quantity;
+                                commandString = string.Format("UPDATE \"SellOrder\" SET quantity = {0} WHERE id = {1}", newSellQuantity, sellId);
+                                using (var innerCommand = new SqlCommand(commandString, connection))
+                                {
+                                    innerCommand.ExecuteNonQuery();
+                                }
+
+                                return true;
+                            }
+
+                            // Delete Sell Order
+                            commandString = string.Format("DELETE FROM \"SellOrder\" WHERE id = {0}", sellId);
+                            using (var innerCommand = new SqlCommand(commandString, connection))
+                            {
+                                innerCommand.ExecuteNonQuery();
+                            }
+
+                            if(sellQuantity == quantity)
+                            {
+                                return true;
+                            }
+                            
+                            quantity -= sellQuantity;
+                        }
+                    }
+                }
 
                 commandString = string.Format("INSERT INTO \"BuyOrder\" (user_id, quantity, timestamp) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now);
                 using (var command = new SqlCommand(commandString, connection))
@@ -268,11 +379,30 @@ namespace Server
                     command.ExecuteNonQuery();
                 }
             }
+
+            return false;
         }
 
         public static void InsertSellingOrder(string username, int quantity)
         {
 
+        }
+
+        public static bool HasEnoughDiginotes(string username, int quantity)
+        {
+            if (quantity < 1)
+            {
+                return true;
+            }
+
+            int id = GetUserId(username);
+            if (id == 0)
+            {
+                return true;
+            }
+
+            // TODO
+            return true;
         }
 
         #endregion

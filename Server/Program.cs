@@ -59,19 +59,7 @@ namespace Server
             }
 
             // Order
-            List<PurchaseOrder> purchaseOrders = ServerDB.GetPurchaseOrders("uEdu");
-
-            if(purchaseOrders.Count == 0)
-            {
-                ServerDB.InsertPurchaseOrder("uEdu", 10);
-
-                purchaseOrders = ServerDB.GetPurchaseOrders("uEdu");
-
-                if (purchaseOrders.Count != 1)
-                {
-                    Console.WriteLine("Test Failed");
-                }
-            }
+            ServerDB.InsertPurchaseOrder("uEdu", 10);
         }
     }
 }
