@@ -8,28 +8,13 @@ namespace Server.DiginoteExchangeSystem
 {
     class SellOrder : Order
     {
-        public SellOrder(String username, int quantity) : base(username, quantity)
+        public SellOrder(int quantity, DateTime timestamp, DateTime suspension) : base(quantity, timestamp, suspension)
         {
         }
 
         public SellOrder() : base()
         {
 
-        }
-
-
-        public bool SetPrice(double price)
-        {
-            double quote = ServerDB.GetQuote();
-
-            if (price <= quote)
-            {
-                ServerDB.UpdateQuote(price);
-                return true;
-            } else
-            {
-                return false;
-            }
         }
     }
 }
