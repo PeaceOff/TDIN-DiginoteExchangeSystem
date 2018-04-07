@@ -83,29 +83,35 @@ namespace Server
             }                         
         }
 
-        public int GetDiginotes(string username)
+        public List<Diginote> GetDiginotes(string username)
         {
-            throw new NotImplementedException();
+            //TODO descomentar para invocar a get diginotes
+            //return ServerDB.GetDiginotes(username);
+            return new List<Diginote>();
         }
 
         List<SellOrder> IDiginoteSystem.GetPendingSellOrders(string username)
         {
-            throw new NotImplementedException();
+            return ServerDB.GetSellingOrders(username);
         }
 
         List<PurchaseOrder> IDiginoteSystem.GetPendingPurchaseOrders(string username)
         {
-            throw new NotImplementedException();
+            return ServerDB.GetPurchaseOrders(username);
         }
 
         List<Transaction> IDiginoteSystem.GetTransactions(string username)
         {
-            throw new NotImplementedException();
+            //TODO descomentar quando houver commit desta função
+            //return ServerDB.GetTransactions(username);
+            return new List<Transaction>();
         }
 
-        List<Transaction> IDiginoteSystem.GetRecentTransactions(string username)
+        List<Transaction> IDiginoteSystem.GetRecentTransactions()
         {
-            throw new NotImplementedException();
+            //TODO descomentar quando houver commit desta função
+            //return ServerDB.GetRecentTransactions(username);
+            return new List<Transaction>();
         }
     }
 }
