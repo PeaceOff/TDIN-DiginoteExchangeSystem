@@ -281,17 +281,19 @@ namespace Server
             return orders;
         }
 
-        public static bool InsertPurchaseOrder(string username, int quantity)
+        public static List<int> InsertPurchaseOrder(string username, int quantity)
         {
+            List<int> serialNumbers = new List<int>();
+
             if(quantity < 1)
             {
-                return true;
+                return serialNumbers;
             }
 
             int id = GetUserId(username);
             if (id == 0)
             {
-                return true;
+                return serialNumbers;
             }
 
             double quote = GetQuote();
@@ -336,6 +338,8 @@ namespace Server
                                 {
                                     innerCommand.ExecuteNonQuery();
                                 }
+
+                                serialNumbers.Add(diginoteId);
                             }
 
                             if (sellQuantity > quantity)
@@ -348,7 +352,7 @@ namespace Server
                                     innerCommand.ExecuteNonQuery();
                                 }
 
-                                return true;
+                                return serialNumbers;
                             }
 
                             // Delete Sell Order
@@ -360,7 +364,7 @@ namespace Server
 
                             if(sellQuantity == quantity)
                             {
-                                return true;
+                                return serialNumbers;
                             }
                             
                             quantity -= sellQuantity;
@@ -375,25 +379,27 @@ namespace Server
                 }
             }
 
-            return false;
+            return serialNumbers;
         }
 
-        public static bool InsertSellingOrder(string username, int quantity)
+        public static List<int> InsertSellingOrder(string username, int quantity)
         {
+            List<int> serialNumbers = new List<int>();
+
             if (quantity < 1)
             {
-                return true;
+                return serialNumbers;
             }
 
             int id = GetUserId(username);
             if (id == 0)
             {
-                return true;
+                return serialNumbers;
             }
 
             if (!HasEnoughDiginotes(username, quantity))
             {
-                return true;
+                return serialNumbers;
             }
 
             double quote = GetQuote();
@@ -438,6 +444,8 @@ namespace Server
                                 {
                                     innerCommand.ExecuteNonQuery();
                                 }
+
+                                serialNumbers.Add(diginoteId);
                             }
 
                             if (buyQuantity > quantity)
@@ -450,7 +458,7 @@ namespace Server
                                     innerCommand.ExecuteNonQuery();
                                 }
 
-                                return true;
+                                return serialNumbers;
                             }
 
                             // Delete Buy Order
@@ -462,7 +470,7 @@ namespace Server
 
                             if (buyQuantity == quantity)
                             {
-                                return true;
+                                return serialNumbers;
                             }
 
                             quantity -= buyQuantity;
@@ -477,7 +485,7 @@ namespace Server
                 }
             }
 
-            return false;
+            return serialNumbers;
         }
 
         public static bool HasEnoughDiginotes(string username, int quantity)
@@ -511,6 +519,10 @@ namespace Server
                 }
             }
         }
+
+        #endregion
+
+        #region Diginote
 
         #endregion
 

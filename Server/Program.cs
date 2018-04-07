@@ -59,10 +59,17 @@ namespace Server
             }
 
             // Order
-            ServerDB.InsertPurchaseOrder("uEdu", 20);
-            ServerDB.InsertSellingOrder("uDavid", 10);
-            ServerDB.InsertSellingOrder("uDavid", 10);
-            ServerDB.InsertSellingOrder("uDavid", 10);
+            List<int> diginotes = new List<int>();
+
+            diginotes = ServerDB.InsertPurchaseOrder("uEdu", 6);
+            diginotes = ServerDB.InsertSellingOrder("uDavid", 2);
+            diginotes = ServerDB.InsertSellingOrder("uDavid", 2);
+            diginotes = ServerDB.InsertSellingOrder("uDavid", 2);
+
+            diginotes = ServerDB.InsertSellingOrder("uEdu", 6);
+            diginotes = ServerDB.InsertPurchaseOrder("uDavid", 2);
+            diginotes = ServerDB.InsertPurchaseOrder("uDavid", 2);
+            diginotes = ServerDB.InsertPurchaseOrder("uDavid", 2);
         }
     }
 }
