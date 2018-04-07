@@ -560,5 +560,43 @@ namespace Server
 
         #endregion
 
+        #region Transactions
+
+        public static List<Transaction> GetTransactions(string username)
+        {
+            List<Transaction> transactions = new List<Transaction>();
+
+            int id = GetUserId(username);
+            if (id == 0)
+            {
+                return transactions;
+            }
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT id FROM \"Transactions\" WHERE user_id = '{0}'", id);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int serial_number = int.Parse(reader["serial_number"].ToString());
+
+                            Transaction transaction = new Transaction(serial_number);
+
+                            diginotes.Add(diginote);
+                        }
+                    }
+                }
+            }
+
+            return diginotes;
+        }
+
+        #endregion
+
     }
 }

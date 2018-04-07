@@ -91,13 +91,15 @@ namespace Shared
         String newOwner;
         int quantity;
         DateTime timestamp;
+        double quote;
 
-        public Transaction(String oldOwner, String newOwner, int quantity, DateTime timestamp)
+        public Transaction(String oldOwner, String newOwner, int quantity, DateTime timestamp, double quote)
         {
             this.oldOwner = oldOwner;
             this.newOwner = newOwner;
             this.quantity = quantity;
             this.timestamp = timestamp;
+            this.quote = quote;
         }
 
         public Transaction() {}
@@ -109,6 +111,8 @@ namespace Shared
         public int Quantity { get; set; }
 
         public DateTime Timestamp { get; set; }
+
+        public double Quote { get; set; }
 
         public override string ToString()
         {
