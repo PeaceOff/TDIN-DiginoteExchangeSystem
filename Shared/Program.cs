@@ -15,7 +15,8 @@ namespace Shared
         string Login(string username, string password);
 
         double GetCurrentQuote(string username);
-        bool SetPrice(int price);
+        bool SetPurchasePrice(int price);
+        bool SetSellPrice(int price);
 
         bool PurchaseOrders(String username, int quantity);
         bool SellOrders(String username, int quantity);        
