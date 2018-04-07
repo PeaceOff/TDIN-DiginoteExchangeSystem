@@ -13,7 +13,19 @@ namespace Client
         private String username = null;
         private String nickname = null;
         private ClientForm clientForm;
-        private List<int> wallet = new List<int>();
+        private List<Diginote> mWallet = new List<Diginote>();
+        private List<SellOrder> mSellOrders = new List<SellOrder>();
+        private List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>(); 
+
+        // TODO Get user wallet
+        // TODO emit selling order
+        // TODO emit purchasing order
+        // TODO AT ANY TIME -> increase purchase order price
+        // TODO AT ANY TIME -> decrease selling order price
+        // TODO AT ANY TIME -> cancel an order
+        // TODO if selling don't purchase
+        // TODO if purchase don't sell
+        // TODO Implement events for logging
 
         public ClientRules(ClientForm cf)
         {
