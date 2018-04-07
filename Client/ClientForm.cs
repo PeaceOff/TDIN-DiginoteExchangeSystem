@@ -35,6 +35,9 @@ namespace Client
             quoteTxtLbl.Hide();
             nicknameTxt.Hide();
             registerBtt.Hide();
+            sellDiginoteBtt.Hide();
+            buyAmountBtt.Hide();
+            diginoteAmountUD.Hide();
         }
 
         private void registerBtt_Click(object sender, EventArgs e)
@@ -79,7 +82,10 @@ namespace Client
                 loginBtt.Hide();
                 signInBtt.Hide();
                 signUpBtt.Hide();
-  
+                sellDiginoteBtt.Show();
+                buyAmountBtt.Show();
+                diginoteAmountUD.Show();
+
                 logoutBtt.Show();
                 loggedLbl.Text = LOGGED_TEXT + nickname;
                 loggedLbl.Show();
@@ -109,6 +115,9 @@ namespace Client
             loginBtt.Show();
             signInBtt.Show();
             signUpBtt.Show();
+            sellDiginoteBtt.Hide();
+            buyAmountBtt.Hide();
+            diginoteAmountUD.Hide();
         }
 
         private void signInBtt_Click(object sender, EventArgs e)
