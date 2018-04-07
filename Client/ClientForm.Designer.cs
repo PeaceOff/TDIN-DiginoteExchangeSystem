@@ -49,6 +49,8 @@
             this.mPurchaseOrderTextArea = new System.Windows.Forms.TextBox();
             this.pendingSellTxt = new MaterialSkin.Controls.MaterialLabel();
             this.mSellOrderTextArea = new System.Windows.Forms.TextBox();
+            this.mTransactionsTxt = new MaterialSkin.Controls.MaterialLabel();
+            this.mTradesTextArea = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.diginoteAmountUD)).BeginInit();
             this.SuspendLayout();
             // 
@@ -252,12 +254,12 @@
             this.mTransactionTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mTransactionTextArea.Cursor = System.Windows.Forms.Cursors.Default;
             this.mTransactionTextArea.Enabled = false;
-            this.mTransactionTextArea.Location = new System.Drawing.Point(395, 168);
+            this.mTransactionTextArea.Location = new System.Drawing.Point(396, 371);
             this.mTransactionTextArea.Multiline = true;
             this.mTransactionTextArea.Name = "mTransactionTextArea";
             this.mTransactionTextArea.ReadOnly = true;
-            this.mTransactionTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.mTransactionTextArea.Size = new System.Drawing.Size(294, 420);
+            this.mTransactionTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mTransactionTextArea.Size = new System.Drawing.Size(294, 217);
             this.mTransactionTextArea.TabIndex = 27;
             // 
             // transactionsTxt
@@ -267,7 +269,7 @@
             this.transactionsTxt.Depth = 0;
             this.transactionsTxt.Font = new System.Drawing.Font("Roboto", 11F);
             this.transactionsTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.transactionsTxt.Location = new System.Drawing.Point(392, 146);
+            this.transactionsTxt.Location = new System.Drawing.Point(392, 349);
             this.transactionsTxt.MouseState = MaterialSkin.MouseState.HOVER;
             this.transactionsTxt.Name = "transactionsTxt";
             this.transactionsTxt.Size = new System.Drawing.Size(143, 19);
@@ -321,7 +323,7 @@
             this.pendingPurchaseTxt.Depth = 0;
             this.pendingPurchaseTxt.Font = new System.Drawing.Font("Roboto", 11F);
             this.pendingPurchaseTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.pendingPurchaseTxt.Location = new System.Drawing.Point(203, 309);
+            this.pendingPurchaseTxt.Location = new System.Drawing.Point(203, 133);
             this.pendingPurchaseTxt.MouseState = MaterialSkin.MouseState.HOVER;
             this.pendingPurchaseTxt.Name = "pendingPurchaseTxt";
             this.pendingPurchaseTxt.Size = new System.Drawing.Size(135, 19);
@@ -333,12 +335,12 @@
             this.mPurchaseOrderTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mPurchaseOrderTextArea.Cursor = System.Windows.Forms.Cursors.Default;
             this.mPurchaseOrderTextArea.Enabled = false;
-            this.mPurchaseOrderTextArea.Location = new System.Drawing.Point(207, 331);
+            this.mPurchaseOrderTextArea.Location = new System.Drawing.Point(207, 155);
             this.mPurchaseOrderTextArea.Multiline = true;
             this.mPurchaseOrderTextArea.Name = "mPurchaseOrderTextArea";
             this.mPurchaseOrderTextArea.ReadOnly = true;
-            this.mPurchaseOrderTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.mPurchaseOrderTextArea.Size = new System.Drawing.Size(165, 226);
+            this.mPurchaseOrderTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mPurchaseOrderTextArea.Size = new System.Drawing.Size(165, 115);
             this.mPurchaseOrderTextArea.TabIndex = 33;
             // 
             // pendingSellTxt
@@ -348,7 +350,7 @@
             this.pendingSellTxt.Depth = 0;
             this.pendingSellTxt.Font = new System.Drawing.Font("Roboto", 11F);
             this.pendingSellTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.pendingSellTxt.Location = new System.Drawing.Point(15, 309);
+            this.pendingSellTxt.Location = new System.Drawing.Point(15, 133);
             this.pendingSellTxt.MouseState = MaterialSkin.MouseState.HOVER;
             this.pendingSellTxt.Name = "pendingSellTxt";
             this.pendingSellTxt.Size = new System.Drawing.Size(137, 19);
@@ -360,13 +362,40 @@
             this.mSellOrderTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mSellOrderTextArea.Cursor = System.Windows.Forms.Cursors.Default;
             this.mSellOrderTextArea.Enabled = false;
-            this.mSellOrderTextArea.Location = new System.Drawing.Point(19, 331);
+            this.mSellOrderTextArea.Location = new System.Drawing.Point(19, 155);
             this.mSellOrderTextArea.Multiline = true;
             this.mSellOrderTextArea.Name = "mSellOrderTextArea";
             this.mSellOrderTextArea.ReadOnly = true;
-            this.mSellOrderTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.mSellOrderTextArea.Size = new System.Drawing.Size(165, 226);
+            this.mSellOrderTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mSellOrderTextArea.Size = new System.Drawing.Size(165, 115);
             this.mSellOrderTextArea.TabIndex = 35;
+            // 
+            // mTransactionsTxt
+            // 
+            this.mTransactionsTxt.AutoSize = true;
+            this.mTransactionsTxt.BackColor = System.Drawing.SystemColors.Window;
+            this.mTransactionsTxt.Depth = 0;
+            this.mTransactionsTxt.Font = new System.Drawing.Font("Roboto", 11F);
+            this.mTransactionsTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.mTransactionsTxt.Location = new System.Drawing.Point(392, 142);
+            this.mTransactionsTxt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.mTransactionsTxt.Name = "mTransactionsTxt";
+            this.mTransactionsTxt.Size = new System.Drawing.Size(117, 19);
+            this.mTransactionsTxt.TabIndex = 38;
+            this.mTransactionsTxt.Text = "My transactions";
+            // 
+            // mTradesTextArea
+            // 
+            this.mTradesTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mTradesTextArea.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mTradesTextArea.Enabled = false;
+            this.mTradesTextArea.Location = new System.Drawing.Point(396, 164);
+            this.mTradesTextArea.Multiline = true;
+            this.mTradesTextArea.Name = "mTradesTextArea";
+            this.mTradesTextArea.ReadOnly = true;
+            this.mTradesTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.mTradesTextArea.Size = new System.Drawing.Size(294, 171);
+            this.mTradesTextArea.TabIndex = 37;
             // 
             // ClientForm
             // 
@@ -374,6 +403,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(700, 600);
+            this.Controls.Add(this.mTransactionsTxt);
+            this.Controls.Add(this.mTradesTextArea);
             this.Controls.Add(this.pendingSellTxt);
             this.Controls.Add(this.mSellOrderTextArea);
             this.Controls.Add(this.pendingPurchaseTxt);
@@ -428,5 +459,7 @@
         private System.Windows.Forms.TextBox mPurchaseOrderTextArea;
         private MaterialSkin.Controls.MaterialLabel pendingSellTxt;
         private System.Windows.Forms.TextBox mSellOrderTextArea;
+        private MaterialSkin.Controls.MaterialLabel mTransactionsTxt;
+        private System.Windows.Forms.TextBox mTradesTextArea;
     }
 }

@@ -27,8 +27,27 @@ namespace Client
 
         // Event Handlers
 
-        private void ClientForm_Load(object sender, EventArgs e)
-        {
+
+        private void LoginShows() {
+
+            sellDiginoteBtt.Show();
+            buyAmountBtt.Show();
+            diginoteAmountUD.Show();
+            pendingPurchaseTxt.Show();
+            pendingSellTxt.Show();
+            mPurchaseOrderTextArea.Show();
+            mSellOrderTextArea.Show();
+            mTradesTextArea.Show();
+            mTransactionsTxt.Show();
+            diginotesLbl.Show();
+            transactionsTxt.Show();
+            mTransactionTextArea.Show();
+            logoutBtt.Show();
+
+        }
+
+        private void LogoutHide() {
+
             resultLbl.Hide();
             loggedLbl.Hide();
             logoutBtt.Hide();
@@ -38,6 +57,20 @@ namespace Client
             sellDiginoteBtt.Hide();
             buyAmountBtt.Hide();
             diginoteAmountUD.Hide();
+            pendingPurchaseTxt.Hide();
+            pendingSellTxt.Hide();
+            mPurchaseOrderTextArea.Hide();
+            mSellOrderTextArea.Hide();
+            mTradesTextArea.Hide();
+            mTransactionsTxt.Hide();
+            diginotesLbl.Hide();
+            transactionsTxt.Hide();
+            mTransactionTextArea.Hide();
+        }
+
+        private void ClientForm_Load(object sender, EventArgs e)
+        {
+            LogoutHide();
         }
 
         private void registerBtt_Click(object sender, EventArgs e)
@@ -82,11 +115,9 @@ namespace Client
                 loginBtt.Hide();
                 signInBtt.Hide();
                 signUpBtt.Hide();
-                sellDiginoteBtt.Show();
-                buyAmountBtt.Show();
-                diginoteAmountUD.Show();
 
-                logoutBtt.Show();
+                LoginShows();
+
                 loggedLbl.Text = LOGGED_TEXT + nickname;
                 loggedLbl.Show();
                 quoteTxtLbl.Show();
@@ -115,9 +146,7 @@ namespace Client
             loginBtt.Show();
             signInBtt.Show();
             signUpBtt.Show();
-            sellDiginoteBtt.Hide();
-            buyAmountBtt.Hide();
-            diginoteAmountUD.Hide();
+
         }
 
         private void signInBtt_Click(object sender, EventArgs e)
