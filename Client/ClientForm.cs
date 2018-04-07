@@ -27,7 +27,6 @@ namespace Client
 
         // Event Handlers
 
-
         private void LoginShows() {
 
             sellDiginoteBtt.Show();
@@ -124,7 +123,7 @@ namespace Client
 
                 // When the client logs in we get the current quote
                 // Afterwards the quote will be updated in real time via events
-                quoteTxtLbl.Text = QUOTE_TEXT + clientRules.GetCurrentQuote().ToString();
+                UpdateQuote(clientRules.GetCurrentQuote());
             }
             else
             {

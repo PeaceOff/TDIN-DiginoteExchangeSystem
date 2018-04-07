@@ -312,9 +312,24 @@
             this.diginoteAmountUD.BackColor = System.Drawing.SystemColors.Control;
             this.diginoteAmountUD.ForeColor = System.Drawing.SystemColors.ControlText;
             this.diginoteAmountUD.Location = new System.Drawing.Point(19, 75);
+            this.diginoteAmountUD.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
+            this.diginoteAmountUD.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             this.diginoteAmountUD.Name = "diginoteAmountUD";
             this.diginoteAmountUD.Size = new System.Drawing.Size(159, 21);
             this.diginoteAmountUD.TabIndex = 32;
+            this.diginoteAmountUD.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // pendingPurchaseTxt
             // 
