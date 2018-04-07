@@ -40,8 +40,16 @@
             this.signInBtt = new MaterialSkin.Controls.MaterialRaisedButton();
             this.signUpBtt = new MaterialSkin.Controls.MaterialRaisedButton();
             this.diginotesLbl = new MaterialSkin.Controls.MaterialLabel();
-            this.logTextBox = new System.Windows.Forms.TextBox();
-            this.materialLabel1 = new MaterialSkin.Controls.MaterialLabel();
+            this.mTransactionTextArea = new System.Windows.Forms.TextBox();
+            this.transactionsTxt = new MaterialSkin.Controls.MaterialLabel();
+            this.buyAmountBtt = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.sellDiginoteBtt = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.diginoteAmountUD = new System.Windows.Forms.NumericUpDown();
+            this.pendingPurchaseTxt = new MaterialSkin.Controls.MaterialLabel();
+            this.mPurchaseOrderTextArea = new System.Windows.Forms.TextBox();
+            this.pendingSellTxt = new MaterialSkin.Controls.MaterialLabel();
+            this.mSellOrderTextArea = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.diginoteAmountUD)).BeginInit();
             this.SuspendLayout();
             // 
             // loggedLbl
@@ -49,14 +57,14 @@
             this.loggedLbl.AutoSize = true;
             this.loggedLbl.BackColor = System.Drawing.SystemColors.Window;
             this.loggedLbl.Depth = 0;
-            this.loggedLbl.Font = new System.Drawing.Font("Verdana", 11F);
+            this.loggedLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.loggedLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.loggedLbl.Location = new System.Drawing.Point(15, 534);
+            this.loggedLbl.Location = new System.Drawing.Point(114, 565);
             this.loggedLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.loggedLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.loggedLbl.Name = "loggedLbl";
             this.loggedLbl.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.loggedLbl.Size = new System.Drawing.Size(113, 22);
+            this.loggedLbl.Size = new System.Drawing.Size(102, 23);
             this.loggedLbl.TabIndex = 15;
             this.loggedLbl.Text = "Logged in as: ";
             // 
@@ -65,7 +73,7 @@
             this.logoutBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.logoutBtt.Depth = 0;
             this.logoutBtt.Font = new System.Drawing.Font("Verdana", 11F);
-            this.logoutBtt.Location = new System.Drawing.Point(18, 559);
+            this.logoutBtt.Location = new System.Drawing.Point(18, 566);
             this.logoutBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.logoutBtt.MouseState = MaterialSkin.MouseState.HOVER;
             this.logoutBtt.Name = "logoutBtt";
@@ -81,14 +89,14 @@
             this.resultLbl.AutoSize = true;
             this.resultLbl.BackColor = System.Drawing.SystemColors.Window;
             this.resultLbl.Depth = 0;
-            this.resultLbl.Font = new System.Drawing.Font("Verdana", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resultLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.resultLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.resultLbl.Location = new System.Drawing.Point(15, 247);
             this.resultLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.resultLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.resultLbl.Name = "resultLbl";
             this.resultLbl.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.resultLbl.Size = new System.Drawing.Size(53, 22);
+            this.resultLbl.Size = new System.Drawing.Size(51, 23);
             this.resultLbl.TabIndex = 17;
             this.resultLbl.Text = "Result";
             // 
@@ -97,14 +105,14 @@
             this.quoteTxtLbl.AutoSize = true;
             this.quoteTxtLbl.BackColor = System.Drawing.SystemColors.Window;
             this.quoteTxtLbl.Depth = 0;
-            this.quoteTxtLbl.Font = new System.Drawing.Font("Verdana", 11F);
+            this.quoteTxtLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.quoteTxtLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.quoteTxtLbl.Location = new System.Drawing.Point(391, 109);
+            this.quoteTxtLbl.Location = new System.Drawing.Point(392, 111);
             this.quoteTxtLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.quoteTxtLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.quoteTxtLbl.Name = "quoteTxtLbl";
             this.quoteTxtLbl.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.quoteTxtLbl.Size = new System.Drawing.Size(122, 22);
+            this.quoteTxtLbl.Size = new System.Drawing.Size(106, 23);
             this.quoteTxtLbl.TabIndex = 18;
             this.quoteTxtLbl.Text = "Current Quote:";
             // 
@@ -228,43 +236,137 @@
             this.diginotesLbl.AutoSize = true;
             this.diginotesLbl.BackColor = System.Drawing.SystemColors.Window;
             this.diginotesLbl.Depth = 0;
-            this.diginotesLbl.Font = new System.Drawing.Font("Verdana", 11F);
+            this.diginotesLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.diginotesLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.diginotesLbl.Location = new System.Drawing.Point(392, 75);
             this.diginotesLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.diginotesLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.diginotesLbl.Name = "diginotesLbl";
             this.diginotesLbl.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
-            this.diginotesLbl.Size = new System.Drawing.Size(121, 22);
+            this.diginotesLbl.Size = new System.Drawing.Size(112, 23);
             this.diginotesLbl.TabIndex = 26;
             this.diginotesLbl.Text = "Your Diginotes:";
             // 
-            // logTextBox
+            // mTransactionTextArea
             // 
-            this.logTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.logTextBox.Cursor = System.Windows.Forms.Cursors.Default;
-            this.logTextBox.Enabled = false;
-            this.logTextBox.Location = new System.Drawing.Point(394, 161);
-            this.logTextBox.Multiline = true;
-            this.logTextBox.Name = "logTextBox";
-            this.logTextBox.ReadOnly = true;
-            this.logTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
-            this.logTextBox.Size = new System.Drawing.Size(294, 420);
-            this.logTextBox.TabIndex = 27;
+            this.mTransactionTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mTransactionTextArea.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mTransactionTextArea.Enabled = false;
+            this.mTransactionTextArea.Location = new System.Drawing.Point(395, 168);
+            this.mTransactionTextArea.Multiline = true;
+            this.mTransactionTextArea.Name = "mTransactionTextArea";
+            this.mTransactionTextArea.ReadOnly = true;
+            this.mTransactionTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.mTransactionTextArea.Size = new System.Drawing.Size(294, 420);
+            this.mTransactionTextArea.TabIndex = 27;
             // 
-            // materialLabel1
+            // transactionsTxt
             // 
-            this.materialLabel1.AutoSize = true;
-            this.materialLabel1.BackColor = System.Drawing.SystemColors.Window;
-            this.materialLabel1.Depth = 0;
-            this.materialLabel1.Font = new System.Drawing.Font("Verdana", 11.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.materialLabel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.materialLabel1.Location = new System.Drawing.Point(391, 141);
-            this.materialLabel1.MouseState = MaterialSkin.MouseState.HOVER;
-            this.materialLabel1.Name = "materialLabel1";
-            this.materialLabel1.Size = new System.Drawing.Size(171, 18);
-            this.materialLabel1.TabIndex = 28;
-            this.materialLabel1.Text = "Recent transactions";
+            this.transactionsTxt.AutoSize = true;
+            this.transactionsTxt.BackColor = System.Drawing.SystemColors.Window;
+            this.transactionsTxt.Depth = 0;
+            this.transactionsTxt.Font = new System.Drawing.Font("Roboto", 11F);
+            this.transactionsTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.transactionsTxt.Location = new System.Drawing.Point(392, 146);
+            this.transactionsTxt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.transactionsTxt.Name = "transactionsTxt";
+            this.transactionsTxt.Size = new System.Drawing.Size(143, 19);
+            this.transactionsTxt.TabIndex = 28;
+            this.transactionsTxt.Text = "Recent transactions";
+            // 
+            // buyAmountBtt
+            // 
+            this.buyAmountBtt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.buyAmountBtt.Depth = 0;
+            this.buyAmountBtt.Font = new System.Drawing.Font("Verdana", 11F);
+            this.buyAmountBtt.Location = new System.Drawing.Point(102, 104);
+            this.buyAmountBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.buyAmountBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.buyAmountBtt.Name = "buyAmountBtt";
+            this.buyAmountBtt.Primary = true;
+            this.buyAmountBtt.Size = new System.Drawing.Size(76, 22);
+            this.buyAmountBtt.TabIndex = 30;
+            this.buyAmountBtt.Text = "Buy";
+            this.buyAmountBtt.UseVisualStyleBackColor = true;
+            // 
+            // sellDiginoteBtt
+            // 
+            this.sellDiginoteBtt.BackColor = System.Drawing.SystemColors.Control;
+            this.sellDiginoteBtt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sellDiginoteBtt.Depth = 0;
+            this.sellDiginoteBtt.Font = new System.Drawing.Font("Verdana", 11F);
+            this.sellDiginoteBtt.Location = new System.Drawing.Point(18, 104);
+            this.sellDiginoteBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.sellDiginoteBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.sellDiginoteBtt.Name = "sellDiginoteBtt";
+            this.sellDiginoteBtt.Primary = true;
+            this.sellDiginoteBtt.Size = new System.Drawing.Size(76, 22);
+            this.sellDiginoteBtt.TabIndex = 31;
+            this.sellDiginoteBtt.Text = "Sell";
+            this.sellDiginoteBtt.UseVisualStyleBackColor = false;
+            // 
+            // diginoteAmountUD
+            // 
+            this.diginoteAmountUD.BackColor = System.Drawing.SystemColors.Control;
+            this.diginoteAmountUD.ForeColor = System.Drawing.SystemColors.ControlText;
+            this.diginoteAmountUD.Location = new System.Drawing.Point(19, 75);
+            this.diginoteAmountUD.Name = "diginoteAmountUD";
+            this.diginoteAmountUD.Size = new System.Drawing.Size(159, 21);
+            this.diginoteAmountUD.TabIndex = 32;
+            // 
+            // pendingPurchaseTxt
+            // 
+            this.pendingPurchaseTxt.AutoSize = true;
+            this.pendingPurchaseTxt.BackColor = System.Drawing.SystemColors.Window;
+            this.pendingPurchaseTxt.Depth = 0;
+            this.pendingPurchaseTxt.Font = new System.Drawing.Font("Roboto", 11F);
+            this.pendingPurchaseTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pendingPurchaseTxt.Location = new System.Drawing.Point(203, 309);
+            this.pendingPurchaseTxt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pendingPurchaseTxt.Name = "pendingPurchaseTxt";
+            this.pendingPurchaseTxt.Size = new System.Drawing.Size(135, 19);
+            this.pendingPurchaseTxt.TabIndex = 34;
+            this.pendingPurchaseTxt.Text = "Pending purchases";
+            // 
+            // mPurchaseOrderTextArea
+            // 
+            this.mPurchaseOrderTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mPurchaseOrderTextArea.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mPurchaseOrderTextArea.Enabled = false;
+            this.mPurchaseOrderTextArea.Location = new System.Drawing.Point(207, 331);
+            this.mPurchaseOrderTextArea.Multiline = true;
+            this.mPurchaseOrderTextArea.Name = "mPurchaseOrderTextArea";
+            this.mPurchaseOrderTextArea.ReadOnly = true;
+            this.mPurchaseOrderTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.mPurchaseOrderTextArea.Size = new System.Drawing.Size(165, 226);
+            this.mPurchaseOrderTextArea.TabIndex = 33;
+            // 
+            // pendingSellTxt
+            // 
+            this.pendingSellTxt.AutoSize = true;
+            this.pendingSellTxt.BackColor = System.Drawing.SystemColors.Window;
+            this.pendingSellTxt.Depth = 0;
+            this.pendingSellTxt.Font = new System.Drawing.Font("Roboto", 11F);
+            this.pendingSellTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.pendingSellTxt.Location = new System.Drawing.Point(15, 309);
+            this.pendingSellTxt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.pendingSellTxt.Name = "pendingSellTxt";
+            this.pendingSellTxt.Size = new System.Drawing.Size(137, 19);
+            this.pendingSellTxt.TabIndex = 36;
+            this.pendingSellTxt.Text = "Pending sell orders";
+            // 
+            // mSellOrderTextArea
+            // 
+            this.mSellOrderTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.mSellOrderTextArea.Cursor = System.Windows.Forms.Cursors.Default;
+            this.mSellOrderTextArea.Enabled = false;
+            this.mSellOrderTextArea.Location = new System.Drawing.Point(19, 331);
+            this.mSellOrderTextArea.Multiline = true;
+            this.mSellOrderTextArea.Name = "mSellOrderTextArea";
+            this.mSellOrderTextArea.ReadOnly = true;
+            this.mSellOrderTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Horizontal;
+            this.mSellOrderTextArea.Size = new System.Drawing.Size(165, 226);
+            this.mSellOrderTextArea.TabIndex = 35;
             // 
             // ClientForm
             // 
@@ -272,9 +374,19 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(700, 600);
-            this.Controls.Add(this.materialLabel1);
-            this.Controls.Add(this.logTextBox);
+            this.Controls.Add(this.pendingSellTxt);
+            this.Controls.Add(this.mSellOrderTextArea);
+            this.Controls.Add(this.pendingPurchaseTxt);
+            this.Controls.Add(this.mPurchaseOrderTextArea);
+            this.Controls.Add(this.diginoteAmountUD);
+            this.Controls.Add(this.sellDiginoteBtt);
+            this.Controls.Add(this.buyAmountBtt);
+            this.Controls.Add(this.transactionsTxt);
+            this.Controls.Add(this.mTransactionTextArea);
             this.Controls.Add(this.diginotesLbl);
+            this.Controls.Add(this.quoteTxtLbl);
+            this.Controls.Add(this.logoutBtt);
+            this.Controls.Add(this.loggedLbl);
             this.Controls.Add(this.signUpBtt);
             this.Controls.Add(this.signInBtt);
             this.Controls.Add(this.registerBtt);
@@ -282,15 +394,13 @@
             this.Controls.Add(this.nicknameTxt);
             this.Controls.Add(this.userTxt);
             this.Controls.Add(this.loginBtt);
-            this.Controls.Add(this.quoteTxtLbl);
             this.Controls.Add(this.resultLbl);
-            this.Controls.Add(this.logoutBtt);
-            this.Controls.Add(this.loggedLbl);
             this.Font = new System.Drawing.Font("Verdana", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ClientForm";
             this.Text = "Diginote Exchange System";
             this.Load += new System.EventHandler(this.ClientForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.diginoteAmountUD)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -309,7 +419,14 @@
         private MaterialSkin.Controls.MaterialRaisedButton signInBtt;
         private MaterialSkin.Controls.MaterialRaisedButton signUpBtt;
         private MaterialSkin.Controls.MaterialLabel diginotesLbl;
-        private System.Windows.Forms.TextBox logTextBox;
-        private MaterialSkin.Controls.MaterialLabel materialLabel1;
+        private System.Windows.Forms.TextBox mTransactionTextArea;
+        private MaterialSkin.Controls.MaterialLabel transactionsTxt;
+        private MaterialSkin.Controls.MaterialRaisedButton buyAmountBtt;
+        private MaterialSkin.Controls.MaterialRaisedButton sellDiginoteBtt;
+        private System.Windows.Forms.NumericUpDown diginoteAmountUD;
+        private MaterialSkin.Controls.MaterialLabel pendingPurchaseTxt;
+        private System.Windows.Forms.TextBox mPurchaseOrderTextArea;
+        private MaterialSkin.Controls.MaterialLabel pendingSellTxt;
+        private System.Windows.Forms.TextBox mSellOrderTextArea;
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Runtime.Remoting;
 using Shared;
 
@@ -12,6 +13,7 @@ namespace Client
         private String username = null;
         private String nickname = null;
         private ClientForm clientForm;
+        private List<int> wallet = new List<int>();
 
         public ClientRules(ClientForm cf)
         {
