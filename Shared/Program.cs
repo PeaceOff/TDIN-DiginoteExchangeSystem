@@ -20,8 +20,8 @@ namespace Shared
         bool SetPurchasePrice(int price);
         bool SetSellPrice(int price);
 
-        bool PurchaseOrders(String username, int quantity);
-        bool SellOrders(String username, int quantity);        
+        List<int> PurchaseOrders(String username, int quantity);
+        List<int> SellOrders(String username, int quantity);        
 
         List<SellOrder> GetPendingSellOrders(String username);
         List<PurchaseOrder> GetPendingPurchaseOrders(String username);
@@ -57,10 +57,10 @@ namespace Shared
     [Serializable]
     public class Order
     {
-        int id;
-        int quantity;
-        DateTime timestamp;
-        DateTime suspension;
+        public int id;
+        public int quantity;
+        public DateTime timestamp;
+        public DateTime suspension;
 
         public Order(int id, int quantity, DateTime timestamp, DateTime suspension)
         {
@@ -71,14 +71,6 @@ namespace Shared
         }
 
         public Order() {}
-
-        public int Id { get; set; }
-
-        public int Quantity { get; set; }
-
-        public DateTime Timestamp { get; set; }
-
-        public DateTime Suspension { get; set; }
     }
 
     // Purchase order object
@@ -103,11 +95,11 @@ namespace Shared
     [Serializable]
     public class Transaction
     {
-        String oldOwner;
-        String newOwner;
-        int quantity;
-        DateTime timestamp;
-        double quote;
+        public String oldOwner;
+        public String newOwner;
+        public int quantity;
+        public DateTime timestamp;
+        public double quote;
 
         public Transaction(String oldOwner, String newOwner, int quantity, DateTime timestamp, double quote)
         {
@@ -120,16 +112,6 @@ namespace Shared
 
         public Transaction() {}
 
-        public String OldOwner { get; set; }
-
-        public String NewOwner { get; set; }
-
-        public int Quantity { get; set; }
-
-        public DateTime Timestamp { get; set; }
-
-        public double Quote { get; set; }
-
         public override string ToString()
         {
             return oldOwner +" sold " + quantity + " diginotes to " +oldOwner;
@@ -140,13 +122,11 @@ namespace Shared
     [Serializable]
     public class Diginote
     {
-        private long serialNumber;
+        public int serialNumber;
 
-        public Diginote(long serialNumber)
+        public Diginote(int serialNumber)
         {
             this.serialNumber = serialNumber;
         }
-
-        public long SerialNumber { get; set; }
     }
 }

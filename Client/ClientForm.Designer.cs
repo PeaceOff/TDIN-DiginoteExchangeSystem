@@ -308,6 +308,7 @@
             this.sellDiginoteBtt.TabIndex = 31;
             this.sellDiginoteBtt.Text = "Sell";
             this.sellDiginoteBtt.UseVisualStyleBackColor = false;
+            this.sellDiginoteBtt.Click += new System.EventHandler(this.sellDiginoteBtt_Click);
             // 
             // diginoteAmountUD
             // 
@@ -421,7 +422,7 @@
             this.statusLbl.BackColor = System.Drawing.SystemColors.Window;
             this.statusLbl.Depth = 0;
             this.statusLbl.Font = new System.Drawing.Font("Roboto", 11F);
-            this.statusLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.statusLbl.ForeColor = System.Drawing.Color.Black;
             this.statusLbl.Location = new System.Drawing.Point(15, 288);
             this.statusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.statusLbl.MouseState = MaterialSkin.MouseState.HOVER;

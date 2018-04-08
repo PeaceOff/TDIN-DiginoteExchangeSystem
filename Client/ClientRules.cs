@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.Remoting;
 using Shared;
 
@@ -17,14 +18,13 @@ namespace Client
         private List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>();
         private List<Transaction> mTransactions = new List<Transaction>();
 
-        // TODO emit selling order
         // TODO emit purchasing order
         // TODO AT ANY TIME -> increase purchase order price
         // TODO AT ANY TIME -> decrease selling order price
         // TODO AT ANY TIME -> cancel an order
-        // TODO if selling don't purchase
-        // TODO if purchase don't sell
         // TODO Implement events for logging
+        // TODO implementar botao para cancelar sell
+        // TODO implementar botao para cancelar purchase
 
         public ClientRules(ClientForm cf)
         {
@@ -45,7 +45,7 @@ namespace Client
             }
         }
 
-        // UI Functions
+        #region UI Functions
 
         public string Register(string username, string nickname, string password)
         {
@@ -58,16 +58,107 @@ namespace Client
             username = result;
 
             if (username != null) {
+                
+                mSellOrders = diginoteSystem.GetPendingSellOrders(username);
+                clientForm.UpdateSellOrders(mSellOrders);
+
+                mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
+                clientForm.UpdatePurchaseOrders(mPurchaseOrders);
+
+                int sellTotal = 0;
+                foreach (var order in mSellOrders)
+                {
+                    sellTotal += order.quantity;
+                }
+
                 mWallet = diginoteSystem.GetDiginotes(username);
-                clientForm.UpdateDiginotes(mWallet.Count);
+                clientForm.UpdateDiginotes((mWallet.Count - sellTotal).ToString() + " (" + sellTotal.ToString() + ")");
 
                 // TODO Utilizar valores na interface
-                mSellOrders = diginoteSystem.GetPendingSellOrders(username);
-                mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
                 mTransactions = diginoteSystem.GetTransactions(username);
+
+                repeater.UpdateQuote += UpdateQuoteHandler;
+                repeater.NewTransaction += NewTransactionHandler;
             }
 
             return username;
+        }
+
+        public void Logout() {
+
+            repeater.UpdateQuote -= UpdateQuoteHandler;
+            repeater.NewTransaction -= NewTransactionHandler;
+            username = null;
+            mWallet = new List<Diginote>();
+            mSellOrders = new List<SellOrder>();
+            mPurchaseOrders = new List<PurchaseOrder>();
+            mTransactions = new List<Transaction>();
+
+        }
+
+        public void CreateSellingOrder(int amount)
+        {
+            int pending = 0;
+            
+            foreach (var order in mSellOrders)
+            {
+                pending += order.quantity;
+            }
+            
+            if (amount > (mWallet.Count - pending))
+            {
+                clientForm.UpdateStatus("You don't have that many diginotes!", false);
+                return;
+            }
+
+            if (mPurchaseOrders.Count > 0)
+            {
+                clientForm.UpdateStatus("You can't sell while having pending purchases.", false);
+                return;
+            }
+
+            List<int> serials = diginoteSystem.SellOrders(username, amount);
+
+            if (serials.Count == 0)
+            {
+                // TODO Pedir se quer baixar preço
+                clientForm.UpdateStatus("No diginote was sold. Request Pending.", false);
+                pending += amount;
+                AddSellOrder();
+            }
+            else if (serials.Count == amount)
+            {
+                clientForm.UpdateStatus("All " + amount + " diginote(s) sold!", true);
+            }
+            else
+            {
+                // TODO Pedir se quer baixar preço
+                string msg = serials.Count + " diginote(s) sold.\n" + "Remaining " + (amount - serials.Count) + " pending.";
+                clientForm.UpdateStatus(msg, true);
+                pending += amount - serials.Count;
+                AddSellOrder();
+            }
+
+            // Remove traded diginotes from wallet
+            mWallet.Where(d => !serials.Contains(d.serialNumber));
+            clientForm.UpdateDiginotes(mWallet.Count - pending + " (" + pending + ")");
+        }
+
+        public void CreatePurchaseOrder(int amount) {
+
+            if (mSellOrders.Count > 0)
+            {
+                clientForm.UpdateStatus("You can't buy while having pending sell orders.", false);
+                return;
+            }
+
+            // TODO Lógica das purchases
+        }
+
+        private void AddSellOrder()
+        {
+            mSellOrders = diginoteSystem.GetPendingSellOrders(username);
+            clientForm.UpdateSellOrders(mSellOrders);
         }
 
         public double GetCurrentQuote() {
@@ -78,6 +169,8 @@ namespace Client
 
             return 0.0;
         }
+
+        #endregion
 
         // Getters and Setters
 

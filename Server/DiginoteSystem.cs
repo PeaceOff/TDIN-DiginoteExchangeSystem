@@ -54,27 +54,14 @@ namespace Server
             return null;
         }
 
-        public bool PurchaseOrders(string username, int quantity)
+        public List<int> PurchaseOrders(string username, int quantity)
         {
-            if (ServerDB.InsertPurchaseOrder(username, quantity).Count == quantity)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return ServerDB.InsertPurchaseOrder(username, quantity);
         }
 
-        public bool SellOrders(string username, int quantity)
+        public List<int> SellOrders(string username, int quantity)
         {
-            if(ServerDB.InsertSellingOrder(username, quantity).Count == quantity)
-            {
-                return true;
-            } else
-            {
-                return false;
-            }
+            return ServerDB.InsertSellingOrder(username, quantity);
         }
 
         public bool SetPurchasePrice(int price)
@@ -106,22 +93,22 @@ namespace Server
             return ServerDB.GetDiginotes(username);
         }
 
-        List<SellOrder> IDiginoteSystem.GetPendingSellOrders(string username)
+        public List<SellOrder> GetPendingSellOrders(string username)
         {
             return ServerDB.GetSellingOrders(username);
         }
 
-        List<PurchaseOrder> IDiginoteSystem.GetPendingPurchaseOrders(string username)
+        public List<PurchaseOrder> GetPendingPurchaseOrders(string username)
         {
             return ServerDB.GetPurchaseOrders(username);
         }
 
-        List<Transaction> IDiginoteSystem.GetTransactions(string username)
+        public List<Transaction> GetTransactions(string username)
         {
             return ServerDB.GetTransactions(username);
         }
 
-        List<Transaction> IDiginoteSystem.GetRecentTransactions()
+        public List<Transaction> GetRecentTransactions()
         {
             //TODO descomentar quando houver commit desta função
             //return ServerDB.GetRecentTransactions(username);

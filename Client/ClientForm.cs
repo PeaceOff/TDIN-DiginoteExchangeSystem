@@ -30,44 +30,47 @@ namespace Client
 
         }
 
-        public void UpdateDiginotes(int amount) {
+        public void UpdateDiginotes(string amount) {
 
-            diginotesLbl.Text = DIGINOTES_TEXT + amount.ToString();
+            diginotesLbl.Text = DIGINOTES_TEXT + amount;
 
         }
 
         public void UpdateSellOrders(List<SellOrder> orders) {
 
+            mSellOrderTextArea.Clear();
             foreach (var order in orders)
             {
-                mSellOrderTextArea.AppendText(order.ToString());
+                mSellOrderTextArea.AppendText(order.quantity.ToString() + " diginote(s)\n");
             }
         }
 
         public void UpdatePurchaseOrders(List<PurchaseOrder> orders)
         {
-
+            mPurchaseOrderTextArea.Clear();
             foreach (var order in orders)
             {
-                mPurchaseOrderTextArea.AppendText(order.ToString());
+                mPurchaseOrderTextArea.AppendText(order.quantity.ToString() + " diginote(s)\n");
             }
         }
 
-        private void UpdateStatus(string s)
+        public void UpdateStatus(string s, bool isPositive)
         {
+            if (isPositive)
+            {
+                statusLbl.ForeColor = System.Drawing.Color.Green;
+            }
+            else
+            {
+                statusLbl.ForeColor = System.Drawing.Color.Red;
+            }
 
             statusLbl.Text = s;
             statusLbl.Show();
+        }
 
-            Task t = Task.Run
-                    (
-                        ()
-                         =>
-                        {
-                            Thread.Sleep(2 * 1000);
-                            statusLbl.Hide();
-                        }
-                    );
+        private void HideStatus() {
+            statusLbl.Hide();
         }
 
         #endregion
@@ -183,6 +186,7 @@ namespace Client
         {
             ClientForm_Load(sender, e);
 
+            clientRules.Logout();
             this.Size = new System.Drawing.Size(250, 300);
             userTxt.Show();
             passTxt.Show();
@@ -192,6 +196,12 @@ namespace Client
             loginBtt.Show();
             signInBtt.Show();
             signUpBtt.Show();
+
+            mPurchaseOrderTextArea.Clear();
+            mSellOrderTextArea.Clear();
+            mTradesTextArea.Clear();
+            mTransactionTextArea.Clear();
+            diginoteAmountUD.Value = 1;
 
         }
 
@@ -211,6 +221,14 @@ namespace Client
             registerBtt.Show();
             nicknameTxt.Show();
             loginBtt.Hide();
+        }
+
+        private void sellDiginoteBtt_Click(object sender, EventArgs e)
+        {
+
+            int amount = (int)diginoteAmountUD.Value;
+
+            clientRules.CreateSellingOrder(amount);
         }
 
         #endregion

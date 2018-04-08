@@ -737,13 +737,13 @@ namespace Server
             
             foreach(Transaction t in transactions)
             {
-                double value = t.Quantity* t.Quote;
+                double value = t.quantity * t.quote;
 
-                if (t.NewOwner == username)
+                if (t.newOwner == username)
                 {
                     balance -= value;
                 }
-                else if(t.OldOwner == username)
+                else if(t.oldOwner == username)
                 {
                     balance += value;
                 }
