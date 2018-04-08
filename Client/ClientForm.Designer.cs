@@ -52,6 +52,8 @@
             this.mTransactionsTxt = new MaterialSkin.Controls.MaterialLabel();
             this.mTradesTextArea = new System.Windows.Forms.TextBox();
             this.statusLbl = new MaterialSkin.Controls.MaterialLabel();
+            this.cancelSellOrderBtt = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.cancelPurchaseBtt = new MaterialSkin.Controls.MaterialRaisedButton();
             ((System.ComponentModel.ISupportInitialize)(this.diginoteAmountUD)).BeginInit();
             this.SuspendLayout();
             // 
@@ -423,7 +425,7 @@
             this.statusLbl.Depth = 0;
             this.statusLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.statusLbl.ForeColor = System.Drawing.Color.Black;
-            this.statusLbl.Location = new System.Drawing.Point(15, 288);
+            this.statusLbl.Location = new System.Drawing.Point(15, 313);
             this.statusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.statusLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.statusLbl.Name = "statusLbl";
@@ -432,12 +434,46 @@
             this.statusLbl.TabIndex = 39;
             this.statusLbl.Text = "Status";
             // 
+            // cancelSellOrderBtt
+            // 
+            this.cancelSellOrderBtt.BackColor = System.Drawing.SystemColors.Control;
+            this.cancelSellOrderBtt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cancelSellOrderBtt.Depth = 0;
+            this.cancelSellOrderBtt.Font = new System.Drawing.Font("Verdana", 11F);
+            this.cancelSellOrderBtt.Location = new System.Drawing.Point(19, 276);
+            this.cancelSellOrderBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cancelSellOrderBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cancelSellOrderBtt.Name = "cancelSellOrderBtt";
+            this.cancelSellOrderBtt.Primary = true;
+            this.cancelSellOrderBtt.Size = new System.Drawing.Size(76, 22);
+            this.cancelSellOrderBtt.TabIndex = 40;
+            this.cancelSellOrderBtt.Text = "Cancel";
+            this.cancelSellOrderBtt.UseVisualStyleBackColor = false;
+            // 
+            // cancelPurchaseBtt
+            // 
+            this.cancelPurchaseBtt.BackColor = System.Drawing.SystemColors.Control;
+            this.cancelPurchaseBtt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.cancelPurchaseBtt.Depth = 0;
+            this.cancelPurchaseBtt.Font = new System.Drawing.Font("Verdana", 11F);
+            this.cancelPurchaseBtt.Location = new System.Drawing.Point(207, 276);
+            this.cancelPurchaseBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.cancelPurchaseBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.cancelPurchaseBtt.Name = "cancelPurchaseBtt";
+            this.cancelPurchaseBtt.Primary = true;
+            this.cancelPurchaseBtt.Size = new System.Drawing.Size(76, 22);
+            this.cancelPurchaseBtt.TabIndex = 41;
+            this.cancelPurchaseBtt.Text = "Cancel";
+            this.cancelPurchaseBtt.UseVisualStyleBackColor = false;
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(700, 600);
+            this.Controls.Add(this.cancelPurchaseBtt);
+            this.Controls.Add(this.cancelSellOrderBtt);
             this.Controls.Add(this.statusLbl);
             this.Controls.Add(this.mTransactionsTxt);
             this.Controls.Add(this.mTradesTextArea);
@@ -498,5 +534,7 @@
         private MaterialSkin.Controls.MaterialLabel mTransactionsTxt;
         private System.Windows.Forms.TextBox mTradesTextArea;
         private MaterialSkin.Controls.MaterialLabel statusLbl;
+        private MaterialSkin.Controls.MaterialRaisedButton cancelSellOrderBtt;
+        private MaterialSkin.Controls.MaterialRaisedButton cancelPurchaseBtt;
     }
 }
