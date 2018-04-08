@@ -79,10 +79,8 @@ namespace Server
 
         public bool SetPurchasePrice(int price)
         {
-            double quote = ServerDB.GetQuote();
-
-            if (price >= quote)  {
-                ServerDB.UpdateQuote(price);
+            if (price >= QUOTE)  {
+                SetQuote(price);
                 return true;
             } else {
                 return false;
@@ -91,11 +89,10 @@ namespace Server
 
         public bool SetSellPrice(int price)
         {
-            double quote = ServerDB.GetQuote();
 
-            if (price <= quote)
+            if (price <= QUOTE)
             {
-                ServerDB.UpdateQuote(price);
+                SetQuote(price);
                 return true;
             }
             else

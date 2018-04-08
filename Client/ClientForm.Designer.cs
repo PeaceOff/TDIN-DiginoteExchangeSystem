@@ -51,6 +51,7 @@
             this.mSellOrderTextArea = new System.Windows.Forms.TextBox();
             this.mTransactionsTxt = new MaterialSkin.Controls.MaterialLabel();
             this.mTradesTextArea = new System.Windows.Forms.TextBox();
+            this.statusLbl = new MaterialSkin.Controls.MaterialLabel();
             ((System.ComponentModel.ISupportInitialize)(this.diginoteAmountUD)).BeginInit();
             this.SuspendLayout();
             // 
@@ -414,12 +415,29 @@
             this.mTradesTextArea.Size = new System.Drawing.Size(294, 173);
             this.mTradesTextArea.TabIndex = 37;
             // 
+            // statusLbl
+            // 
+            this.statusLbl.AutoSize = true;
+            this.statusLbl.BackColor = System.Drawing.SystemColors.Window;
+            this.statusLbl.Depth = 0;
+            this.statusLbl.Font = new System.Drawing.Font("Roboto", 11F);
+            this.statusLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
+            this.statusLbl.Location = new System.Drawing.Point(15, 288);
+            this.statusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.statusLbl.MouseState = MaterialSkin.MouseState.HOVER;
+            this.statusLbl.Name = "statusLbl";
+            this.statusLbl.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
+            this.statusLbl.Size = new System.Drawing.Size(52, 23);
+            this.statusLbl.TabIndex = 39;
+            this.statusLbl.Text = "Status";
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(700, 600);
+            this.Controls.Add(this.statusLbl);
             this.Controls.Add(this.mTransactionsTxt);
             this.Controls.Add(this.mTradesTextArea);
             this.Controls.Add(this.pendingSellTxt);
@@ -478,5 +496,6 @@
         private System.Windows.Forms.TextBox mSellOrderTextArea;
         private MaterialSkin.Controls.MaterialLabel mTransactionsTxt;
         private System.Windows.Forms.TextBox mTradesTextArea;
+        private MaterialSkin.Controls.MaterialLabel statusLbl;
     }
 }

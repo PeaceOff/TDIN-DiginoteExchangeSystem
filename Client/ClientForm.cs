@@ -1,6 +1,9 @@
 ﻿using MaterialSkin.Controls;
+using Shared;
 using System;
-using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Client
 {
@@ -18,7 +21,8 @@ namespace Client
             clientRules = new ClientRules(this);
         }
 
-        // Callback functions
+        
+        #region Callback Functions
 
         public void UpdateQuote(double newQuote) {
 
@@ -32,7 +36,43 @@ namespace Client
 
         }
 
-        // Event Handlers
+        public void UpdateSellOrders(List<SellOrder> orders) {
+
+            foreach (var order in orders)
+            {
+                mSellOrderTextArea.AppendText(order.ToString());
+            }
+        }
+
+        public void UpdatePurchaseOrders(List<PurchaseOrder> orders)
+        {
+
+            foreach (var order in orders)
+            {
+                mPurchaseOrderTextArea.AppendText(order.ToString());
+            }
+        }
+
+        private void UpdateStatus(string s)
+        {
+
+            statusLbl.Text = s;
+            statusLbl.Show();
+
+            Task t = Task.Run
+                    (
+                        ()
+                         =>
+                        {
+                            Thread.Sleep(2 * 1000);
+                            statusLbl.Hide();
+                        }
+                    );
+        }
+
+        #endregion
+
+        #region Event Handlers
 
         private void LoginShows() {
 
@@ -54,6 +94,7 @@ namespace Client
 
         private void LogoutHide() {
 
+            statusLbl.Hide();
             resultLbl.Hide();
             loggedLbl.Hide();
             logoutBtt.Hide();
@@ -171,5 +212,7 @@ namespace Client
             nicknameTxt.Show();
             loginBtt.Hide();
         }
+
+        #endregion
     }
 }
