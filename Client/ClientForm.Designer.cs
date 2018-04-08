@@ -109,8 +109,8 @@
             this.quoteTxtLbl.Depth = 0;
             this.quoteTxtLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.quoteTxtLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.quoteTxtLbl.Location = new System.Drawing.Point(392, 111);
-            this.quoteTxtLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.quoteTxtLbl.Location = new System.Drawing.Point(392, 108);
+            this.quoteTxtLbl.Margin = new System.Windows.Forms.Padding(4, 10, 4, 0);
             this.quoteTxtLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.quoteTxtLbl.Name = "quoteTxtLbl";
             this.quoteTxtLbl.Padding = new System.Windows.Forms.Padding(0, 2, 0, 2);
@@ -270,6 +270,7 @@
             this.transactionsTxt.Font = new System.Drawing.Font("Roboto", 11F);
             this.transactionsTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.transactionsTxt.Location = new System.Drawing.Point(392, 349);
+            this.transactionsTxt.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.transactionsTxt.MouseState = MaterialSkin.MouseState.HOVER;
             this.transactionsTxt.Name = "transactionsTxt";
             this.transactionsTxt.Size = new System.Drawing.Size(143, 19);
@@ -392,7 +393,8 @@
             this.mTransactionsTxt.Depth = 0;
             this.mTransactionsTxt.Font = new System.Drawing.Font("Roboto", 11F);
             this.mTransactionsTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.mTransactionsTxt.Location = new System.Drawing.Point(392, 142);
+            this.mTransactionsTxt.Location = new System.Drawing.Point(392, 141);
+            this.mTransactionsTxt.Margin = new System.Windows.Forms.Padding(3, 10, 3, 0);
             this.mTransactionsTxt.MouseState = MaterialSkin.MouseState.HOVER;
             this.mTransactionsTxt.Name = "mTransactionsTxt";
             this.mTransactionsTxt.Size = new System.Drawing.Size(117, 19);
@@ -404,12 +406,12 @@
             this.mTradesTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mTradesTextArea.Cursor = System.Windows.Forms.Cursors.Default;
             this.mTradesTextArea.Enabled = false;
-            this.mTradesTextArea.Location = new System.Drawing.Point(396, 164);
+            this.mTradesTextArea.Location = new System.Drawing.Point(396, 163);
             this.mTradesTextArea.Multiline = true;
             this.mTradesTextArea.Name = "mTradesTextArea";
             this.mTradesTextArea.ReadOnly = true;
             this.mTradesTextArea.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.mTradesTextArea.Size = new System.Drawing.Size(294, 171);
+            this.mTradesTextArea.Size = new System.Drawing.Size(294, 173);
             this.mTradesTextArea.TabIndex = 37;
             // 
             // ClientForm

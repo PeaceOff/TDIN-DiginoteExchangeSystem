@@ -14,9 +14,9 @@ namespace Client
         private ClientForm clientForm;
         private List<Diginote> mWallet = new List<Diginote>();
         private List<SellOrder> mSellOrders = new List<SellOrder>();
-        private List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>(); 
+        private List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>();
+        private List<Transaction> mTransactions = new List<Transaction>();
 
-        // TODO Get user wallet
         // TODO emit selling order
         // TODO emit purchasing order
         // TODO AT ANY TIME -> increase purchase order price
@@ -33,9 +33,11 @@ namespace Client
             diginoteSystem = (IDiginoteSystem)GetRemote.New(typeof(IDiginoteSystem));
 
             repeater.UpdateQuote += UpdateQuoteHandler;
+            repeater.NewTransaction += NewTransactionHandler;
             try
             {
                 diginoteSystem.UpdateQuote += repeater.FireUpdateQuoteEvent;
+                diginoteSystem.NewTransaction += repeater.FireNewTransactionEvent;
             }
             catch (Exception ex)
             {
@@ -58,6 +60,11 @@ namespace Client
             if (username != null) {
                 mWallet = diginoteSystem.GetDiginotes(username);
                 clientForm.UpdateDiginotes(mWallet.Count);
+
+                // TODO Utilizar valores na interface
+                mSellOrders = diginoteSystem.GetPendingSellOrders(username);
+                mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
+                mTransactions = diginoteSystem.GetTransactions(username);
             }
 
             return username;
@@ -89,6 +96,11 @@ namespace Client
         public void UpdateQuoteHandler(double q)
         {
             clientForm.UpdateQuote(q);
+        }
+
+        public void NewTransactionHandler(Transaction t)
+        {
+            // TODO Acabar
         }
     }  
 }

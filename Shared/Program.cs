@@ -5,11 +5,13 @@ namespace Shared
 {
     // Delegate for the Update Quote event
     public delegate void UpdateQuoteEvent(double q);
+    public delegate void NewTransactionEvent(Transaction t);
 
     // Shared interface for the diginote system (for both client and server)
     public interface IDiginoteSystem
     {
         event UpdateQuoteEvent UpdateQuote;
+        event NewTransactionEvent NewTransaction; 
 
         string Register(string username, string nickname, string password);
         string Login(string username, string password);
@@ -32,10 +34,16 @@ namespace Shared
     public class EventRepeater : MarshalByRefObject
     {
         public event UpdateQuoteEvent UpdateQuote;
+        public event NewTransactionEvent NewTransaction;
 
         public void FireUpdateQuoteEvent(double q)
         {
             UpdateQuote(q);
+        }
+
+        public void FireNewTransactionEvent(Transaction t)
+        {
+            NewTransaction(t);
         }
 
         // Infinite Lease Time
@@ -45,6 +53,7 @@ namespace Shared
         }
     }
 
+    // Order object
     [Serializable]
     public class Order
     {
@@ -72,6 +81,7 @@ namespace Shared
         public DateTime Suspension { get; set; }
     }
 
+    // Purchase order object
     [Serializable]
     public class PurchaseOrder : Order
     {
@@ -80,6 +90,7 @@ namespace Shared
         public PurchaseOrder() : base() {}
     }
 
+    // Sell order object
     [Serializable]
     public class SellOrder : Order
     {
@@ -88,6 +99,7 @@ namespace Shared
         public SellOrder() : base() {}
     }
 
+    // Transaction object
     [Serializable]
     public class Transaction
     {
@@ -124,6 +136,7 @@ namespace Shared
         }
     }
 
+    // Diginote represents the currency in the system
     [Serializable]
     public class Diginote
     {

@@ -7,16 +7,14 @@ namespace Server
     public class DiginoteSystem : MarshalByRefObject, IDiginoteSystem
     {
         public event UpdateQuoteEvent UpdateQuote;
-
-        // TODO mover isto para a db (maybe?)
-        List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>();
-        List<SellOrder> mSellOrders = new List<SellOrder>();
-
+        // TODO falta usar
+        public event NewTransactionEvent NewTransaction;
+        
         private static double QUOTE = 1.00;
 
         public DiginoteSystem()
         {
-            //TODO Verificar
+
             if (!ServerDB.InitQuote(QUOTE)) {
                 QUOTE = ServerDB.GetQuote();
             }
