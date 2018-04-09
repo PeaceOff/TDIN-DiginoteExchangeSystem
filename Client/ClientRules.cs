@@ -17,6 +17,7 @@ namespace Client
         private List<SellOrder> mSellOrders = new List<SellOrder>();
         private List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>();
         private List<Transaction> mTransactions = new List<Transaction>();
+        private bool isLoggedIn = false;
 
         // TODO emit purchasing order
         // TODO AT ANY TIME -> increase purchase order price
@@ -45,6 +46,16 @@ namespace Client
             }
         }
 
+        // Destructor
+        ~ClientRules() {
+
+            diginoteSystem.UpdateQuote -= repeater.FireUpdateQuoteEvent;
+            diginoteSystem.NewTransaction -= repeater.FireNewTransactionEvent;
+            repeater.UpdateQuote -= UpdateQuoteHandler;
+            repeater.NewTransaction -= NewTransactionHandler;
+
+        }
+
         #region UI Functions
 
         public string Register(string username, string nickname, string password)
@@ -58,7 +69,9 @@ namespace Client
             username = result;
 
             if (username != null) {
-                
+
+                isLoggedIn = true;
+
                 mSellOrders = diginoteSystem.GetPendingSellOrders(username);
                 clientForm.UpdateSellOrders(mSellOrders);
 
@@ -76,9 +89,6 @@ namespace Client
 
                 // TODO Utilizar valores na interface
                 mTransactions = diginoteSystem.GetTransactions(username);
-
-                repeater.UpdateQuote += UpdateQuoteHandler;
-                repeater.NewTransaction += NewTransactionHandler;
             }
 
             return username;
@@ -86,8 +96,7 @@ namespace Client
 
         public void Logout() {
 
-            repeater.UpdateQuote -= UpdateQuoteHandler;
-            repeater.NewTransaction -= NewTransactionHandler;
+            isLoggedIn = false;
             username = null;
             mWallet = new List<Diginote>();
             mSellOrders = new List<SellOrder>();
@@ -188,11 +197,18 @@ namespace Client
 
         public void UpdateQuoteHandler(double q)
         {
+            if (!isLoggedIn) {
+                return;
+            }
             clientForm.UpdateQuote(q);
         }
 
         public void NewTransactionHandler(Transaction t)
         {
+            if (!isLoggedIn)
+            {
+                return;
+            }
             // TODO Acabar
         }
     }  
