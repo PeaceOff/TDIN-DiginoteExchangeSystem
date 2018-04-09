@@ -294,6 +294,7 @@
             this.buyAmountBtt.TabIndex = 30;
             this.buyAmountBtt.Text = "Buy";
             this.buyAmountBtt.UseVisualStyleBackColor = true;
+            this.buyAmountBtt.Click += new System.EventHandler(this.buyAmountBtt_Click);
             // 
             // sellDiginoteBtt
             // 
@@ -424,7 +425,7 @@
             this.statusLbl.BackColor = System.Drawing.SystemColors.Window;
             this.statusLbl.Depth = 0;
             this.statusLbl.Font = new System.Drawing.Font("Roboto", 11F);
-            this.statusLbl.ForeColor = System.Drawing.Color.Black;
+            this.statusLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.statusLbl.Location = new System.Drawing.Point(15, 313);
             this.statusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.statusLbl.MouseState = MaterialSkin.MouseState.HOVER;
@@ -449,6 +450,7 @@
             this.cancelSellOrderBtt.TabIndex = 40;
             this.cancelSellOrderBtt.Text = "Cancel";
             this.cancelSellOrderBtt.UseVisualStyleBackColor = false;
+            this.cancelSellOrderBtt.Click += new System.EventHandler(this.cancelSellOrderBtt_Click);
             // 
             // cancelPurchaseBtt
             // 
@@ -465,6 +467,7 @@
             this.cancelPurchaseBtt.TabIndex = 41;
             this.cancelPurchaseBtt.Text = "Cancel";
             this.cancelPurchaseBtt.UseVisualStyleBackColor = false;
+            this.cancelPurchaseBtt.Click += new System.EventHandler(this.cancelPurchaseBtt_Click);
             // 
             // ClientForm
             // 

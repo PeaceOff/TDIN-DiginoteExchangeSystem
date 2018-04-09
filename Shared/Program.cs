@@ -28,6 +28,9 @@ namespace Shared
         List<Diginote> GetDiginotes(String username);
         List<Transaction> GetTransactions(String username);
         List<Transaction> GetRecentTransactions();
+
+        void DeleteSellOrder(SellOrder order);
+        void DeletePurchaseOrder(PurchaseOrder order);
     }
 
     // Event Repeater to respect the compiler rules for the server

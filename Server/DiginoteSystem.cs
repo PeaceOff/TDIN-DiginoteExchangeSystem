@@ -115,6 +115,17 @@ namespace Server
             return new List<Transaction>();
         }
 
+        public void DeleteSellOrder(SellOrder order) {
+
+            ServerDB.DeleteSellingOrder(order);
+
+        }
+
+        public void DeletePurchaseOrder(PurchaseOrder order) {
+
+            ServerDB.DeletePurchaseOrder(order);
+        }
+
 
     }
 }

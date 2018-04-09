@@ -153,6 +153,31 @@ namespace Client
             clientForm.UpdateDiginotes(mWallet.Count - pending + " (" + pending + ")");
         }
 
+        public void CancelSellOrder() {
+
+            if (mSellOrders.Count == 0) {
+                clientForm.UpdateStatus("No orders to cancel.", false);
+                return;
+            }
+
+            SellOrder toRemove = mSellOrders.First();
+
+            diginoteSystem.DeleteSellOrder(toRemove);
+
+            mSellOrders.Remove(toRemove);
+            
+            clientForm.UpdateSellOrders(mSellOrders);
+            clientForm.UpdateStatus("Sell order canceled!", true);
+
+            int toSell = 0;
+            foreach (var order in mSellOrders)
+            {
+                toSell += order.quantity;
+            }
+            clientForm.UpdateDiginotes((mWallet.Count - toSell) + " (" + toSell + ")");
+
+        }
+
         public void CreatePurchaseOrder(int amount) {
 
             if (mSellOrders.Count > 0)
@@ -161,7 +186,57 @@ namespace Client
                 return;
             }
 
-            // TODO Lógica das purchases
+            List<int> serials = diginoteSystem.PurchaseOrders(username, amount);
+
+            // não comprou nenhuma. purchase order nova
+            if (serials.Count == 0)
+            {
+                clientForm.UpdateStatus("No diginote was bought. Pending...", false);
+            }
+            // comprou algumas, mas não todas
+            else if (serials.Count < amount)
+            {
+                clientForm.UpdateStatus(serials.Count + " diginotes were sold. Rest are pending.", true);
+            }
+            // comprou todas
+            else
+            {
+                clientForm.UpdateStatus("All diginotes bought!", true);
+            }
+
+            // Atualizar pending purchases
+            mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
+            clientForm.UpdatePurchaseOrders(mPurchaseOrders);
+
+            // Atualizar wallet
+            mWallet = diginoteSystem.GetDiginotes(username);
+            int pending = 0;
+            foreach (var order  in mSellOrders)
+            {
+                pending += order.quantity;
+            }
+            clientForm.UpdateDiginotes((mWallet.Count - pending) + " (" + pending +")");
+
+        }
+
+        public void CancelPurchaseOrder()
+        {
+
+            if (mPurchaseOrders.Count == 0)
+            {
+                clientForm.UpdateStatus("No orders to cancel.", false);
+                return;
+            }
+
+            PurchaseOrder toRemove = mPurchaseOrders.First();
+
+            diginoteSystem.DeletePurchaseOrder(toRemove);
+
+            mPurchaseOrders.Remove(toRemove);
+
+            clientForm.UpdatePurchaseOrders(mPurchaseOrders);
+            clientForm.UpdateStatus("Purchase order canceled!", true);
+
         }
 
         private void AddSellOrder()

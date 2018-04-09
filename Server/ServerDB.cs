@@ -219,8 +219,10 @@ namespace Server
 
         #region Order
 
-        public static void DeletePurchaseOrder(int id)
+        public static void DeletePurchaseOrder(PurchaseOrder order)
         {
+            int id = order.id;
+
             using (SqlConnection connection = GetConnection())
             {
                 string commandString = string.Format("DELETE FROM \"BuyOrder\" WHERE id = {0}", id);
@@ -231,8 +233,10 @@ namespace Server
             }
         }
 
-        public static void DeleteSellingOrder(int id)
+        public static void DeleteSellingOrder(SellOrder order)
         {
+            int id = order.id;
+
             using (SqlConnection connection = GetConnection())
             {
                 string commandString = string.Format("DELETE FROM \"SellOrder\" WHERE id = {0}", id);
@@ -390,7 +394,7 @@ namespace Server
 
                             }
 
-                            SellOrder sellOrder = new SellOrder(id, quantity, timestamp, suspension);
+                            SellOrder sellOrder = new SellOrder(orderId, quantity, timestamp, suspension);
 
                             orders.Add(sellOrder);
                         }

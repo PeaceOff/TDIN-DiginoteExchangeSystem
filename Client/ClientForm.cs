@@ -92,6 +92,8 @@ namespace Client
             transactionsTxt.Show();
             mTransactionTextArea.Show();
             logoutBtt.Show();
+            cancelPurchaseBtt.Show();
+            cancelSellOrderBtt.Show();
 
         }
 
@@ -116,6 +118,8 @@ namespace Client
             diginotesLbl.Hide();
             transactionsTxt.Hide();
             mTransactionTextArea.Hide();
+            cancelPurchaseBtt.Hide();
+            cancelSellOrderBtt.Hide();
         }
 
         private void ClientForm_Load(object sender, EventArgs e)
@@ -229,8 +233,27 @@ namespace Client
             int amount = (int)diginoteAmountUD.Value;
 
             clientRules.CreateSellingOrder(amount);
+
+            diginoteAmountUD.Value = 1;
         }
 
+        private void cancelSellOrderBtt_Click(object sender, EventArgs e)
+        {
+            clientRules.CancelSellOrder();
+        }
+
+        private void cancelPurchaseBtt_Click(object sender, EventArgs e)
+        {
+            clientRules.CancelPurchaseOrder();
+        }
+
+        private void buyAmountBtt_Click(object sender, EventArgs e)
+        {
+            int amount = (int)diginoteAmountUD.Value;
+            clientRules.CreatePurchaseOrder(amount);
+            diginoteAmountUD.Value = 1;
+        }
+        
         #endregion
     }
 }
