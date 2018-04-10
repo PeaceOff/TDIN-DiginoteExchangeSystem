@@ -19,8 +19,6 @@ namespace Client
         private List<Transaction> mTransactions = new List<Transaction>();
         private bool isLoggedIn = false;
 
-        // TODO AT ANY TIME -> increase purchase order price
-        // TODO AT ANY TIME -> decrease selling order price
         // TODO Implement events for logging
 
         public ClientRules(ClientForm cf)
@@ -83,8 +81,8 @@ namespace Client
                 mWallet = diginoteSystem.GetDiginotes(username);
                 clientForm.UpdateDiginotes((mWallet.Count - sellTotal).ToString() + " (" + sellTotal.ToString() + ")");
 
-                // TODO Utilizar valores na interface
                 mTransactions = diginoteSystem.GetTransactions(username);
+                clientForm.UpdateMyTransactions(mTransactions);
             }
 
             return username;

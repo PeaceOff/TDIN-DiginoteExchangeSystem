@@ -31,6 +31,7 @@ namespace Shared
 
         void DeleteSellOrder(SellOrder order);
         void DeletePurchaseOrder(PurchaseOrder order);
+        void UnsuspendOrders(string username);
     }
 
     // Event Repeater to respect the compiler rules for the server

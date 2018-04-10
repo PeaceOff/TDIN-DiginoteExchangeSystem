@@ -117,6 +117,11 @@ namespace Server
             ServerDB.DeletePurchaseOrder(order);
         }
 
+        public void UnsuspendOrders(string username)
+        {
+            ServerDB.UnsuspendOrders(username);
+        }
+
 
     }
 }

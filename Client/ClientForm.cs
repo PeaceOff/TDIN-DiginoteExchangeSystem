@@ -45,6 +45,35 @@ namespace Client
             }
         }
 
+        public void UpdateMyTransactions(List<Transaction> transactions) {
+
+            mTradesTextArea.Clear();
+            foreach (var trans in transactions)
+            {
+                AddOneMyTransactions(trans);
+            }
+        }
+
+        public void AddOneMyTransactions(Transaction t) {
+
+            mTradesTextArea.AppendText(t.oldOwner + " sold " + t.quantity + " diginote(s) to " + t.newOwner + "\n");
+
+        }
+
+        public void UpdateGlobalTransactions(List<Transaction> transactions) {
+
+            mTransactionTextArea.Clear();
+            foreach (var trans in transactions) {
+                AddOneGlobalTransactions(trans);
+            }
+        }
+
+        public void AddOneGlobalTransactions(Transaction t) {
+
+            mTransactionTextArea.AppendText(t.oldOwner + " sold " + t.quantity + " diginote(s) to " + t.newOwner + "\n");
+
+        }
+
         public void UpdatePurchaseOrders(List<PurchaseOrder> orders)
         {
             mPurchaseOrderTextArea.Clear();
