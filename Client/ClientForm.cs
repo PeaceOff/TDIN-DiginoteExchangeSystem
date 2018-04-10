@@ -256,10 +256,6 @@ namespace Client
         {
             int amount = (int)diginoteAmountUD.Value;
             clientRules.CreatePurchaseOrder(amount);
-            clientRules.CreatePurchaseOrder(amount);
-            clientRules.CreatePurchaseOrder(amount);
-            clientRules.CreatePurchaseOrder(amount);
-            clientRules.CreatePurchaseOrder(amount);
             diginoteAmountUD.Value = 1;
         }
 
