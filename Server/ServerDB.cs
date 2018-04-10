@@ -256,7 +256,7 @@ namespace Server
                 // Buy Order
                 if (suspend)
                 {
-                    commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = {0}", DateTime.Now);
+                    commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = '{0}'", DateTime.Now);
                 }
                 else
                 {
@@ -271,7 +271,7 @@ namespace Server
                 // Sell Order
                 if (suspend)
                 {
-                    commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = {0}", DateTime.Now);
+                    commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = '{0}'", DateTime.Now);
                 }
                 else
                 {

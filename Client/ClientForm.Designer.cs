@@ -190,6 +190,7 @@
             this.passTxt.Size = new System.Drawing.Size(127, 23);
             this.passTxt.TabIndex = 2;
             this.passTxt.UseSystemPasswordChar = true;
+            this.passTxt.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passTxt_KeyDown);
             // 
             // nicknameTxt
             // 

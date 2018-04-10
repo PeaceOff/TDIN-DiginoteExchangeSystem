@@ -64,27 +64,18 @@ namespace Server
             return ServerDB.InsertSellingOrder(username, quantity);
         }
 
-        public bool SetPurchasePrice(int price)
+        public void IncreasePurchasePrice(double price)
         {
             if (price >= QUOTE)  {
                 SetQuote(price);
-                return true;
-            } else {
-                return false;
-            }                         
+            }                        
         }
 
-        public bool SetSellPrice(int price)
+        public void DecreaseSellPrice(double price)
         {
-
             if (price <= QUOTE)
             {
                 SetQuote(price);
-                return true;
-            }
-            else
-            {
-                return false;
             }
         }
 

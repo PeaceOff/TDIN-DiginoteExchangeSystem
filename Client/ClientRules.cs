@@ -235,6 +235,42 @@ namespace Client
 
         }
 
+        public void IncreasePurchaseOrderPrice()
+        {
+            if (mPurchaseOrders.Count == 0)
+            {
+                clientForm.UpdateStatus("You don't have pending purchase orders.",false);
+                return;
+            }
+
+            var popup = new PopupForm(GetCurrentQuote(), false);
+
+            if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                diginoteSystem.IncreasePurchasePrice(popup.newValue);
+            }
+
+            popup.Dispose();
+        }
+
+        public void DecreaseSellOrderPrice()
+        {
+            if (mSellOrders.Count == 0)
+            {
+                clientForm.UpdateStatus("You don't have pending sell orders.", false);
+                return;
+            }
+
+            var popup = new PopupForm(GetCurrentQuote(), true);
+
+            if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                diginoteSystem.DecreaseSellPrice(popup.newValue);
+            }
+
+            popup.Dispose();
+        }
+
         private void AddSellOrder()
         {
             mSellOrders = diginoteSystem.GetPendingSellOrders(username);

@@ -263,12 +263,20 @@ namespace Client
 
         private void decreaseSellOrderPriceBtt_Click(object sender, EventArgs e)
         {
-            // TODO complete
+            clientRules.DecreaseSellOrderPrice();
         }
 
         private void increasePurchaseOrderPriceBtt_Click(object sender, EventArgs e)
         {
-            // TODO complete
+            clientRules.IncreasePurchaseOrderPrice();
+        }
+
+        private void passTxt_KeyDown(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (e.KeyCode == System.Windows.Forms.Keys.Enter)
+            {
+                loginBtt.PerformClick();
+            }
         }
     }
 }
