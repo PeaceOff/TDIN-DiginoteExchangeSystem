@@ -94,6 +94,8 @@ namespace Client
             logoutBtt.Show();
             cancelPurchaseBtt.Show();
             cancelSellOrderBtt.Show();
+            increasePurchaseOrderPriceBtt.Show();
+            decreaseSellOrderPriceBtt.Show();
 
         }
 
@@ -120,6 +122,9 @@ namespace Client
             mTransactionTextArea.Hide();
             cancelPurchaseBtt.Hide();
             cancelSellOrderBtt.Hide();
+            increasePurchaseOrderPriceBtt.Hide();
+            decreaseSellOrderPriceBtt.Hide();
+
         }
 
         private void ClientForm_Load(object sender, EventArgs e)
@@ -251,9 +256,23 @@ namespace Client
         {
             int amount = (int)diginoteAmountUD.Value;
             clientRules.CreatePurchaseOrder(amount);
+            clientRules.CreatePurchaseOrder(amount);
+            clientRules.CreatePurchaseOrder(amount);
+            clientRules.CreatePurchaseOrder(amount);
+            clientRules.CreatePurchaseOrder(amount);
             diginoteAmountUD.Value = 1;
         }
-        
+
         #endregion
+
+        private void decreaseSellOrderPriceBtt_Click(object sender, EventArgs e)
+        {
+            // TODO complete
+        }
+
+        private void increasePurchaseOrderPriceBtt_Click(object sender, EventArgs e)
+        {
+            // TODO complete
+        }
     }
 }

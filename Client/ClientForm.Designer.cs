@@ -54,6 +54,8 @@
             this.statusLbl = new MaterialSkin.Controls.MaterialLabel();
             this.cancelSellOrderBtt = new MaterialSkin.Controls.MaterialRaisedButton();
             this.cancelPurchaseBtt = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.decreaseSellOrderPriceBtt = new MaterialSkin.Controls.MaterialRaisedButton();
+            this.increasePurchaseOrderPriceBtt = new MaterialSkin.Controls.MaterialRaisedButton();
             ((System.ComponentModel.ISupportInitialize)(this.diginoteAmountUD)).BeginInit();
             this.SuspendLayout();
             // 
@@ -285,7 +287,7 @@
             this.buyAmountBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.buyAmountBtt.Depth = 0;
             this.buyAmountBtt.Font = new System.Drawing.Font("Verdana", 11F);
-            this.buyAmountBtt.Location = new System.Drawing.Point(102, 104);
+            this.buyAmountBtt.Location = new System.Drawing.Point(195, 144);
             this.buyAmountBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.buyAmountBtt.MouseState = MaterialSkin.MouseState.HOVER;
             this.buyAmountBtt.Name = "buyAmountBtt";
@@ -302,7 +304,7 @@
             this.sellDiginoteBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.sellDiginoteBtt.Depth = 0;
             this.sellDiginoteBtt.Font = new System.Drawing.Font("Verdana", 11F);
-            this.sellDiginoteBtt.Location = new System.Drawing.Point(18, 104);
+            this.sellDiginoteBtt.Location = new System.Drawing.Point(111, 144);
             this.sellDiginoteBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.sellDiginoteBtt.MouseState = MaterialSkin.MouseState.HOVER;
             this.sellDiginoteBtt.Name = "sellDiginoteBtt";
@@ -317,7 +319,7 @@
             // 
             this.diginoteAmountUD.BackColor = System.Drawing.SystemColors.Control;
             this.diginoteAmountUD.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.diginoteAmountUD.Location = new System.Drawing.Point(19, 75);
+            this.diginoteAmountUD.Location = new System.Drawing.Point(112, 115);
             this.diginoteAmountUD.Maximum = new decimal(new int[] {
             999,
             0,
@@ -344,7 +346,7 @@
             this.pendingPurchaseTxt.Depth = 0;
             this.pendingPurchaseTxt.Font = new System.Drawing.Font("Roboto", 11F);
             this.pendingPurchaseTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.pendingPurchaseTxt.Location = new System.Drawing.Point(203, 133);
+            this.pendingPurchaseTxt.Location = new System.Drawing.Point(199, 171);
             this.pendingPurchaseTxt.MouseState = MaterialSkin.MouseState.HOVER;
             this.pendingPurchaseTxt.Name = "pendingPurchaseTxt";
             this.pendingPurchaseTxt.Size = new System.Drawing.Size(135, 19);
@@ -356,7 +358,7 @@
             this.mPurchaseOrderTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mPurchaseOrderTextArea.Cursor = System.Windows.Forms.Cursors.Default;
             this.mPurchaseOrderTextArea.Enabled = false;
-            this.mPurchaseOrderTextArea.Location = new System.Drawing.Point(207, 155);
+            this.mPurchaseOrderTextArea.Location = new System.Drawing.Point(203, 193);
             this.mPurchaseOrderTextArea.Multiline = true;
             this.mPurchaseOrderTextArea.Name = "mPurchaseOrderTextArea";
             this.mPurchaseOrderTextArea.ReadOnly = true;
@@ -371,7 +373,7 @@
             this.pendingSellTxt.Depth = 0;
             this.pendingSellTxt.Font = new System.Drawing.Font("Roboto", 11F);
             this.pendingSellTxt.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.pendingSellTxt.Location = new System.Drawing.Point(15, 133);
+            this.pendingSellTxt.Location = new System.Drawing.Point(11, 171);
             this.pendingSellTxt.MouseState = MaterialSkin.MouseState.HOVER;
             this.pendingSellTxt.Name = "pendingSellTxt";
             this.pendingSellTxt.Size = new System.Drawing.Size(137, 19);
@@ -383,7 +385,7 @@
             this.mSellOrderTextArea.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.mSellOrderTextArea.Cursor = System.Windows.Forms.Cursors.Default;
             this.mSellOrderTextArea.Enabled = false;
-            this.mSellOrderTextArea.Location = new System.Drawing.Point(19, 155);
+            this.mSellOrderTextArea.Location = new System.Drawing.Point(15, 193);
             this.mSellOrderTextArea.Multiline = true;
             this.mSellOrderTextArea.Name = "mSellOrderTextArea";
             this.mSellOrderTextArea.ReadOnly = true;
@@ -426,7 +428,7 @@
             this.statusLbl.Depth = 0;
             this.statusLbl.Font = new System.Drawing.Font("Roboto", 11F);
             this.statusLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.statusLbl.Location = new System.Drawing.Point(15, 313);
+            this.statusLbl.Location = new System.Drawing.Point(11, 351);
             this.statusLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.statusLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.statusLbl.Name = "statusLbl";
@@ -441,7 +443,7 @@
             this.cancelSellOrderBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelSellOrderBtt.Depth = 0;
             this.cancelSellOrderBtt.Font = new System.Drawing.Font("Verdana", 11F);
-            this.cancelSellOrderBtt.Location = new System.Drawing.Point(19, 276);
+            this.cancelSellOrderBtt.Location = new System.Drawing.Point(15, 314);
             this.cancelSellOrderBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cancelSellOrderBtt.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancelSellOrderBtt.Name = "cancelSellOrderBtt";
@@ -458,7 +460,7 @@
             this.cancelPurchaseBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelPurchaseBtt.Depth = 0;
             this.cancelPurchaseBtt.Font = new System.Drawing.Font("Verdana", 11F);
-            this.cancelPurchaseBtt.Location = new System.Drawing.Point(207, 276);
+            this.cancelPurchaseBtt.Location = new System.Drawing.Point(203, 314);
             this.cancelPurchaseBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cancelPurchaseBtt.MouseState = MaterialSkin.MouseState.HOVER;
             this.cancelPurchaseBtt.Name = "cancelPurchaseBtt";
@@ -469,12 +471,48 @@
             this.cancelPurchaseBtt.UseVisualStyleBackColor = false;
             this.cancelPurchaseBtt.Click += new System.EventHandler(this.cancelPurchaseBtt_Click);
             // 
+            // decreaseSellOrderPriceBtt
+            // 
+            this.decreaseSellOrderPriceBtt.BackColor = System.Drawing.SystemColors.Control;
+            this.decreaseSellOrderPriceBtt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.decreaseSellOrderPriceBtt.Depth = 0;
+            this.decreaseSellOrderPriceBtt.Font = new System.Drawing.Font("Verdana", 11F);
+            this.decreaseSellOrderPriceBtt.Location = new System.Drawing.Point(104, 314);
+            this.decreaseSellOrderPriceBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.decreaseSellOrderPriceBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.decreaseSellOrderPriceBtt.Name = "decreaseSellOrderPriceBtt";
+            this.decreaseSellOrderPriceBtt.Primary = true;
+            this.decreaseSellOrderPriceBtt.Size = new System.Drawing.Size(76, 22);
+            this.decreaseSellOrderPriceBtt.TabIndex = 42;
+            this.decreaseSellOrderPriceBtt.Text = "- Price";
+            this.decreaseSellOrderPriceBtt.UseVisualStyleBackColor = false;
+            this.decreaseSellOrderPriceBtt.Click += new System.EventHandler(this.decreaseSellOrderPriceBtt_Click);
+            // 
+            // increasePurchaseOrderPriceBtt
+            // 
+            this.increasePurchaseOrderPriceBtt.BackColor = System.Drawing.SystemColors.Control;
+            this.increasePurchaseOrderPriceBtt.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.increasePurchaseOrderPriceBtt.Depth = 0;
+            this.increasePurchaseOrderPriceBtt.Font = new System.Drawing.Font("Verdana", 11F);
+            this.increasePurchaseOrderPriceBtt.Location = new System.Drawing.Point(292, 314);
+            this.increasePurchaseOrderPriceBtt.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.increasePurchaseOrderPriceBtt.MouseState = MaterialSkin.MouseState.HOVER;
+            this.increasePurchaseOrderPriceBtt.Name = "increasePurchaseOrderPriceBtt";
+            this.increasePurchaseOrderPriceBtt.Primary = true;
+            this.increasePurchaseOrderPriceBtt.Size = new System.Drawing.Size(76, 22);
+            this.increasePurchaseOrderPriceBtt.TabIndex = 43;
+            this.increasePurchaseOrderPriceBtt.Text = "+ Price";
+            this.increasePurchaseOrderPriceBtt.UseVisualStyleBackColor = false;
+            this.increasePurchaseOrderPriceBtt.Click += new System.EventHandler(this.increasePurchaseOrderPriceBtt_Click);
+            // 
             // ClientForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(700, 600);
+            this.Controls.Add(this.increasePurchaseOrderPriceBtt);
+            this.Controls.Add(this.decreaseSellOrderPriceBtt);
             this.Controls.Add(this.cancelPurchaseBtt);
             this.Controls.Add(this.cancelSellOrderBtt);
             this.Controls.Add(this.statusLbl);
@@ -539,5 +577,7 @@
         private MaterialSkin.Controls.MaterialLabel statusLbl;
         private MaterialSkin.Controls.MaterialRaisedButton cancelSellOrderBtt;
         private MaterialSkin.Controls.MaterialRaisedButton cancelPurchaseBtt;
+        private MaterialSkin.Controls.MaterialRaisedButton decreaseSellOrderPriceBtt;
+        private MaterialSkin.Controls.MaterialRaisedButton increasePurchaseOrderPriceBtt;
     }
 }

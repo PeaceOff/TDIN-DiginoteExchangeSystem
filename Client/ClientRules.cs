@@ -19,13 +19,9 @@ namespace Client
         private List<Transaction> mTransactions = new List<Transaction>();
         private bool isLoggedIn = false;
 
-        // TODO emit purchasing order
         // TODO AT ANY TIME -> increase purchase order price
         // TODO AT ANY TIME -> decrease selling order price
-        // TODO AT ANY TIME -> cancel an order
         // TODO Implement events for logging
-        // TODO implementar botao para cancelar sell
-        // TODO implementar botao para cancelar purchase
 
         public ClientRules(ClientForm cf)
         {
@@ -275,6 +271,8 @@ namespace Client
             if (!isLoggedIn) {
                 return;
             }
+
+            // TODO implementar lógica de subida e baixa de quota
             clientForm.UpdateQuote(q);
         }
 
