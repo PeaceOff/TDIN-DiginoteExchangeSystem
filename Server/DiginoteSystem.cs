@@ -7,7 +7,6 @@ namespace Server
     public class DiginoteSystem : MarshalByRefObject, IDiginoteSystem
     {
         public event UpdateQuoteEvent UpdateQuote;
-        // TODO falta usar
         public event NewTransactionEvent NewTransaction;
         
         private static double QUOTE = 1.00;
@@ -109,9 +108,7 @@ namespace Server
 
         public List<Transaction> GetRecentTransactions()
         {
-            //TODO descomentar quando houver commit desta função
-            //return ServerDB.GetRecentTransactions(username);
-            return new List<Transaction>();
+            return ServerDB.GetTransactions(25);
         }
 
         public void DeleteSellOrder(SellOrder order) {
