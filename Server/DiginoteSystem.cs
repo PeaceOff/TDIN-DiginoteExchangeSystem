@@ -34,7 +34,7 @@ namespace Server
         private void SetQuote(double value) {
             QUOTE = value;
             ServerDB.UpdateQuote(QUOTE);
-            UpdateQuote(QUOTE);
+            UpdateQuote.Invoke(QUOTE);
         }
 
         public string Register(string username, string nickname, string password)
@@ -131,7 +131,7 @@ namespace Server
 
         public void HandleNewDBTransactionHandler(Transaction t)
         {
-            NewTransaction(t);
+            NewTransaction.Invoke(t);
         }
 
     }
