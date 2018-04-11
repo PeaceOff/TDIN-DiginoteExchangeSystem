@@ -450,7 +450,7 @@ namespace Server
                             }
 
                             Transaction t = new Transaction(sellUserId.ToString(), id.ToString(), transactionQuantity, DateTime.Now, quote);
-                            NewDBTransaction(t);
+                            NewDBTransaction.Invoke(t);
 
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
@@ -559,7 +559,7 @@ namespace Server
                             }
 
                             Transaction t = new Transaction(id.ToString(), buyUserId.ToString(), transactionQuantity, DateTime.Now, quote);
-                            NewDBTransaction(t);
+                            NewDBTransaction.Invoke(t);
 
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
