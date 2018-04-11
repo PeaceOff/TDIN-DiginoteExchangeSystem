@@ -700,7 +700,42 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transaction\" WHERE old_user_id = '{0}' OR new_user_id = '{0}' ORDER BY id OFFSET 0 ROWS FETCH NEXT 5 ROWS ONLY", id);
+                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transaction\" WHERE old_user_id = '{0}' OR new_user_id = '{0}'", id);
+                using (var command = new SqlCommand(commandString, connection))
+                {
+                    using (var reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            int old_user_id = int.Parse(reader["old_user_id"].ToString());
+                            int new_user_id = int.Parse(reader["new_user_id"].ToString());
+                            int quantity = int.Parse(reader["quantity"].ToString());
+                            DateTime timestamp = Convert.ToDateTime(reader["timestamp"].ToString());
+                            double quote = double.Parse(reader["quote"].ToString());
+
+                            string old_user_username = GetUsername(old_user_id);
+                            string new_user_username = GetUsername(new_user_id);
+
+                            Transaction transaction = new Transaction(old_user_username, new_user_username, quantity, timestamp, quote);
+
+                            transactions.Add(transaction);
+                        }
+                    }
+                }
+            }
+
+            return transactions;
+        }
+
+        public static List<Transaction> GetTransactions(int rows)
+        {
+            List<Transaction> transactions = new List<Transaction>();
+
+            using (SqlConnection connection = GetConnection())
+            {
+                string commandString;
+
+                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transaction\" ORDER BY id OFFSET 0 ROWS FETCH NEXT {0} ROWS ONLY", rows);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())
