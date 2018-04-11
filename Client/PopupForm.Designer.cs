@@ -40,24 +40,24 @@
             // 
             this.newValueUD.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.newValueUD.DecimalPlaces = 3;
+            this.newValueUD.DecimalPlaces = 2;
             this.newValueUD.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.newValueUD.Increment = new decimal(new int[] {
             1,
             0,
             0,
-            196608});
+            131072});
             this.newValueUD.Location = new System.Drawing.Point(67, 137);
             this.newValueUD.Maximum = new decimal(new int[] {
-            999999,
+            99999,
             0,
             0,
-            196608});
+            131072});
             this.newValueUD.Minimum = new decimal(new int[] {
             1,
             0,
             0,
-            196608});
+            131072});
             this.newValueUD.Name = "newValueUD";
             this.newValueUD.Size = new System.Drawing.Size(164, 21);
             this.newValueUD.TabIndex = 0;
@@ -65,7 +65,7 @@
             1,
             0,
             0,
-            196608});
+            131072});
             // 
             // confirmBtt
             // 
@@ -107,7 +107,7 @@
             this.resultLbl.BackColor = System.Drawing.SystemColors.Window;
             this.resultLbl.Depth = 0;
             this.resultLbl.Font = new System.Drawing.Font("Roboto", 11F);
-            this.resultLbl.ForeColor = System.Drawing.Color.Red;
+            this.resultLbl.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.resultLbl.Location = new System.Drawing.Point(12, 272);
             this.resultLbl.MouseState = MaterialSkin.MouseState.HOVER;
             this.resultLbl.Name = "resultLbl";
