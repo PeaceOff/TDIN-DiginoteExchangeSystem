@@ -4,7 +4,7 @@ using System.Collections.Generic;
 namespace Shared
 {
     // Delegate for the Update Quote event
-    public delegate void UpdateQuoteEvent(double q);
+    public delegate void UpdateQuoteEvent(double q, bool isIncrease);
     public delegate void NewTransactionEvent(Transaction t);
 
     // Shared interface for the diginote system (for both client and server)
@@ -40,9 +40,9 @@ namespace Shared
         public event UpdateQuoteEvent UpdateQuote;
         public event NewTransactionEvent NewTransaction;
 
-        public void FireUpdateQuoteEvent(double q)
+        public void FireUpdateQuoteEvent(double q, bool isIncrease)
         {
-            UpdateQuote(q);
+            UpdateQuote(q, isIncrease);
         }
 
         public void FireNewTransactionEvent(Transaction t)

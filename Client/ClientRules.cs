@@ -300,7 +300,7 @@ namespace Client
 
         // Handlers
 
-        public void UpdateQuoteHandler(double q)
+        public void UpdateQuoteHandler(double q, bool isIncrease)
         {
             if (!isLoggedIn) {
                 return;
