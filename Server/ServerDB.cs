@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace Server
 {
+    public delegate void NewDBTransactionEvent(Transaction t);
+
     class ServerDB
     {
+        public static event NewDBTransactionEvent NewDBTransaction;
 
         #region Connection
 
@@ -446,6 +449,9 @@ namespace Server
                                 innerCommand.ExecuteNonQuery();
                             }
 
+                            Transaction t = new Transaction(sellUserId.ToString(), id.ToString(), transactionQuantity, DateTime.Now, quote);
+                            NewDBTransaction(t);
+
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
                             {
@@ -551,6 +557,9 @@ namespace Server
                             {
                                 innerCommand.ExecuteNonQuery();
                             }
+
+                            Transaction t = new Transaction(id.ToString(), buyUserId.ToString(), transactionQuantity, DateTime.Now, quote);
+                            NewDBTransaction(t);
 
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
@@ -735,7 +744,7 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transaction\" ORDER BY id OFFSET 0 ROWS FETCH NEXT {0} ROWS ONLY", rows);
+                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transaction\" ORDER BY timestamp DESC OFFSET 0 ROWS FETCH NEXT {0} ROWS ONLY", rows);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())

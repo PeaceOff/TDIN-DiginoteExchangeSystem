@@ -15,12 +15,20 @@ namespace Server
         public DiginoteSystem()
         {
 
-            if (!ServerDB.InitQuote(QUOTE)) {
+            if (!ServerDB.InitQuote(QUOTE))
+            {
                 QUOTE = ServerDB.GetQuote();
             }
 
+            ServerDB.NewDBTransaction += HandleNewDBTransactionHandler;
+
             Console.WriteLine("Starting System with quote: " + QUOTE);
             Console.WriteLine("DiginoteSystem constructor called.");
+        }
+
+        ~DiginoteSystem()
+        {
+            ServerDB.NewDBTransaction -= HandleNewDBTransactionHandler;
         }
 
         // Setter for the static value of QUOTE that triggers the event
@@ -122,6 +130,12 @@ namespace Server
             ServerDB.UnsuspendOrders(username);
         }
 
+        // Handlers
+
+        public void HandleNewDBTransactionHandler(Transaction t)
+        {
+            NewTransaction(t);
+        }
 
     }
 }
