@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
 using Shared;
+using System.Threading.Tasks;
 
 namespace Client
 {
@@ -278,7 +279,18 @@ namespace Client
 
             if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                diginoteSystem.IncreasePurchasePrice(popup.newValue);
+                if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    Task t = Task.Run
+                        (
+                            ()
+                             =>
+                            {
+                                diginoteSystem.IncreasePurchasePrice(popup.newValue);
+                            }
+                        );
+                    t.Wait();
+                }    
             }
 
             popup.Dispose();
@@ -296,7 +308,15 @@ namespace Client
 
             if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                diginoteSystem.DecreaseSellPrice(popup.newValue);
+                Task t = Task.Run
+                    (
+                        ()
+                         =>
+                        {
+                            diginoteSystem.DecreaseSellPrice(popup.newValue);
+                        }
+                    );
+                t.Wait();          
             }
 
             popup.Dispose();
