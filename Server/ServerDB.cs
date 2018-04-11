@@ -735,7 +735,7 @@ namespace Server
             {
                 string commandString;
 
-                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transaction\" ORDER BY id OFFSET 0 ROWS FETCH NEXT {0} ROWS ONLY", rows);
+                commandString = string.Format("SELECT old_user_id, new_user_id, quantity, timestamp, quote FROM \"Transaction\" ORDER BY timestamp DESC OFFSET 0 ROWS FETCH NEXT {0} ROWS ONLY", rows);
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     using (var reader = command.ExecuteReader())
