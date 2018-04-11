@@ -122,12 +122,14 @@ namespace Client
 
             List<int> serials = diginoteSystem.SellOrders(username, amount);
 
+            bool prompt = false;
+
             if (serials.Count == 0)
             {
-                // TODO Pedir se quer baixar preço
                 clientForm.UpdateStatus("No diginote was sold. Request Pending.", false);
                 pending += amount;
                 AddSellOrder();
+                prompt = true;
             }
             else if (serials.Count == amount)
             {
@@ -135,16 +137,29 @@ namespace Client
             }
             else
             {
-                // TODO Pedir se quer baixar preço
                 string msg = serials.Count + " diginote(s) sold.\n" + "Remaining " + (amount - serials.Count) + " pending.";
                 clientForm.UpdateStatus(msg, true);
                 pending += amount - serials.Count;
                 AddSellOrder();
+                prompt = true;
             }
 
             // Remove traded diginotes from wallet
             mWallet.Where(d => !serials.Contains(d.serialNumber));
             clientForm.UpdateDiginotes(mWallet.Count - pending + " (" + pending + ")");
+
+            if (prompt) { // Não vendeu todas, pedir para baixar preço
+
+                var popup = new PopupForm(GetCurrentQuote(), true);
+
+                if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    diginoteSystem.IncreasePurchasePrice(popup.newValue);
+                }
+
+                popup.Dispose();
+
+            }
         }
 
         public void CancelSellOrder() {
@@ -182,15 +197,19 @@ namespace Client
 
             List<int> serials = diginoteSystem.PurchaseOrders(username, amount);
 
+            bool prompt = false;
+
             // não comprou nenhuma. purchase order nova
             if (serials.Count == 0)
             {
                 clientForm.UpdateStatus("No diginote was bought. Pending...", false);
+                prompt = true;
             }
             // comprou algumas, mas não todas
             else if (serials.Count < amount)
             {
                 clientForm.UpdateStatus(serials.Count + " diginotes were sold. Rest are pending.", true);
+                prompt = true;
             }
             // comprou todas
             else
@@ -210,6 +229,20 @@ namespace Client
                 pending += order.quantity;
             }
             clientForm.UpdateDiginotes((mWallet.Count - pending) + " (" + pending +")");
+
+            if (prompt)
+            { // Não vendeu todas, pedir para aumentar preço
+
+                var popup = new PopupForm(GetCurrentQuote(), false);
+
+                if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    diginoteSystem.IncreasePurchasePrice(popup.newValue);
+                }
+
+                popup.Dispose();
+
+            }
 
         }
 
@@ -300,14 +333,27 @@ namespace Client
 
         // Handlers
 
-        public void UpdateQuoteHandler(double q, bool isIncrease)
+        public void UpdateQuoteHandler(double q)
         {
             if (!isLoggedIn) {
                 return;
             }
 
-            // TODO implementar lógica de subida e baixa de quota
             clientForm.UpdateQuote(q);
+
+            if (mSellOrders.Count > 0 || mPurchaseOrders.Count > 0)
+            {// implementar lógica de subida e baixa de quota
+
+                var confirmForm = new ConfirmForm(q);
+
+                if (confirmForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    diginoteSystem.UnsuspendOrders(username);
+                }
+
+                confirmForm.Dispose();
+            }
+
         }
 
         public void NewTransactionHandler(Transaction t)

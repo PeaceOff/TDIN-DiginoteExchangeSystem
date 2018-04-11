@@ -25,10 +25,9 @@ namespace Server
 
         // Setter for the static value of QUOTE that triggers the event
         private void SetQuote(double value) {
-            bool isIncrease = (QUOTE > value) ? true : false;
             QUOTE = value;
             ServerDB.UpdateQuote(QUOTE);
-            UpdateQuote(QUOTE, isIncrease);
+            UpdateQuote(QUOTE);
         }
 
         public string Register(string username, string nickname, string password)
