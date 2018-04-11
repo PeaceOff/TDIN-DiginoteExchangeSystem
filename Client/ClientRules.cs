@@ -17,6 +17,7 @@ namespace Client
         private List<SellOrder> mSellOrders = new List<SellOrder>();
         private List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>();
         private List<Transaction> mTransactions = new List<Transaction>();
+        private List<Transaction> mGlobalTransactions = new List<Transaction>();
         private bool isLoggedIn = false;
 
         // TODO Implement events for logging
@@ -83,6 +84,9 @@ namespace Client
 
                 mTransactions = diginoteSystem.GetTransactions(username);
                 clientForm.UpdateMyTransactions(mTransactions);
+
+                mGlobalTransactions = diginoteSystem.GetRecentTransactions();
+                clientForm.UpdateGlobalTransactions(mGlobalTransactions);
             }
 
             return username;
@@ -96,6 +100,7 @@ namespace Client
             mSellOrders = new List<SellOrder>();
             mPurchaseOrders = new List<PurchaseOrder>();
             mTransactions = new List<Transaction>();
+            mGlobalTransactions = new List<Transaction>();
 
         }
 
@@ -362,7 +367,35 @@ namespace Client
             {
                 return;
             }
-            // TODO Acabar
+
+            if (t.newOwner == username || t.oldOwner == username)
+            {
+                if (mSellOrders.Count != 0)
+                {
+                    mSellOrders = diginoteSystem.GetPendingSellOrders(username);
+                    clientForm.UpdateSellOrders(mSellOrders);
+                }
+                else
+                {
+                    mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
+                    clientForm.UpdatePurchaseOrders(mPurchaseOrders);
+                }
+
+                mTransactions = diginoteSystem.GetTransactions(username);
+                clientForm.UpdateMyTransactions(mTransactions);
+
+                int sellTotal = 0;
+                foreach (var order in mSellOrders)
+                {
+                    sellTotal += order.quantity;
+                }
+
+                mWallet = diginoteSystem.GetDiginotes(username);
+                clientForm.UpdateDiginotes((mWallet.Count - sellTotal).ToString() + " (" + sellTotal.ToString() + ")");
+            }
+
+            mGlobalTransactions.Add(t);
+            clientForm.UpdateGlobalTransactions(mGlobalTransactions);
         }
     }  
 }
