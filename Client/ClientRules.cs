@@ -286,15 +286,7 @@ namespace Client
             {
                 if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    Task t = Task.Run
-                        (
-                            ()
-                             =>
-                            {
-                                diginoteSystem.IncreasePurchasePrice(popup.newValue);
-                            }
-                        );
-                    t.Wait();
+                    diginoteSystem.IncreasePurchasePrice(popup.newValue);
                 }    
             }
 
@@ -312,16 +304,8 @@ namespace Client
             var popup = new PopupForm(GetCurrentQuote(), true);
 
             if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                Task t = Task.Run
-                    (
-                        ()
-                         =>
-                        {
-                            diginoteSystem.DecreaseSellPrice(popup.newValue);
-                        }
-                    );
-                t.Wait();          
+            {   
+                diginoteSystem.DecreaseSellPrice(popup.newValue);
             }
 
             popup.Dispose();
