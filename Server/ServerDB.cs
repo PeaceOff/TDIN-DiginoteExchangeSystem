@@ -9,8 +9,11 @@ using System.Threading.Tasks;
 
 namespace Server
 {
+    public delegate void NewDBTransactionEvent(Transaction t);
+
     class ServerDB
     {
+        public static event NewDBTransactionEvent NewDBTransaction;
 
         #region Connection
 
@@ -446,6 +449,9 @@ namespace Server
                                 innerCommand.ExecuteNonQuery();
                             }
 
+                            Transaction t = new Transaction(sellUserId.ToString(), id.ToString(), transactionQuantity, DateTime.Now, quote);
+                            NewDBTransaction(t);
+
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
                             {
@@ -551,6 +557,9 @@ namespace Server
                             {
                                 innerCommand.ExecuteNonQuery();
                             }
+
+                            Transaction t = new Transaction(id.ToString(), buyUserId.ToString(), transactionQuantity, DateTime.Now, quote);
+                            NewDBTransaction(t);
 
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
