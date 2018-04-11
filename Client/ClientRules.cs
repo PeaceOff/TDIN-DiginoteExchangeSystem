@@ -284,10 +284,7 @@ namespace Client
 
             if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    diginoteSystem.IncreasePurchasePrice(popup.newValue);
-                }    
+                diginoteSystem.IncreasePurchasePrice(popup.newValue);
             }
 
             popup.Dispose();
