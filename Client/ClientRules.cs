@@ -67,10 +67,21 @@ namespace Client
                 diginoteSystem.DeleteSellOrder(order);
             }
 
+            mSellOrders.Clear();
+
             foreach (var order in mPurchaseOrders)
             {
                 diginoteSystem.DeletePurchaseOrder(order);
             }
+
+            mPurchaseOrders.Clear();
+
+            clientForm.UpdatePurchaseOrders(mPurchaseOrders);
+            clientForm.UpdateSellOrders(mSellOrders);
+
+            clientForm.UpdateDiginotes(mWallet.Count.ToString());
+
+
         }
 
         #region UI Functions
@@ -157,6 +168,18 @@ namespace Client
                 pending += amount;
                 AddSellOrder();
                 prompt = true;
+
+                // Update sell orders
+                mSellOrders = diginoteSystem.GetPendingSellOrders(username);
+                clientForm.UpdateSellOrders(mSellOrders);
+
+                int toSell = 0;
+                foreach (var order in mSellOrders)
+                {
+                    toSell += order.quantity;
+                }
+                clientForm.UpdateDiginotes((mWallet.Count - toSell) + " (" + toSell + ")");
+
             }
             else if (serials.Count == amount)
             {
@@ -181,7 +204,7 @@ namespace Client
 
                 if (popup.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    diginoteSystem.IncreasePurchasePrice(popup.newValue);
+                    diginoteSystem.DecreaseSellPrice(popup.newValue);
                 }
 
                 popup.Dispose();
@@ -230,6 +253,9 @@ namespace Client
             if (serials.Count == 0)
             {
                 clientForm.UpdateStatus("No diginote was bought. Pending...", false);
+                // Atualizar pending purchases
+                mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
+                clientForm.UpdatePurchaseOrders(mPurchaseOrders);
                 prompt = true;
             }
             // comprou algumas, mas não todas
@@ -244,14 +270,10 @@ namespace Client
                 clientForm.UpdateStatus("All diginotes bought!", true);
             }
 
-            // Atualizar pending purchases
-            mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
-            clientForm.UpdatePurchaseOrders(mPurchaseOrders);
-
             // Atualizar wallet
             mWallet = diginoteSystem.GetDiginotes(username);
             int pending = 0;
-            foreach (var order  in mSellOrders)
+            foreach (var order in mSellOrders)
             {
                 pending += order.quantity;
             }
@@ -371,8 +393,6 @@ namespace Client
 
             ConfirmDialogDelegate cDel = new ConfirmDialogDelegate(clientForm.ConfirmDialog);
             clientForm.BeginInvoke(cDel, new object[] { q });
-
-            //clientForm.UpdateQuote(q);
         }
 
         public void NewTransactionHandler(Transaction t)
@@ -384,42 +404,35 @@ namespace Client
 
             if (t.newOwner == username || t.oldOwner == username)
             {
-                if (mSellOrders.Count != 0)
-                {
-                    mSellOrders = diginoteSystem.GetPendingSellOrders(username);
-                    UpdateSellOrderDelegate sellDel = new UpdateSellOrderDelegate(clientForm.UpdateSellOrders);
-                    clientForm.BeginInvoke(sellDel, new object[] { mSellOrders });
-                    //clientForm.UpdateSellOrders(mSellOrders);
-                }
-                else
-                {
-                    mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
-                    UpdatePurchaseOrderDelegate purchaseDel = new UpdatePurchaseOrderDelegate(clientForm.UpdatePurchaseOrders);
-                    clientForm.BeginInvoke(purchaseDel, new object[] { mPurchaseOrders });
-                    //clientForm.UpdatePurchaseOrders(mPurchaseOrders);
-                }
 
-                mTransactions = diginoteSystem.GetTransactions(username);
+                mSellOrders = diginoteSystem.GetPendingSellOrders(username);
+                UpdateSellOrderDelegate sellDel = new UpdateSellOrderDelegate(clientForm.UpdateSellOrders);
+                clientForm.BeginInvoke(sellDel, new object[] { mSellOrders });
+
+                mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
+                UpdatePurchaseOrderDelegate purchaseDel = new UpdatePurchaseOrderDelegate(clientForm.UpdatePurchaseOrders);
+                clientForm.BeginInvoke(purchaseDel, new object[] { mPurchaseOrders });
+
+                mTransactions.Add(t);
                 UpdateTransactionsDelegate tranDel = new UpdateTransactionsDelegate(clientForm.UpdateMyTransactions);
                 clientForm.BeginInvoke(tranDel, new object[] { mTransactions });
-                //clientForm.UpdateMyTransactions(mTransactions);
-
-                int sellTotal = 0;
-                foreach (var order in mSellOrders)
-                {
-                    sellTotal += order.quantity;
-                }
-                string sentence = (mWallet.Count - sellTotal).ToString() + " (" + sellTotal.ToString() + ")";
-                mWallet = diginoteSystem.GetDiginotes(username);
-                UpdateDiginotesDelegate digiDel = new UpdateDiginotesDelegate(clientForm.UpdateDiginotes);
-                clientForm.BeginInvoke(digiDel, new object[] { sentence });
-                //clientForm.UpdateDiginotes(sentence);
             }
+
+            mWallet = diginoteSystem.GetDiginotes(username);
+            int sellTotal = 0;
+            foreach (var order in mSellOrders)
+            {
+                sellTotal += order.quantity;
+            }
+
+            string sentence = (mWallet.Count - sellTotal).ToString() + " (" + sellTotal.ToString() + ")";
+            
+            UpdateDiginotesDelegate digiDel = new UpdateDiginotesDelegate(clientForm.UpdateDiginotes);
+            clientForm.BeginInvoke(digiDel, new object[] { sentence });
 
             mGlobalTransactions.Add(t);
             UpdateTransactionsDelegate transDel = new UpdateTransactionsDelegate(clientForm.UpdateGlobalTransactions);
             clientForm.BeginInvoke(transDel, new object[] { mGlobalTransactions });
-            //clientForm.UpdateGlobalTransactions(mGlobalTransactions);
         }
     }  
 }
