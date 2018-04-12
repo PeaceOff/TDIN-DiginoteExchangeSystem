@@ -47,6 +47,10 @@ namespace Client
                 {
                     clientRules.diginoteSystem.UnsuspendOrders(clientRules.username);
                 }
+                else
+                {
+                    clientRules.CancelOrders();
+                }
 
                 confirmForm.Dispose();
             }

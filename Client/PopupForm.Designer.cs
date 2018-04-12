@@ -71,6 +71,7 @@
             // 
             this.confirmBtt.AutoSize = true;
             this.confirmBtt.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.confirmBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.confirmBtt.Depth = 0;
             this.confirmBtt.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.confirmBtt.Location = new System.Drawing.Point(67, 167);
@@ -88,6 +89,7 @@
             // 
             this.cancelBtt.AutoSize = true;
             this.cancelBtt.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.cancelBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelBtt.Depth = 0;
             this.cancelBtt.Font = new System.Drawing.Font("Verdana", 8.25F);
             this.cancelBtt.Location = new System.Drawing.Point(167, 167);

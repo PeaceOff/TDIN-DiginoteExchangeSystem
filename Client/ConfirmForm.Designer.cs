@@ -37,6 +37,7 @@
             // 
             // confirmBtt
             // 
+            this.confirmBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.confirmBtt.Depth = 0;
             this.confirmBtt.Location = new System.Drawing.Point(32, 152);
             this.confirmBtt.MouseState = MaterialSkin.MouseState.HOVER;
@@ -50,6 +51,7 @@
             // 
             // cancelBtt
             // 
+            this.cancelBtt.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelBtt.Depth = 0;
             this.cancelBtt.Location = new System.Drawing.Point(153, 152);
             this.cancelBtt.MouseState = MaterialSkin.MouseState.HOVER;
