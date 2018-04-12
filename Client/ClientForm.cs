@@ -57,7 +57,7 @@ namespace Client
 
         }
 
-public void UpdateDiginotes(string amount) {
+        public void UpdateDiginotes(string amount) {
 
             diginotesLbl.Text = DIGINOTES_TEXT + amount;
 

@@ -450,9 +450,6 @@ namespace Server
                                 innerCommand.ExecuteNonQuery();
                             }
 
-                            Transaction t = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
-                            NewDBTransaction.Invoke(t);
-
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
                             {
@@ -483,6 +480,8 @@ namespace Server
                                     innerCommand.ExecuteNonQuery();
                                 }
 
+                                Transaction t1 = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
+                                NewDBTransaction.Invoke(t1);
                                 return serialNumbers;
                             }
 
@@ -495,9 +494,13 @@ namespace Server
 
                             if(sellQuantity == quantity)
                             {
+                                Transaction t2 = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
+                                NewDBTransaction.Invoke(t2);
                                 return serialNumbers;
                             }
-                            
+
+                            Transaction t3 = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
+                            NewDBTransaction.Invoke(t3);
                             quantity -= sellQuantity;
                         }
                     }
@@ -560,9 +563,6 @@ namespace Server
                                 innerCommand.ExecuteNonQuery();
                             }
 
-                            Transaction t = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
-                            NewDBTransaction.Invoke(t);
-
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
                             {
@@ -593,6 +593,8 @@ namespace Server
                                     innerCommand.ExecuteNonQuery();
                                 }
 
+                                Transaction t1 = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
+                                NewDBTransaction.Invoke(t1);
                                 return serialNumbers;
                             }
 
@@ -605,10 +607,15 @@ namespace Server
 
                             if (buyQuantity == quantity)
                             {
+                                Transaction t2 = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
+                                NewDBTransaction.Invoke(t2);
                                 return serialNumbers;
                             }
 
                             quantity -= buyQuantity;
+
+                            Transaction t3 = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
+                            NewDBTransaction.Invoke(t3);
                         }
                     }
                 }

@@ -118,7 +118,7 @@ namespace Shared
 
         public override string ToString()
         {
-            return oldOwner +" sold " + quantity + " diginotes to " +oldOwner;
+            return oldOwner +" sold " + quantity + " diginotes to " + newOwner;
         }
     }
 
