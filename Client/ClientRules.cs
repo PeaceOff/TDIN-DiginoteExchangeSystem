@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Remoting;
 using Shared;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Client
 {
+    delegate void RedrawQuoteDelegate(double q);
+    delegate void UpdateSellOrderDelegate(List<SellOrder> so);
+    delegate void UpdatePurchaseOrderDelegate(List<PurchaseOrder> po);
+    delegate void UpdateTransactionsDelegate(List<Transaction> t);
+    delegate void UpdateDiginotesDelegate(string s);
+
     class ClientRules
     {
         private IDiginoteSystem diginoteSystem = null;
@@ -345,7 +351,9 @@ namespace Client
                 return;
             }
 
-            clientForm.UpdateQuote(q);
+            RedrawQuoteDelegate rDel = new RedrawQuoteDelegate(clientForm.UpdateQuote);
+            clientForm.BeginInvoke(rDel, new object[] { q });
+            //clientForm.UpdateQuote(q);
 
             if (mSellOrders.Count > 0 || mPurchaseOrders.Count > 0)
             {// implementar lógica de subida e baixa de quota
@@ -374,29 +382,39 @@ namespace Client
                 if (mSellOrders.Count != 0)
                 {
                     mSellOrders = diginoteSystem.GetPendingSellOrders(username);
-                    clientForm.UpdateSellOrders(mSellOrders);
+                    UpdateSellOrderDelegate sellDel = new UpdateSellOrderDelegate(clientForm.UpdateSellOrders);
+                    clientForm.BeginInvoke(sellDel, new object[] { mSellOrders });
+                    //clientForm.UpdateSellOrders(mSellOrders);
                 }
                 else
                 {
                     mPurchaseOrders = diginoteSystem.GetPendingPurchaseOrders(username);
-                    clientForm.UpdatePurchaseOrders(mPurchaseOrders);
+                    UpdatePurchaseOrderDelegate purchaseDel = new UpdatePurchaseOrderDelegate(clientForm.UpdatePurchaseOrders);
+                    clientForm.BeginInvoke(purchaseDel, new object[] { mPurchaseOrders });
+                    //clientForm.UpdatePurchaseOrders(mPurchaseOrders);
                 }
 
                 mTransactions = diginoteSystem.GetTransactions(username);
-                clientForm.UpdateMyTransactions(mTransactions);
+                UpdateTransactionsDelegate tranDel = new UpdateTransactionsDelegate(clientForm.UpdateMyTransactions);
+                clientForm.BeginInvoke(tranDel, new object[] { mTransactions });
+                //clientForm.UpdateMyTransactions(mTransactions);
 
                 int sellTotal = 0;
                 foreach (var order in mSellOrders)
                 {
                     sellTotal += order.quantity;
                 }
-
+                string sentence = (mWallet.Count - sellTotal).ToString() + " (" + sellTotal.ToString() + ")";
                 mWallet = diginoteSystem.GetDiginotes(username);
-                clientForm.UpdateDiginotes((mWallet.Count - sellTotal).ToString() + " (" + sellTotal.ToString() + ")");
+                UpdateDiginotesDelegate digiDel = new UpdateDiginotesDelegate(clientForm.UpdateDiginotes);
+                clientForm.BeginInvoke(digiDel, new object[] { sentence });
+                //clientForm.UpdateDiginotes(sentence);
             }
 
             mGlobalTransactions.Add(t);
-            clientForm.UpdateGlobalTransactions(mGlobalTransactions);
+            UpdateTransactionsDelegate transDel = new UpdateTransactionsDelegate(clientForm.UpdateGlobalTransactions);
+            clientForm.BeginInvoke(transDel, new object[] { mGlobalTransactions });
+            //clientForm.UpdateGlobalTransactions(mGlobalTransactions);
         }
     }  
 }
