@@ -35,7 +35,25 @@ namespace Client
 
         }
 
-        public void UpdateDiginotes(string amount) {
+        public void ConfirmDialog(double q)
+        {
+
+            if (clientRules.mSellOrders.Count > 0 || clientRules.mPurchaseOrders.Count > 0)
+            {// implementar lógica de subida e baixa de quota
+
+                var confirmForm = new ConfirmForm(q);
+
+                if (confirmForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                {
+                    clientRules.diginoteSystem.UnsuspendOrders(clientRules.username);
+                }
+
+                confirmForm.Dispose();
+            }
+
+        }
+
+public void UpdateDiginotes(string amount) {
 
             diginotesLbl.Text = DIGINOTES_TEXT + amount;
 

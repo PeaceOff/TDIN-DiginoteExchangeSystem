@@ -11,19 +11,20 @@ namespace Client
     class ClientRules
     {
         delegate void RedrawQuoteDelegate(double q);
+        delegate void ConfirmDialogDelegate(double q);
         delegate void UpdateSellOrderDelegate(List<SellOrder> so);
         delegate void UpdatePurchaseOrderDelegate(List<PurchaseOrder> po);
         delegate void UpdateTransactionsDelegate(List<Transaction> t);
         delegate void UpdateDiginotesDelegate(string s);
 
-        private IDiginoteSystem diginoteSystem = null;
+        public IDiginoteSystem diginoteSystem = null;
         private EventRepeater repeater = new EventRepeater();
 
-        private String username = null;
+        public String username = null;
         private ClientForm clientForm;
         private List<Diginote> mWallet = new List<Diginote>();
-        private List<SellOrder> mSellOrders = new List<SellOrder>();
-        private List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>();
+        public List<SellOrder> mSellOrders = new List<SellOrder>();
+        public List<PurchaseOrder> mPurchaseOrders = new List<PurchaseOrder>();
         private List<Transaction> mTransactions = new List<Transaction>();
         private List<Transaction> mGlobalTransactions = new List<Transaction>();
         private bool isLoggedIn = false;
@@ -354,21 +355,11 @@ namespace Client
 
             RedrawQuoteDelegate rDel = new RedrawQuoteDelegate(clientForm.UpdateQuote);
             clientForm.BeginInvoke(rDel, new object[] { q });
+
+            ConfirmDialogDelegate cDel = new ConfirmDialogDelegate(clientForm.ConfirmDialog);
+            clientForm.BeginInvoke(cDel, new object[] { q });
+
             //clientForm.UpdateQuote(q);
-
-           /* if (mSellOrders.Count > 0 || mPurchaseOrders.Count > 0)
-            {// implementar lógica de subida e baixa de quota
-
-                var confirmForm = new ConfirmForm(q);
-
-                if (confirmForm.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    diginoteSystem.UnsuspendOrders(username);
-                }
-
-                confirmForm.Dispose();
-            }*/
-
         }
 
         public void NewTransactionHandler(Transaction t)
