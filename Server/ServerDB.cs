@@ -424,6 +424,8 @@ namespace Server
             }
 
             double quote = GetQuote();
+            string oldUser = "";
+            int transactionQuantity = 0;
 
             using (SqlConnection connection = GetConnection())
             {
@@ -439,9 +441,9 @@ namespace Server
                             int sellId = int.Parse(reader["id"].ToString());
                             int sellUserId = int.Parse(reader["user_id"].ToString());
                             int sellQuantity = int.Parse(reader["quantity"].ToString());
-                            string oldUser = reader["username"].ToString();
+                            oldUser = reader["username"].ToString();
 
-                            int transactionQuantity = sellQuantity < quantity ? sellQuantity : quantity;
+                            transactionQuantity = sellQuantity < quantity ? sellQuantity : quantity;
 
                             // Create Transaction
                             commandString = string.Format("INSERT INTO \"Transaction\" (old_user_id, new_user_id, quantity, timestamp, quote) VALUES ('{0}', '{1}', '{2}', '{3}','{4}')", sellUserId, id, transactionQuantity, DateTime.Now, quote);
@@ -499,8 +501,6 @@ namespace Server
                                 return serialNumbers;
                             }
 
-                            Transaction t3 = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
-                            NewDBTransaction.Invoke(t3);
                             quantity -= sellQuantity;
                         }
                     }
@@ -512,6 +512,9 @@ namespace Server
                     command.ExecuteNonQuery();
                 }
             }
+
+            Transaction t3 = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
+            NewDBTransaction.Invoke(t3);
 
             return serialNumbers;
         }
@@ -542,6 +545,9 @@ namespace Server
             {
                 string commandString;
 
+                string newUser = "";
+                int transactionQuantity = 0;
+
                 commandString = string.Format("SELECT \"BuyOrder\".id, user_id, quantity, username FROM \"BuyOrder\" INNER JOIN \"User\" ON \"BuyOrder\".user_id = \"User\".id WHERE suspension IS NULL ORDER BY timestamp ASC");
                 using (var command = new SqlCommand(commandString, connection))
                 {
@@ -552,9 +558,9 @@ namespace Server
                             int buyId = int.Parse(reader["id"].ToString());
                             int buyUserId = int.Parse(reader["user_id"].ToString());
                             int buyQuantity = int.Parse(reader["quantity"].ToString());
-                            string newUser = reader["username"].ToString();
+                            newUser = reader["username"].ToString();
 
-                            int transactionQuantity = buyQuantity < quantity ? buyQuantity : quantity;
+                            transactionQuantity = buyQuantity < quantity ? buyQuantity : quantity;
 
                             // Create Transaction
                             commandString = string.Format("INSERT INTO \"Transaction\" (old_user_id, new_user_id, quantity, timestamp, quote) VALUES ('{0}', '{1}', '{2}', '{3}','{4}')", id, buyUserId, transactionQuantity, DateTime.Now, quote);
@@ -614,8 +620,6 @@ namespace Server
 
                             quantity -= buyQuantity;
 
-                            Transaction t3 = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
-                            NewDBTransaction.Invoke(t3);
                         }
                     }
                 }
@@ -625,6 +629,9 @@ namespace Server
                 {
                     command.ExecuteNonQuery();
                 }
+
+                Transaction t3 = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
+                NewDBTransaction.Invoke(t3);
             }
 
             return serialNumbers;
