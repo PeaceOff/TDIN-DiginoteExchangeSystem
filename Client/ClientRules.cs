@@ -7,14 +7,15 @@ using System.Windows.Forms;
 
 namespace Client
 {
-    delegate void RedrawQuoteDelegate(double q);
-    delegate void UpdateSellOrderDelegate(List<SellOrder> so);
-    delegate void UpdatePurchaseOrderDelegate(List<PurchaseOrder> po);
-    delegate void UpdateTransactionsDelegate(List<Transaction> t);
-    delegate void UpdateDiginotesDelegate(string s);
 
     class ClientRules
     {
+        delegate void RedrawQuoteDelegate(double q);
+        delegate void UpdateSellOrderDelegate(List<SellOrder> so);
+        delegate void UpdatePurchaseOrderDelegate(List<PurchaseOrder> po);
+        delegate void UpdateTransactionsDelegate(List<Transaction> t);
+        delegate void UpdateDiginotesDelegate(string s);
+
         private IDiginoteSystem diginoteSystem = null;
         private EventRepeater repeater = new EventRepeater();
 
@@ -355,7 +356,7 @@ namespace Client
             clientForm.BeginInvoke(rDel, new object[] { q });
             //clientForm.UpdateQuote(q);
 
-            if (mSellOrders.Count > 0 || mPurchaseOrders.Count > 0)
+           /* if (mSellOrders.Count > 0 || mPurchaseOrders.Count > 0)
             {// implementar lógica de subida e baixa de quota
 
                 var confirmForm = new ConfirmForm(q);
@@ -366,7 +367,7 @@ namespace Client
                 }
 
                 confirmForm.Dispose();
-            }
+            }*/
 
         }
 

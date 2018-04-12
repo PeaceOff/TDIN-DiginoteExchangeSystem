@@ -21,7 +21,12 @@ namespace Client
             clientRules = new ClientRules(this);
         }
 
-        
+        public override object InitializeLifetimeService()
+        {
+            return null;
+        }
+
+
         #region Callback Functions
 
         public void UpdateQuote(double newQuote) {
