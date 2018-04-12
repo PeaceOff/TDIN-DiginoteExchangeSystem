@@ -60,6 +60,19 @@ namespace Client
 
         }
 
+        public void CancelOrders() {
+
+            foreach (var order in mSellOrders)
+            {
+                diginoteSystem.DeleteSellOrder(order);
+            }
+
+            foreach (var order in mPurchaseOrders)
+            {
+                diginoteSystem.DeletePurchaseOrder(order);
+            }
+        }
+
         #region UI Functions
 
         public string Register(string username, string nickname, string password)

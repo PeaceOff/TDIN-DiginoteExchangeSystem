@@ -23,7 +23,7 @@ namespace Client
 
             if (isDecrease)
             {
-                if (newValue >= currentQuote)
+                if (newValue > currentQuote)
                 {
                     resultLbl.ForeColor = System.Drawing.Color.Red;
                     resultLbl.Text = "New value must be lower than " + currentQuote.ToString();
@@ -35,7 +35,7 @@ namespace Client
                 Close();
             }
             else {
-                if (newValue <= currentQuote)
+                if (newValue < currentQuote)
                 {
                     resultLbl.ForeColor = System.Drawing.Color.Red;
                     resultLbl.Text = "New value must be higher than " + currentQuote.ToString();
