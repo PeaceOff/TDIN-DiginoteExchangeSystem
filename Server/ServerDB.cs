@@ -301,7 +301,7 @@ namespace Server
                 string commandString;
 
                 // Buy Order
-                commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = null WHERE user_id = {0}");
+                commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = null WHERE user_id = {0}", id);
 
                 using (var command = new SqlCommand(commandString, connection))
                 {
@@ -309,7 +309,7 @@ namespace Server
                 }
 
                 // Sell Order
-                commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = null WHERE user_id = {0}");
+                commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = null WHERE user_id = {0}", id);
 
                 using (var command = new SqlCommand(commandString, connection))
                 {
