@@ -426,6 +426,7 @@ namespace Server
             double quote = GetQuote();
             string oldUser = "";
             int transactionQuantity = 0;
+            bool transacted = false;
 
             using (SqlConnection connection = GetConnection())
             {
@@ -451,6 +452,7 @@ namespace Server
                             {
                                 innerCommand.ExecuteNonQuery();
                             }
+                            transacted = true;
 
                             // Change Diginote Owner
                             for (int i = 0; i < transactionQuantity; i++)
@@ -511,10 +513,15 @@ namespace Server
                 {
                     command.ExecuteNonQuery();
                 }
+
+                if (transacted)
+                {
+                    Transaction t3 = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
+                    NewDBTransaction.Invoke(t3);
+                }
             }
 
-            Transaction t3 = new Transaction(oldUser, username, transactionQuantity, DateTime.Now, quote);
-            NewDBTransaction.Invoke(t3);
+            
 
             return serialNumbers;
         }
@@ -547,6 +554,7 @@ namespace Server
 
                 string newUser = "";
                 int transactionQuantity = 0;
+                bool transacted = false;
 
                 commandString = string.Format("SELECT \"BuyOrder\".id, user_id, quantity, username FROM \"BuyOrder\" INNER JOIN \"User\" ON \"BuyOrder\".user_id = \"User\".id WHERE suspension IS NULL ORDER BY timestamp ASC");
                 using (var command = new SqlCommand(commandString, connection))
@@ -630,8 +638,11 @@ namespace Server
                     command.ExecuteNonQuery();
                 }
 
-                Transaction t3 = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
-                NewDBTransaction.Invoke(t3);
+                if (transacted)
+                {
+                    Transaction t3 = new Transaction(username, newUser, transactionQuantity, DateTime.Now, quote);
+                    NewDBTransaction.Invoke(t3);
+                }
             }
 
             return serialNumbers;
