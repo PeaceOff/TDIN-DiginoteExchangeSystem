@@ -259,7 +259,7 @@ namespace Server
                 // Buy Order
                 if (suspend)
                 {
-                    commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = '{0}'", DateTime.Now);
+                    commandString = String.Format("UPDATE \"BuyOrder\" SET Suspension = '{0}'", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 }
                 else
                 {
@@ -274,7 +274,7 @@ namespace Server
                 // Sell Order
                 if (suspend)
                 {
-                    commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = '{0}'", DateTime.Now);
+                    commandString = String.Format("UPDATE \"SellOrder\" SET Suspension = '{0}'", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 }
                 else
                 {
@@ -446,7 +446,7 @@ namespace Server
                             transactionQuantity = sellQuantity < quantity ? sellQuantity : quantity;
 
                             // Create Transaction
-                            commandString = string.Format("INSERT INTO \"Transaction\" (old_user_id, new_user_id, quantity, timestamp, quote) VALUES ('{0}', '{1}', '{2}', '{3}','{4}')", sellUserId, id, transactionQuantity, DateTime.Now, quote);
+                            commandString = string.Format("INSERT INTO \"Transaction\" (old_user_id, new_user_id, quantity, timestamp, quote) VALUES ('{0}', '{1}', '{2}', '{3}','{4}')", sellUserId, id, transactionQuantity, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"), quote);
                             using (var innerCommand = new SqlCommand(commandString, connection))
                             {
                                 innerCommand.ExecuteNonQuery();
@@ -506,7 +506,7 @@ namespace Server
                     }
                 }
 
-                commandString = string.Format("INSERT INTO \"BuyOrder\" (user_id, quantity, timestamp) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now);
+                commandString = string.Format("INSERT INTO \"BuyOrder\" (user_id, quantity, timestamp) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     command.ExecuteNonQuery();
@@ -624,7 +624,7 @@ namespace Server
                     }
                 }
 
-                commandString = string.Format("INSERT INTO \"SellOrder\" (user_id, quantity, timestamp) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now);
+                commandString = string.Format("INSERT INTO \"SellOrder\" (user_id, quantity, timestamp) VALUES ('{0}', '{1}' , '{2}')", id, quantity, DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff"));
                 using (var command = new SqlCommand(commandString, connection))
                 {
                     command.ExecuteNonQuery();
